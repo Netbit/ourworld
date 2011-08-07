@@ -1,0 +1,14 @@
+# Compiled source #
+###################
+*.pyc
+.pydevproject
+.project
+media/
+
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
