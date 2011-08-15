@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class District(models.Model):
     name        = models.CharField(50)
-    #location   = 
+    location    = models.CharField()
     description = models.TextField()
    
 class NguoiTiepCan(models.Model):
