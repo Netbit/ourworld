@@ -17,7 +17,7 @@ class NguoiTiepCan(models.Model):
         return self.name
     
 class KindOfConstruction(models.Model):
-    name = models.CharField(max_lenght = 100)
+    name = models.CharField(max_length = 100)
     
     def __unicode__(self):
         return self.name
