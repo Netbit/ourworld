@@ -1,18 +1,24 @@
 
 .header {
-	height: 100px;
-	width: 100%;
-	position: fixed;
-	background-color: green;
+	height: 80px;
+	position: relative;
+	background-color: #f5f5dc;
 }
 
 .filter {
-	height: 50px;
-	top: 110px;
+	height: 40px;
+	top: 5px;
 	position: relative;
-	background-color: gray;
+	background-color: #dcdcdc;
 }
-.map {
-	width: 95%;
-	background-color: lime;
+.map {	
+	height: 600px;
+	position: relative;
+	background-color: #9acd32;
+}
+.footer {
+	height: 50px;
+	top: 5px;
+	position: relative;
+	background-color: #90c032;
 }
