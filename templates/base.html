@@ -5,13 +5,15 @@
 <title>Map Application</title>
 
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
-
 <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
 
 {% block extra_static %}{% endblock %}
 </head>
 <body>
-	{% block nav %}	{% endblock %}
-	{% block main %} {% endblock %}
+	{% block header %}	{% endblock %}
+	
+	{% block filter %}	{% endblock %}
+	
+	{% block map %} {% map %}
 </body>
 </html>
