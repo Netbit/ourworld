@@ -1,0 +1,18 @@
+
+.header {
+	height: 100px;
+	width: 100%;
+	position: fixed;
+	background-color: green;
+}
+
+.filter {
+	height: 50px;
+	top: 110px;
+	position: fixed;
+	background-color: gray;
+}
+.map {
+	width: 95%;
+	background-color: lime;
+}
