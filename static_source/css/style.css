@@ -9,7 +9,7 @@
 .filter {
 	height: 50px;
 	top: 110px;
-	position: fixed;
+	position: relative;
 	background-color: gray;
 }
 .map {
