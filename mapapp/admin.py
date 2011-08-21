@@ -9,7 +9,7 @@ class AdminDistrict(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminKindOfConstruction(admin.ModelAdmin):
-    list_display = ['name',]
+    list_display = ['name','description']
     list_filter = ('name',)
     search_fields = ('name',)
     
@@ -19,7 +19,7 @@ class AdminConstruction(admin.ModelAdmin):
     search_fields = ('name','kind_of_construction', 'district')
     
 class AdminNguoiTiepCan(admin.ModelAdmin):
-    list_display = ['name',]
+    list_display = ['name','description']
     list_filter = ('name',)
     search_fields = ('name',)
     
