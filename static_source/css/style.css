@@ -27,7 +27,7 @@
 .icon {
 	margin-right: 10px;
 }
-.icon a img:HOVER {
+.icon a img:hover {
 	color: rgba(255, 255, 255, 0.7); 
 	-webkit-transform: scale(1.5); 
   	-moz-transform: scale(1.5); 
@@ -44,4 +44,14 @@
 	top: 5px;
 	position: relative;
 	background-color: #90c032;
+}
+
+.search_place {
+	width: 250px;
+	height: 30px;
+	background-color: cyan;
+}
+.search_path {
+	display: none;
+	z-index: 1;
 }
