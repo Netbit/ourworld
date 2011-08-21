@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'mapapp',
+    'mapapp.templatetags'
     # 'django.contrib.admindocs',
 )
 
