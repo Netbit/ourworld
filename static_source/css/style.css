@@ -3,6 +3,7 @@
 	height: 80px;
 	position: relative;
 	background-color: #f5f5dc;
+	border: 2px solid purple;
 }
 
 .filter {
@@ -10,6 +11,28 @@
 	top: 5px;
 	position: relative;
 	background-color: #dcdcdc;
+}
+.left {
+	float: left;
+    height: 30px;
+    width: 450px;
+    border: 1px solid gray;
+}
+.right {
+ 	float: right;
+    height: 30px;
+    width: 450px;
+    border: 1px solid green;
+}
+.icon {
+	margin-right: 10px;
+}
+.icon a img:HOVER {
+	color: rgba(255, 255, 255, 0.7); 
+	-webkit-transform: scale(1.5); 
+  	-moz-transform: scale(1.5); 
+  	-o-transform: scale(1.5); 
+  	transform: scale(1.5); 
 }
 .map {	
 	height: 600px;
