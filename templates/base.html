@@ -5,9 +5,28 @@
 <title>Map Application</title>
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
 <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+
+<script type="text/javascript">
+  function initialize() {
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+      zoom: 10,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("my_map"),
+        myOptions);
+  }
+
+</script>
+
 {% block extra_static %}{% endblock %}
 </head>
-<body>
+<body onload="initialize()">
 	<div class="header">
 		sdsd sd s ds d sd
 	</div>	 
