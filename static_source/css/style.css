@@ -2,27 +2,36 @@
 .header {
 	height: 80px;
 	position: relative;
-	background-color: #f5f5dc;
+	font-family: arial,sans-serif;
+	font-size: 35px;
+	color: #ffffff;
 	border: 2px solid purple;
+	background-image: url("/static/images/header.png");
 }
 
 .filter {
 	height: 40px;
 	top: 10px;
 	position: relative;
-	background-color: #dcdcdc;
+	border:2px thin;
+	border-radius: 25px;
+	-moz-border-radius:25px;
+	background-color: rgba(120, 120, 120, 0.5);
 }
 .left {
 	float: left;
-    height: 30px;
-    width: 450px;
-    border: 1px solid gray;
+    height: 32px;
+    width: 49%;
+    margin-left: 15px;
+    margin-top: 4px;
+    border-right: 2px solid gray;
 }
 .right {
  	float: right;
-    height: 30px;
-    width: 450px;
-    border: 1px solid green;
+    height: 32px;
+    width: 48%;
+    margin-left: 5px;
+    margin-top: 4px;
 }
 .icon {
 	margin-right: 10px;
@@ -53,7 +62,7 @@
 	top: 18px;
 	position: relative;
 	overflow: hidden;	
-	margin-left: 300px;
+	margin-left: 320px;
 	width: 300px;		
 	border:2px thin;
 	border-radius: 25px;
@@ -68,7 +77,12 @@
 	height: 30px;
 }
 .textbox {
-	width: 200px;
+	width: 200px;	
+}
+.textbox:focus {
+	-webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7); 
+  	-moz-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7); 
+  	box-shadow: 0 0 12px rgba(51, 204, 255, 0.7);  
 }
 .search_path {
 	display: none;
