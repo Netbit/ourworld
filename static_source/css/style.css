@@ -8,7 +8,7 @@
 
 .filter {
 	height: 40px;
-	top: 5px;
+	top: 10px;
 	position: relative;
 	background-color: #dcdcdc;
 }
@@ -34,24 +34,42 @@
   	-o-transform: scale(1.5); 
   	transform: scale(1.5); 
 }
-.map {	
-	height: 600px;
-	position: relative;
-	background-color: #9acd32;
-}
 .footer {
 	height: 50px;
-	top: 5px;
+	top: 10px;
 	position: relative;
 	background-color: #90c032;
 }
-
+.show {
+	height: 620px;
+	top: 10px;
+	position: relative;
+}
+.map {	
+	top: -20px;
+	height: 600px;
+}
+.box {
+	top: 18px;
+	position: relative;
+	overflow: hidden;	
+	margin-left: 300px;
+	width: 300px;		
+	border:2px thin;
+	border-radius: 25px;
+	-moz-border-radius:25px;
+	background-color: rgba(120, 120, 120, 0.5);
+	z-index: 999;
+}
 .search_place {
-	width: 250px;
+	margin-left: 13px;
+	margin-top: 2px;
+	width: 290px;
 	height: 30px;
-	background-color: cyan;
+}
+.textbox {
+	width: 200px;
 }
 .search_path {
 	display: none;
-	z-index: 1;
 }

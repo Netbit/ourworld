@@ -3,18 +3,19 @@
 {% load tagslib %}
 
 {% block map %}
-<div id="my_map" class="map">
-	<div class="search">
+<div class="show">
+	<div class="box">
 		<div class="search_place">
-			<input type="text" name="search">
+			<input class="textbox" type="text" name="search">
 			<input type="submit" name="Search" value="Search">		
 		</div>
 		<div class="search_path">			
-			From Place: <input type="text" name="from_place"><br>
-			To Place: <input type="text" name="to_place">
+			From Place: <input class="textbox" type="text" name="from_place"><br>
+			To Place: <input class="textbox" type="text" name="to_place">
 			<input type="submit" name="Search" value="Search">		
 		</div>
 	</div>	
-	Hello, World!!
+	<div class="map" id="my_map">
+	</div>
 </div>	
 {% endblock %}
