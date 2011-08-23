@@ -43,6 +43,7 @@
 	-webkit-transform: scale(1.5); 
   	-moz-transform: scale(1.5); 
   	-o-transform: scale(1.5); 
+  	-ms-transform: scale(1.5); 
   	transform: scale(1.5); 
 }
 .footer {
@@ -52,6 +53,7 @@
 	background-color: #90c032;
 	border-radius: 10px;
 	-moz-border-radius:10px;
+	-ms-border-radius:10px;
 }
 .show {
 	height: 620px;
@@ -67,18 +69,47 @@
 	position: relative;
 	overflow: hidden;	
 	margin-left: 320px;
-	width: 300px;		
+	width: 332px;		
 	border:2px thin;
 	border-radius: 25px;
 	-moz-border-radius:25px;
+	-ms-border-radius:25px;
 	background-color: rgba(120, 120, 120, 0.5);
-	z-index: 999;
+	z-index: 9;	
 }
-.search_place {
-	margin-left: 13px;
-	margin-top: 2px;
-	width: 290px;
+.search-place {
 	height: 30px;
+	margin-left: 5px;
+	margin-right: 10px;
+	padding-top: 4px;
+	float: right;
+}
+.icon-search {
+	padding-top: 5px;
+	padding-left: 10px;
+	width: 15px;
+	float: left;
+	text-align: center;
+}
+.point {
+	font-size: 8px;
+	width: 15px;
+	padding-top: 1px;
+	cursor: pointer;
+}
+.point:hover {
+	background-color: rgba(126,126,126,0.5);
+	font-weight: bold;
+}
+.path {
+	font-size: 8px;
+	padding-top: 3px;
+	width: 15px;
+	cursor: pointer;
+}
+.path:hover {
+	background-color: rgba(126,126,126,0.5);
+	font-weight: bold;
 }
 .textbox {
 	width: 210px;
@@ -86,12 +117,14 @@
 .textbox:focus {
 	-webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7); 
   	-moz-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7); 
+  	-ms-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7);
   	box-shadow: 0 0 12px rgba(51, 204, 255, 0.7);  
 }
-.search_path {
+.search-path {
 	display: none;
 }
-
 .button {
 	cursor: pointer;
+	font-weight: bold;
+	height: 25px;
 }
