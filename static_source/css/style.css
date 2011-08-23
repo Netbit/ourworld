@@ -81,7 +81,7 @@
 	height: 30px;
 }
 .textbox {
-	width: 200px;	
+	width: 210px;
 }
 .textbox:focus {
 	-webkit-box-shadow: 0 0 12px rgba(51, 204, 255, 0.7); 
@@ -90,4 +90,8 @@
 }
 .search_path {
 	display: none;
+}
+
+.button {
+	cursor: pointer;
 }
