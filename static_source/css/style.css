@@ -7,6 +7,8 @@
 	color: #ffffff;
 	border: 2px solid purple;
 	background-image: url("/static/images/header.png");
+	border-radius: 10px;
+	-moz-border-radius:10px;
 }
 
 .filter {
@@ -14,8 +16,8 @@
 	top: 10px;
 	position: relative;
 	border:2px thin;
-	border-radius: 25px;
-	-moz-border-radius:25px;
+	border-radius: 10px;
+	-moz-border-radius:10px;
 	background-color: rgba(120, 120, 120, 0.5);
 }
 .left {
@@ -48,6 +50,8 @@
 	top: 10px;
 	position: relative;
 	background-color: #90c032;
+	border-radius: 10px;
+	-moz-border-radius:10px;
 }
 .show {
 	height: 620px;
