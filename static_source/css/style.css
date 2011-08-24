@@ -68,8 +68,8 @@
 	top: 18px;
 	position: relative;
 	overflow: hidden;	
-	margin-left: 320px;
-	width: 332px;		
+	width: 332px;	
+	margin: auto;	
 	border:2px thin;
 	border-radius: 25px;
 	-moz-border-radius:25px;
@@ -83,8 +83,10 @@
 	margin-right: 10px;
 	padding-top: 4px;
 	float: right;
+	display: block;
 }
 .icon-search {
+	font-family: Time New Roman;
 	padding-top: 5px;
 	padding-left: 10px;
 	width: 15px;
@@ -98,7 +100,7 @@
 	cursor: pointer;
 }
 .point:hover {
-	background-color: rgba(126,126,126,0.5);
+	background-color: #00FFFF;
 	font-weight: bold;
 }
 .path {
@@ -108,7 +110,7 @@
 	cursor: pointer;
 }
 .path:hover {
-	background-color: rgba(126,126,126,0.5);
+	background-color: #00FFFF;
 	font-weight: bold;
 }
 .textbox {
@@ -121,10 +123,19 @@
   	box-shadow: 0 0 12px rgba(51, 204, 255, 0.7);  
 }
 .search-path {
+	height: 30px;
+	margin-left: 5px;
+	margin-right: 10px;
+	padding-top: 4px;
+	float: right;
 	display: none;
 }
 .button {
 	cursor: pointer;
 	font-weight: bold;
 	height: 25px;
+}
+.swap {
+	margin-right: 5px;
+	cursor: pointer;
 }
