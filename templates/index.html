@@ -11,17 +11,17 @@
 <div class="show">
 	<div class="box">
 		<div class="icon-search">
-			<div class="point"><a>A</a></div>
-			<div class="path"><a>A-B</a></div>
+			<div class="point" title="Tìm kiếm địa điểm A"><a>A</a></div>
+			<div class="path" title="Tìm kiếm đường đi từ A đến B"><a>A-B</a></div>
 		</div>
 		<div class="search-place">
-			<input class="textbox" type="text" name="search" placeholder="Nhập địa điểm...">
+			<input autofocus="autofocus" id="p" class="textbox" type="text" name="search" placeholder="Nhập địa điểm...">
 			<input type="submit" name="Search" value="Search" class="button">		
 		</div>
 		<div class="search-path">			
 			<input id="a" class="textbox" type="text" name="from_place" placeholder="Địa điểm đi">
 			<img class="swap" src="{{ STATIC_URL }}images/swap.png"><input id="b" class="textbox" type="text" name="to_place" placeholder="Địa điểm đến">
-			<input type="submit" name="Search" value="Search">		
+			<input type="submit" name="Search" value="Search" class="button">		
 		</div>
 	</div>	
 	<div class="map" id="my_map">
