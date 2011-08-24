@@ -15,13 +15,17 @@
 			<div class="path" title="Tìm kiếm đường đi từ A đến B"><a>A-B</a></div>
 		</div>
 		<div class="search-place">
-			<input autofocus="autofocus" id="p" class="textbox" type="text" name="search" placeholder="Nhập địa điểm...">
-			<input type="submit" name="Search" value="Search" class="button">		
+			<form action="" method="get">
+				<input autofocus="autofocus" id="p" class="textbox" type="text" name="search" placeholder="Nhập địa điểm...">
+				<input type="submit" name="Search" value="Search" class="button">		
+			</form>
 		</div>
-		<div class="search-path">			
-			<input id="a" class="textbox" type="text" name="from_place" placeholder="Địa điểm đi">
-			<img title="Tìm đường theo hướng ngược lại" class="swap" src="{{ STATIC_URL }}images/swap.png"><input id="b" class="textbox" type="text" name="to_place" placeholder="Địa điểm đến">
-			<input type="submit" name="Search" value="Search" class="button">		
+		<div class="search-path">
+			<form action="">
+				<input id="a" class="textbox" type="text" name="from_place" placeholder="Địa điểm đi">
+				<img title="Tìm đường theo hướng ngược lại" class="swap" src="{{ STATIC_URL }}images/swap.png"><input id="b" class="textbox" type="text" name="to_place" placeholder="Địa điểm đến">
+				<input type="submit" name="Search" value="Search" class="button">
+			</form>					
 		</div>
 	</div>	
 	<div class="map" id="my_map">
