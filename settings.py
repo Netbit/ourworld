@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'ourworld.urls'
@@ -116,10 +117,18 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'mapapp',
-    'mapapp.templatetags'
-    # 'django.contrib.admindocs',
+    'mapapp.templatetags',
+    'django.contrib.admindocs',
 )
 
+LANGUAGES = (
+  ('vi', 'Vietnamese'),
+  ('en', 'English'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_DIR, 'mapapp/locale'),
+)
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
