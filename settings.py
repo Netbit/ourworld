@@ -127,6 +127,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
+    os.path.join(PROJECT_DIR, 'locale'),
     os.path.join(PROJECT_DIR, 'mapapp/locale'),
 )
 # A sample logging configuration. The only tangible logging

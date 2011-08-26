@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% load tagslib %}
 
 {% block extra_static %}
@@ -11,13 +13,13 @@
 <div class="show">
 	<div class="box">
 		<div class="icon-search">
-			<div class="point" title="Tìm kiếm địa điểm A"><a>A</a></div>
+			<div class="point" title="{% trans 'Find position A on map' %}"><a>A</a></div>
 			<div class="path" title="Tìm kiếm đường đi từ A đến B"><a>A-B</a></div>
 		</div>
 		<div class="search-place">
 			<form action="" method="get">
 				<input autofocus="autofocus" id="p" class="textbox" type="text" name="search" placeholder="Nhập địa điểm...">
-				<input type="submit" name="Search" value="Search" class="button">		
+				<input type="submit" name="Search" value="{% trans 'Search' %}" class="button">		
 			</form>
 		</div>
 		<div class="search-path">
