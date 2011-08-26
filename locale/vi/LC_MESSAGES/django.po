@@ -3,10 +3,10 @@
 msgid "Get reverse directions"
 msgstr "Tìm theo hướng ngược lại"
 
-msgid "Start address"
+msgid "Start address..."
 msgstr "Địa điểm đi"
 
-msgid "End address"
+msgid "End address..."
 msgstr "Địa điểm đến"
 
 msgid "Find position A on map"
@@ -17,3 +17,6 @@ msgstr "Tìm đường đi từ A đến B"
 
 msgid "Search"
 msgstr "Tìm"
+
+msgid "Type address here..."
+msgstr "Nhập địa điểm"

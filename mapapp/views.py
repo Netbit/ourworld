@@ -6,7 +6,7 @@ from django.utils import translation
 
 def home(request):
     
-    translation.activate('vi')
+    translation.activate('en')
     kind_person = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     return render_to_response('index.html', {'kind_person' : kind_person,

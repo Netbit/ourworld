@@ -2,10 +2,10 @@
 msgid "Get reverse directions"
 msgstr ""
 
-msgid "Start address"
+msgid "Start address..."
 msgstr ""
 
-msgid "End address"
+msgid "End address..."
 msgstr ""
 
 msgid "Find position A on map"
@@ -15,4 +15,7 @@ msgid "Find direction from A to B"
 msgstr ""
 
 msgid "Search"
+msgstr ""
+
+msgid "Type address here..."
 msgstr ""
