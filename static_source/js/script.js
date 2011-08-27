@@ -17,4 +17,19 @@ $(document).ready(function(){
     	$('#a').val($('#b').val());
     	$('#b').val(temp);
     });
+    
+    $("#p").autocomplete("lookup/", { 
+    	autoFill: true,
+        max: 10,
+    });
+    
+    $("#a").autocomplete("lookup/", { 
+    	autoFill: true,
+        max: 10,
+    });
+    
+    $("#b").autocomplete("lookup/", { 
+    	autoFill: true,
+        max: 10,
+    });
 });
