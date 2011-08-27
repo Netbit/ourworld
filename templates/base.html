@@ -15,33 +15,13 @@
 
 
 <script type="text/javascript"
-    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+    src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>
 
-<script type="text/javascript">
-  function initialize() {
-  	var address = "Hồ Chí Minh";
-  	var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': address}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-	          var myOptions = {
-	     				zoom: 13,
-	      				center: results[0].geometry.location,
-	      				mapTypeId: google.maps.MapTypeId.ROADMAP
-	    	  };
-	    	var map = new google.maps.Map(document.getElementById("my_map"), myOptions);
-	      } else {
-	        alert("Geocode was not successful for the following reason: " + status);
-	      }
-    	}
-    );
-  }
-
-</script>
 
 {% block extra_static %}{% endblock %}
 </head>
-<body onload="initialize()">
+<body>
 	<div class="header">
 		Bản đồ cho người khuyết tật
 	</div>
