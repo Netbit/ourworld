@@ -124,7 +124,7 @@ INSTALLED_APPS = (
 
 gettext = lambda s: s
 LANGUAGES = (
-  ('vi', gettext('Viet Name')),
+  ('vi', gettext('Viet Nam')),
   ('en', gettext('English')),
 )
 

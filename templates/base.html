@@ -3,9 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Bản đồ cho người khuyết tật</title>
-<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
+
+<link href="{{ STATIC_URL }}favicon.ico" rel="shortcut icon"/>
+
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.autocomplete.css">
+
 
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?sensor=true">
@@ -56,7 +63,7 @@
 	</div>
 	{% block map %} {% endblock %}
 	<div class="footer">
-		Copyright by SPS
+		Designed by SPS Group
 	</div>
 </body>
 </html>
