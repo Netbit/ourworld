@@ -1,4 +1,3 @@
-
 msgid "Get reverse directions"
 msgstr ""
 

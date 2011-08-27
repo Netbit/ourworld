@@ -1,5 +1,6 @@
 # Django settings for ourworld project.
 import os
+from django.utils.translation import ugettext
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
@@ -121,15 +122,18 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+gettext = lambda s: s
 LANGUAGES = (
-  ('vi', 'Vietnamese'),
-  ('en', 'English'),
+  ('vi', gettext('Vietnamese')),
+  ('en', gettext('English')),
 )
 
 LOCALE_PATHS = (
     os.path.join(PROJECT_DIR, 'locale'),
     os.path.join(PROJECT_DIR, 'mapapp/locale'),
 )
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
