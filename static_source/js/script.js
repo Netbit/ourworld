@@ -60,17 +60,23 @@ $(document).ready(function(){
     });
     
     $("#p").autocomplete("lookup/", { 
-    	autoFill: true,
+    	autoFill: false,
         max: 10,
+        multiple: true,
+    	multipleSeparator: " ",
     });
     
     $("#a").autocomplete("lookup/", { 
-    	autoFill: true,
+    	autoFill: false,
         max: 10,
+        multiple: true,
+    	multipleSeparator: " ",
     });
     
     $("#b").autocomplete("lookup/", { 
-    	autoFill: true,
+    	autoFill: false,
         max: 10,
+        multiple: true,
+    	multipleSeparator: " ",
     });
 });

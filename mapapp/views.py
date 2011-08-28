@@ -4,6 +4,7 @@ from django.template.context import RequestContext
 from mapapp.models import KindOfPerson, KindOfConstruction, Construction
 from django.utils import translation
 from django.http import HttpResponse
+from django.db.models import Q
 
 def home(request):
     
