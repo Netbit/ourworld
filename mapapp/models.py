@@ -2,9 +2,17 @@ from django.db import models
 
 # Create your models here.
 class District(models.Model):
-    name        = models.CharField(max_length = 100)
-    location    = models.CharField(max_length = 30)
+    name        = models.CharField(max_length = 60)
+    unsigned_name = models.CharField(max_length = 50)
+    location    = models.CharField(max_length = 30, blank = True)
     description = models.TextField(blank = True)
+    
+    def __unicode__(self):
+        return self.name
+
+class Street(models.Model):
+    name    = models.CharField(max_length = 100)
+    unsigned_name = models.CharField(max_length = 80)
     
     def __unicode__(self):
         return self.name
@@ -27,7 +35,9 @@ class KindOfConstruction(models.Model):
 
 class Construction(models.Model):   
     name               = models.CharField(max_length = 100)
-    address            = models.CharField(max_length = 50)
+    unsigned_name      = models.CharField(max_length = 80)
+    number_or_alley    = models.CharField(max_length = 20)
+    street             = models.ForeignKey(Street)
     district           = models.ForeignKey(District)
     location           = models.CharField(max_length = 30, blank = True)
     link_image         = models.ImageField(upload_to = 'images/place')
@@ -40,7 +50,7 @@ class Construction(models.Model):
         return self.name
     
     def get_address(self):
-        return '%s, %s' % (self.address, self.district)
+        return '%s %s %s' % (self.number_or_alley, self.street, self.district)
 
 
     
