@@ -9,6 +9,26 @@
 <![endif]-->
 {% endblock %}
 
+{% block header %}
+	<div class="header">
+		Bản đồ cho người khuyết tật
+		{% get_current_language as LANGUAGE_CODE %}
+		{% get_available_languages as LANGUAGES %}
+		<div class='localization'>
+			<select name="language" class="language">
+				{% for lang_cd, lang in LANGUAGES %}
+					{% if lang_cd == LANGUAGE_CODE %}
+					<option value="{{ lang_cd }}" selected="selected">{{ lang }}</option>
+					{% else %}
+					<option value="{{ lang_cd }}">{{ lang }}</option>
+					{% endif %}
+				
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+{% endblock %}
+
 {% block map %}
 <div class="show">
 	<div class="box">

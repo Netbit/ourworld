@@ -22,9 +22,9 @@
 {% block extra_static %}{% endblock %}
 </head>
 <body>
-	<div class="header">
-		Bản đồ cho người khuyết tật
-	</div>
+
+	{% block header %}{% endblock %}
+	
 	<div class="filter">
 		<div class="left">
 			{% for obj in kind_person %}

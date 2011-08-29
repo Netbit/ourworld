@@ -79,4 +79,17 @@ $(document).ready(function(){
         multiple: true,
     	multipleSeparator: " ",
     });
+    
+    $('.language').change(function() {
+    	var value = $('.language').val();
+		$.ajax({
+			url: "/language/" + value,
+			success: function(data){
+				alert(data);
+			    location.reload();
+			}
+		});
+	});
 });
+
+
