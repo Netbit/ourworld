@@ -122,15 +122,13 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
-gettext = lambda s: s
 LANGUAGES = (
-  ('vi', gettext('Vietnamese')),
-  ('en', gettext('English')),
+  ('vi', 'Vietnamese'),
+  ('en', 'English'),
 )
 
 LOCALE_PATHS = (
     os.path.join(PROJECT_DIR, 'locale'),
-    os.path.join(PROJECT_DIR, 'mapapp/locale'),
 )
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576

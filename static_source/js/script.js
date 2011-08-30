@@ -61,34 +61,31 @@ $(document).ready(function(){
     
     $("#p").autocomplete("lookup/", { 
     	autoFill: false,
-        max: 10,
+        max: 15,
         multiple: true,
+        scroll: true,
     	multipleSeparator: " ",
     });
     
     $("#a").autocomplete("lookup/", { 
     	autoFill: false,
-        max: 10,
+        max: 15,
         multiple: true,
+        scroll: true,
     	multipleSeparator: " ",
     });
     
     $("#b").autocomplete("lookup/", { 
     	autoFill: false,
-        max: 10,
+        max: 15,
         multiple: true,
+        scroll: true,
     	multipleSeparator: " ",
     });
     
     $('.language').change(function() {
     	var value = $('.language').val();
-		$.ajax({
-			url: "/language/" + value,
-			success: function(data){
-				alert(data);
-			    location.reload();
-			}
-		});
+    	window.open('?lang=' + value, '_self', false);		
 	});
 });
 

@@ -3,17 +3,13 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from mapapp.models import KindOfPerson, KindOfConstruction, Construction
 from django.utils import translation
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.db.models import Q
-
-
-def change_languge(request, lang_cd):
-    translation.activate(lang_cd)
-    return HttpResponseRedirect(translation.get_language())
 
     
 def home(request):
-    a = translation.get_language()
+    lang = request.GET.get("lang", 'vi')
+    translation.activate(lang)
     kind_person = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     return render_to_response('index.html', {'kind_person' : kind_person,
