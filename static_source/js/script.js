@@ -64,7 +64,7 @@ $(document).ready(function(){
         max: 15,
         multiple: true,
         scroll: true,
-    	multipleSeparator: " ",
+    	multipleSeparator: " "
     });
     
     $("#a").autocomplete("lookup/", { 
@@ -72,7 +72,7 @@ $(document).ready(function(){
         max: 15,
         multiple: true,
         scroll: true,
-    	multipleSeparator: " ",
+    	multipleSeparator: " "
     });
     
     $("#b").autocomplete("lookup/", { 
@@ -80,12 +80,17 @@ $(document).ready(function(){
         max: 15,
         multiple: true,
         scroll: true,
-    	multipleSeparator: " ",
+    	multipleSeparator: " "
     });
-    
+
     $('.language').change(function() {
-    	var value = $('.language').val();
-    	window.open('?lang=' + value, '_self', false);		
+    	try {
+    		var obj = document.getElementById('lang');
+        	var value = obj.options(obj.selectedIndex).value;
+        	window.open('?lang=' + value, '_self', false);
+		} catch (e) {
+			alert(e);
+		}	
 	});
 });
 

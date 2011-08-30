@@ -168,6 +168,7 @@ body {
 	cursor: pointer;
 	font-weight: bold;
 	height: 25px;
+	width: 65px;	
 }
 
 .swap {
@@ -177,7 +178,7 @@ body {
 
 .localization {
 	float: right;
+	bottom: 5px;
 	position: relative;
 	margin-right: 5px;
-	top: 35px;
 }

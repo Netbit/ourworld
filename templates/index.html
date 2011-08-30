@@ -15,7 +15,7 @@
 		{% get_current_language as LANGUAGE_CODE %}
 		{% get_available_languages as LANGUAGES %}
 		<div class='localization'>
-			<select name="language" class="language">
+			<select id='lang' name="language" class="language">
 				{% for lang_cd, lang in LANGUAGES %}
 					{% if lang_cd == LANGUAGE_CODE %}
 					<option value="{{ lang_cd }}" selected="selected">{{ lang }}</option>
