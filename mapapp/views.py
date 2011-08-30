@@ -22,6 +22,9 @@ def lookup(request):
     if request.GET.has_key(u'q'):
         value = request.GET[u'q']
         lst = KindOfConstruction.objects.filter(name__contains = value)
+        if len(lst) < 2:
+            lst.extend(KindOfConstruction.objects.filter(unsgined_name__contains = value))
+        
         data = ""
         for i in lst:
             data += i.name + "\n"

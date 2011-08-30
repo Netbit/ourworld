@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class District(models.Model):
     name        = models.CharField(max_length = 60)
+    name_english = models.CharField(max_length = 60)
     unsigned_name = models.CharField(max_length = 50)
     location    = models.CharField(max_length = 30, blank = True)
     description = models.TextField(blank = True)
@@ -35,6 +36,7 @@ class KindOfConstruction(models.Model):
 
 class Construction(models.Model):   
     name               = models.CharField(max_length = 100)
+    name_english       = models.CharField(max_length = 100)
     unsigned_name      = models.CharField(max_length = 80)
     number_or_alley    = models.CharField(max_length = 20)
     street             = models.ForeignKey(Street)
@@ -42,6 +44,7 @@ class Construction(models.Model):
     location           = models.CharField(max_length = 30, blank = True)
     link_image         = models.ImageField(upload_to = 'images/place')
     description_detail = models.TextField(blank = True)
+    description_detail_english = models.TextField(blank = True)
     description_other  = models.TextField(blank = True)
     kind_of_construction = models.ForeignKey(KindOfConstruction)
     kind_of_person     = models.ManyToManyField(KindOfPerson)
