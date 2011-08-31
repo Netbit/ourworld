@@ -8,8 +8,21 @@ from django.db.models import Q
 
     
 def home(request):
-    lang = request.GET.get("lang", 'vi')
-    translation.activate(lang)
+    lang = request.GET.get("lang", '')
+    if lang == '':
+        if request.session.get('lang', '') != '':
+            translation.activate(request.session.get('lang', ''))
+        else:
+            translation.activate('vi')
+            request.session['lang'] = 'vi'
+    else:
+        if request.session.get('lang', '') != '':
+            if lang != request.session.get('lang', ''):
+                translation.activate(lang)
+                request.session['lang'] = lang
+        else:
+            translation.activate(lang)
+    
     kind_person = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     return render_to_response('index.html', {'kind_person' : kind_person,
