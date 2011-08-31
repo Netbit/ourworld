@@ -20,8 +20,11 @@ def home(request):
             if lang != request.session.get('lang', ''):
                 translation.activate(lang)
                 request.session['lang'] = lang
+            else:
+                translation.activate(lang)
         else:
             translation.activate(lang)
+            request.session['lang'] = lang
     
     kind_person = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
