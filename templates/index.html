@@ -4,7 +4,14 @@
 
 {% load tagslib %}
 
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+
 {% block extra_static %}
+
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
+</script>
 <!--[if IE]><link rel="stylesheet" href="ie.css" type="text/css" media="screen, projection" />
 <![endif]-->
 {% endblock %}

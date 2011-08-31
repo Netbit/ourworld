@@ -6,7 +6,7 @@ $(document).ready(function(){
   	var map;
   	
   	//$("body").load(function(){
-		address = "Hồ Chí Minh";
+		address = "Ho Chi Minh City";
 	 	geocoder = new google.maps.Geocoder();
 		geocoder.geocode({'address': address}, function(results, status) {
 	      	if (status == google.maps.GeocoderStatus.OK) {
@@ -31,9 +31,8 @@ $(document).ready(function(){
 	    		map.setCenter(results[0].geometry.location);
 	    		var marker = new google.maps.Marker({
 	    							map: map,
-	    							position: results.geometry.location
-	    							});
-	    		
+	    							position: results[0].geometry.location
+	    							});	    		
 	    	} else {
 	    		alert("Geocode was not successful for the following reason: " + status);
 	    	}   

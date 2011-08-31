@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mapapp.models import District, KindOfConstruction, Construction,\
-    KindOfPerson
+    KindOfPerson, Street
 
 
 class AdminDistrict(admin.ModelAdmin):
@@ -23,8 +23,14 @@ class AdminNguoiTiepCan(admin.ModelAdmin):
     list_filter = ('name',)
     search_fields = ('name',)
     
+class AdminStreet(admin.ModelAdmin):
+    list_display = ['name',]
+    list_filter = ('name',)
+    search_fields = ('name',)    
+
 
 admin.site.register(District, AdminDistrict)
 admin.site.register(KindOfConstruction, AdminKindOfConstruction)
 admin.site.register(Construction, AdminConstruction)
 admin.site.register(KindOfPerson, AdminNguoiTiepCan)
+admin.site.register(Street, AdminStreet)
