@@ -5,24 +5,20 @@ $(document).ready(function(){
   	var geocoder;
   	var map;
   	
-  	//$("body").load(function(){
-		address = "Ho Chi Minh City";
-	 	geocoder = new google.maps.Geocoder();
-		geocoder.geocode({'address': address}, function(results, status) {
-	      	if (status == google.maps.GeocoderStatus.OK) {
-	      		var myOptions = {
-	     							zoom: 13,
-	      							center: results[0].geometry.location,
-	      							mapTypeId: google.maps.MapTypeId.ROADMAP
-	    	  					};
-	      		map = new google.maps.Map(document.getElementById("my_map"), myOptions);
-	      	} else {
-	        	alert("Geocode was not successful for the following reason: " + status);
-	      	}
-    	});
-  	//});
-	
-
+	address = "Ho Chi Minh City";
+ 	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'address': address}, function(results, status) {
+      	if (status == google.maps.GeocoderStatus.OK) {
+      		var myOptions = {
+     							zoom: 13,
+      							center: results[0].geometry.location,
+      							mapTypeId: google.maps.MapTypeId.ROADMAP
+    	  					};
+      		map = new google.maps.Map(document.getElementById("my_map"), myOptions);
+      	} else {
+        	alert("Geocode was not successful for the following reason: " + status);
+      	}
+	});
 	
   	$('#search_place').click(function() {
 	    address = document.getElementById("p").value;
