@@ -1,3 +1,7 @@
+/*
+ * Son Tieu test commit 
+ */
+
 var map;
 
 function initialize() {
