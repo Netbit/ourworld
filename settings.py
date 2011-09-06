@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'modeltranslation',
     'mapapp',
     'mapapp.templatetags',
     'django.contrib.admindocs',
@@ -126,6 +127,8 @@ LANGUAGES = (
   ('vi', 'Vietnamese'),
   ('en', 'English'),
 )
+
+MODELTRANSLATION_TRANSLATION_REGISTRY = "mapapp.translation"
 
 LOCALE_PATHS = (
     os.path.join(PROJECT_DIR, 'locale'),
