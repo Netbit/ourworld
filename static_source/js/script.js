@@ -156,7 +156,7 @@ $(document).ready(function() {
 	$('.language').change(function() {
 		try {
 			var obj = document.getElementById('lang');
-			var value = obj.options(obj.selectedIndex).value;
+			var value = obj.options[obj.selectedIndex].value;
 			window.open('?lang=' + value, '_self', false);
 		} catch (e) {
 			alert(e);
