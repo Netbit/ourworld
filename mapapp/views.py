@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from mapapp.models import KindOfPerson, KindOfConstruction, Construction
+from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
 from django.utils import translation
 from django.http import HttpResponse
 from django.db.models import Q
@@ -37,9 +37,9 @@ def home(request):
 def lookup(request):
     if request.GET.has_key(u'q'):
         value = request.GET[u'q']
-        lst = KindOfConstruction.objects.filter(name__contains = value)
+        lst = Street.objects.filter(name__contains = value)
         if len(lst) < 2:
-            lst.extend(KindOfConstruction.objects.filter(unsgined_name__contains = value))
+            lst.extend(Street.objects.filter(unsgined_name__contains = value))
         
         data = ""
         for i in lst:
