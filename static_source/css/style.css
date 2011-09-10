@@ -81,7 +81,7 @@ body {
 	height: 600px;
 }
 
-.box {
+.box-search {
 	top: 18px;
 	position: relative;
 	overflow: hidden;
@@ -181,4 +181,27 @@ body {
 	bottom: 5px;
 	position: relative;
 	margin-right: 5px;
+}
+
+.box {
+	position: fixed;
+	background-image: url("/static/images/nav_bg.gif");
+	z-index: 99;
+	bottom: 0px;
+	width: 230px;
+	height: 300px;
+	overflow: auto;
+	right: 0px;
+	display: none;
+}
+.show-box {
+	position: fixed;
+	background-image: url("/static/images/nav_bg.gif");
+	z-index: 999;
+	cursor: pointer;
+	bottom: 0px;
+	width: 16px;
+	height: 16px;
+	right: 0px;
+	z-index: 999;
 }
