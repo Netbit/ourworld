@@ -132,6 +132,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = "mapapp.translation"
 
 LOCALE_PATHS = (
     os.path.join(PROJECT_DIR, 'locale'),
+    os.path.join(PROJECT_DIR, 'mapapp\\locale'),
 )
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
