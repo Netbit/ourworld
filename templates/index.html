@@ -8,7 +8,7 @@
 {% get_available_languages as LANGUAGES %}
 
 {% block extra_static %}
-
+<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
 </script>
@@ -37,7 +37,7 @@
 
 {% block map %}
 <div class="show">
-	<div class="box">
+	<div class="box-search">
 		<div class="icon-search">
 			<div class="point" title="{% trans 'Find position A on map' %}"><a>A</a></div>
 			<div class="path" title="{% trans 'Find direction from A to B' %}"><a>A-B</a></div>
@@ -57,7 +57,14 @@
 			</form>					
 		</div>
 	</div>	
-	<div class="map" id="my_map">
+	<div class="map" id="my_map"></div>
+	<div id="box" class="box">
+		<img alt="" style="cursor: pointer;" id="hidden-popup" title="{% trans 'Hidden this box' %}" src="{{ STATIC_URL }}images/hide.png"><br>
+		<div id="content">
+		</div>
+	</div>
+	<div class="show-box" id="show-box">
+		<img id="show-popup" alt="" src="{{ STATIC_URL }}images/show.png" title="{% trans 'Show details' %}"><br>
 	</div>
 </div>	
 {% endblock %}
