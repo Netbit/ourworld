@@ -5,27 +5,18 @@ from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
 from django.utils import translation
 from django.http import HttpResponse
 from django.db.models import Q
+from django.views.i18n import set_language
 
     
 def home(request):
     lang = request.GET.get("lang", '')
     if lang == '':
-        if request.session.get('lang', '') != '':
-            translation.activate(request.session.get('lang', ''))
-        else:
-            translation.activate('vi')
-            request.session['lang'] = 'vi'
-    else:
-        if request.session.get('lang', '') != '':
-            if lang != request.session.get('lang', ''):
-                translation.activate(lang)
-                request.session['lang'] = lang
-            else:
-                translation.activate(lang)
-        else:
-            translation.activate(lang)
-            request.session['lang'] = lang
+        lang = request.session['django_language']
     
+    if request.session['django_language'] != lang:        
+        request.session['django_language'] = lang
+        
+    translation.activate(lang)        
     kind_person = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     return render_to_response('index.html', {'kind_person' : kind_person,
