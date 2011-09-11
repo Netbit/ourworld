@@ -37,6 +37,7 @@ body {
 	margin-left: 15px;
 	margin-top: 4px;
 	border-right: 2px solid gray;
+	overflow: auto;
 }
 
 .right {
@@ -45,6 +46,7 @@ body {
 	width: 48%;
 	margin-left: 5px;
 	margin-top: 4px;
+	overflow: auto;
 }
 
 .icon {
