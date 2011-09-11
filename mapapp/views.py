@@ -10,9 +10,13 @@ from django.views.i18n import set_language
     
 def home(request):
     lang = request.GET.get("lang", '')
+    
+    if request.session.has_key('django_language') == False:
+        request.session['django_language'] = 'vi'
+        
     if lang == '':
         lang = request.session['django_language']
-    
+        
     if request.session['django_language'] != lang:        
         request.session['django_language'] = lang
         
