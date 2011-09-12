@@ -84,6 +84,12 @@ msgstr ""
 msgid "Kind of construction name"
 msgstr ""
 
+msgid "Construction"
+msgstr ""
+
+msgid "Constructions"
+msgstr ""
+
 msgid "Construction name"
 msgstr ""
 
@@ -111,14 +117,14 @@ msgstr ""
 msgid "Description other"
 msgstr ""
 
-msgid "Kind of person"
+msgid "Kind of Person"
 msgstr ""
 
-msgid "Kind of persons"
+msgid "Kind of Persons"
 msgstr ""
 
-msgid "Kind of construction"
+msgid "Kind of Construction"
 msgstr ""
 
-msgid "Kind of constructions"
+msgid "Kind of Constructions"
 msgstr ""

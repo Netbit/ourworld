@@ -82,6 +82,12 @@ msgstr "Hình ảnh"
 msgid "Kind of construction name"
 msgstr "Tên loại công trình"
 
+msgid "Construction"
+msgstr "Công trình"
+
+msgid "Constructions"
+msgstr "Danh sách các công trình"
+
 msgid "Construction name"
 msgstr "Tên công trình"
 
@@ -109,14 +115,14 @@ msgstr "Mô tả chi tiết"
 msgid "Description other"
 msgstr "Mô tả khác"
 
-msgid "Kind of person"
+msgid "Kind of Person"
 msgstr "Loại người tiếp cận"
 
-msgid "Kind of persons"
+msgid "Kind of Persons"
 msgstr "Danh sách loại người tiếp cận"
 
-msgid "Kind of construction"
+msgid "Kind of Construction"
 msgstr "Loại công trình"
 
-msgid "Kind of constructions"
+msgid "Kind of Constructions"
 msgstr "Danh sách loại công trình"
