@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+# --------------- HTML ------------------
 msgid "Get reverse directions"
 msgstr "Tìm đường theo hướng ngược lại."
 
@@ -52,3 +53,70 @@ msgstr "Thời gian"
 
 msgid "(by car)"
 msgstr "(xe ô tô)"
+
+# -------------------- ADMIN SITE ------------------
+msgid "District name"
+msgstr "Tên Quận/Huyện"
+
+msgid "District unsigned name"
+msgstr "Tên không dấu"
+
+msgid "Location (on map)"
+msgstr "Vị trí(trên bản đồ)"
+
+msgid "Description"
+msgstr "Mô tả chi tiết"
+
+msgid "Street name"
+msgstr "Tên đường"
+
+msgid "Street unsigned name"
+msgstr "Tên không dấu"
+
+msgid "Kind of person name"
+msgstr "Tên loại người tiếp cận"
+
+msgid "Image"
+msgstr "Hình ảnh"
+
+msgid "Kind of construction name"
+msgstr "Tên loại công trình"
+
+msgid "Construction name"
+msgstr "Tên công trình"
+
+msgid "Construction unsigned name"
+msgstr "Tên không dấu"
+
+msgid "Number or alley"
+msgstr "Số/hẻm"
+
+msgid "Street"
+msgstr "Đường"
+
+msgid "Streets"
+msgstr "Danh sách Đường"
+
+msgid "District"
+msgstr "Quận"
+
+msgid "Districts"
+msgstr "Danh sách các quận"
+
+msgid "Description detail"
+msgstr "Mô tả chi tiết"
+
+msgid "Description other"
+msgstr "Mô tả khác"
+
+msgid "Kind of person"
+msgstr "Loại người tiếp cận"
+
+msgid "Kind of persons"
+msgstr "Danh sách loại người tiếp cận"
+
+msgid "Kind of construction"
+msgstr "Loại công trình"
+
+msgid "Kind of constructions"
+msgstr "Danh sách loại công trình"

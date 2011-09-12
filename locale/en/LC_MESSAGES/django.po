@@ -17,6 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+
+# --------------- HTML ------------------
 msgid "Get reverse directions"
 msgstr ""
 
@@ -51,4 +53,72 @@ msgid "Time"
 msgstr ""
 
 msgid "(by car)"
+msgstr ""
+
+
+# -------------------- ADMIN SITE ------------------
+msgid "District name"
+msgstr ""
+
+msgid "District unsigned name"
+msgstr ""
+
+msgid "Location (on map)"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Street name"
+msgstr ""
+
+msgid "Street unsigned name"
+msgstr ""
+
+msgid "Kind of person name"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Kind of construction name"
+msgstr ""
+
+msgid "Construction name"
+msgstr ""
+
+msgid "Construction unsigned name"
+msgstr ""
+
+msgid "Number or alley"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "Streets"
+msgstr ""
+
+msgid "District"
+msgstr ""
+
+msgid "Districts"
+msgstr ""
+
+msgid "Description detail"
+msgstr ""
+
+msgid "Description other"
+msgstr ""
+
+msgid "Kind of person"
+msgstr ""
+
+msgid "Kind of persons"
+msgstr ""
+
+msgid "Kind of construction"
+msgstr ""
+
+msgid "Kind of constructions"
 msgstr ""
