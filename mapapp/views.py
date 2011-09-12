@@ -5,7 +5,6 @@ from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
 from django.utils import translation
 from django.http import HttpResponse
 from django.db.models import Q
-from django.views.i18n import set_language
 
     
 def home(request):
@@ -42,3 +41,6 @@ def lookup(request):
         return HttpResponse(data)
     else:
         return HttpResponse("")
+
+def get_information(request, id):
+    return HttpResponse("This is a respond text.")

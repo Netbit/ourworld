@@ -5,7 +5,20 @@ var originIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=
 var geocoder;
 var bounds;
 
-function get_info_of_place() {
+function get_info_of_place(marker) {	
+	$.ajax({
+	  url: "/info/" + marker.id,
+	  beforeSend: function() {
+		  alert("before");
+	  },
+	  success: function(data){
+	    alert(data);
+	  },
+	  error: function() {
+		alert("Error");
+	  }
+	});
+	
 	var contentString = 'Hello';
 	var infowindow = new google.maps.InfoWindow({
 		content : contentString
@@ -49,10 +62,11 @@ function search_place(address) {
 			map.setCenter(results[0].geometry.location);
 			marker = new google.maps.Marker({
 				map : map,
-				position : results[0].geometry.location
+				position : results[0].geometry.location,
+				id: 1
 			});
-			infowindow = get_info_of_place();
 			google.maps.event.addListener(marker, 'click', function() {
+				infowindow = get_info_of_place(marker);
 				infowindow.open(map, marker);
 			});
 		} else {
