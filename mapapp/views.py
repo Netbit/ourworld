@@ -5,6 +5,7 @@ from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
 from django.utils import translation
 from django.http import HttpResponse
 from django.db.models import Q
+from django.conf import settings
 
     
 def home(request):
