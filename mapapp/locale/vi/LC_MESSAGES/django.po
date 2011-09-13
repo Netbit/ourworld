@@ -101,7 +101,7 @@ msgid "Street"
 msgstr "Đường"
 
 msgid "Streets"
-msgstr "Danh sách Đường"
+msgstr "Danh sách các con Đường"
 
 msgid "District"
 msgstr "Quận"

@@ -101,13 +101,13 @@ msgid "Street"
 msgstr "Đường"
 
 msgid "Streets"
-msgstr "Danh sách Đường"
+msgstr "Danh sách các con đường"
 
 msgid "District"
 msgstr "Quận"
 
 msgid "Districts"
-msgstr "Danh sách các quận"
+msgstr "Danh sách các Quận"
 
 msgid "Description detail"
 msgstr "Mô tả chi tiết"
