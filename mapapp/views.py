@@ -1,8 +1,8 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
-from django.utils import translation
+from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District
+from django.utils import translation, simplejson
 from django.http import HttpResponse
 from django.db.models import Q
 from django.conf import settings
@@ -21,10 +21,22 @@ def home(request):
         request.session['django_language'] = lang
         
     translation.activate(lang)        
-    kind_person = KindOfPerson.objects.all()
+    kind_person       = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
-    return render_to_response('index.html', {'kind_person' : kind_person,
-                                             'kind_construction' : kind_construction}, 
+    districts         = District.objects.all()
+    default_district  = District.objects.get(unsigned_name = "Quan 1")
+    construction      = Construction.objects.filter(district = default_district.id)
+    location          = []
+    for con in construction:
+        st = con.get_address()
+        location.append(st)
+        
+    return render_to_response('index.html', {'kind_person'       : kind_person,
+                                             'kind_construction' : kind_construction,
+                                             'location'          : simplejson.dumps(location), 
+                                             'length'            : len(location),
+                                             'districts'         : districts,
+                                             }, 
                               context_instance = RequestContext(request))
     
     

@@ -74,6 +74,16 @@ function search_place(address) {
 					+ status);
 		}
 	});
+	
+	var length = "{{ length }}";
+	var location = "{{ location }}";
+	var con = document.document.getElementById("construction");
+	var index;
+	for (var i = 0; i < lenght; i++) {
+		index = '' + i;
+		con.add(new Option(location[i],index));
+	}
+					
 }
 
 function showSteps(directionResult) {
