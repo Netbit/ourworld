@@ -26,15 +26,14 @@ def home(request):
     districts         = District.objects.all()
     default_district  = District.objects.get(unsigned_name = "Quan 1")
     construction      = Construction.objects.filter(district = default_district.id)
-    location          = []
+    location          = ''
     for con in construction:
-        st = con.get_address()
-        location.append(st)
-        
+        location += con.get_address()
+        location += ';'
+               
     return render_to_response('index.html', {'kind_person'       : kind_person,
                                              'kind_construction' : kind_construction,
-                                             'location'          : simplejson.dumps(location), 
-                                             'length'            : len(location),
+                                             'location'          : location, 
                                              'districts'         : districts,
                                              }, 
                               context_instance = RequestContext(request))

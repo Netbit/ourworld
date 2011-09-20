@@ -48,6 +48,12 @@ function initialize() {
 					+ status);
 		}
 	});
+	var location = document.getElementById('location');
+	var places = con.value.split(';');
+	var length = places.length - 1;
+	for (var i = 0; i < length; i++) {
+		search_place(places[i]);
+	}
 }
 
 function search_place(address) {
@@ -70,20 +76,9 @@ function search_place(address) {
 				infowindow.open(map, marker);
 			});
 		} else {
-			alert("Geocode was not successful for the following reason: "
-					+ status);
+			alert("Geocode was not successful for the following reason: " + status);
 		}
-	});
-	
-	var length = "{{ length }}";
-	var location = "{{ location }}";
-	var con = document.document.getElementById("construction");
-	var index;
-	for (var i = 0; i < lenght; i++) {
-		index = '' + i;
-		con.add(new Option(location[i],index));
-	}
-					
+	});				
 }
 
 function showSteps(directionResult) {
