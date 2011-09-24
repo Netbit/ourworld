@@ -6,6 +6,8 @@ from django.utils import translation, simplejson
 from django.http import HttpResponse
 from django.db.models import Q
 from django.conf import settings
+from compiler.pycodegen import TRY_FINALLY
+import json
 
     
 def home(request):
@@ -55,4 +57,14 @@ def lookup(request):
         return HttpResponse("")
 
 def get_information(request, id):
-    return HttpResponse("This is a respond text.")
+    try:
+        con = Construction.objects.get(id = id)
+        data = { "results" : {
+                        "details" : con.description_detail,
+                        "image": con.link_image.url
+                    }  
+               }
+    except:
+        data = { "results" : {}
+               }
+    return HttpResponse(json.dumps(data), mimetype = "application/json")

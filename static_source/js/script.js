@@ -5,21 +5,25 @@ var originIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=
 var geocoder;
 var bounds;
 
-function get_info_of_place(marker) {	
-	$.ajax({
-	  url: "/info/" + marker.id,
-	  beforeSend: function() {
-		  alert("before");
-	  },
-	  success: function(data){
-	    alert(data);
-	  },
-	  error: function() {
-		alert("Error");
-	  }
-	});
+function get_info_of_place(marker) {
+	var contentString = '';
+//	$.ajax({
+//		url : "/info/" + "1",
+//		beforeSend : function() {
+//
+//		},
+//		success : function(data) {
+//			if (data.results.image != "") {
+//				contentString += "<img src='" + data.results.image + "'>";				
+//			}
+//			contentString += "<div>" + data.results.details + "</div>";
+//			alert(contentString);
+//		},
+//		error : function(e) {
+//			alert("No data");
+//		}
+//	});
 	
-	var contentString = 'Hello';
 	var infowindow = new google.maps.InfoWindow({
 		content : contentString
 	});
@@ -48,12 +52,12 @@ function initialize() {
 					+ status);
 		}
 	});
-	var location = document.getElementById('location');
-	var places = con.value.split(';');
-	var length = places.length - 1;
-	for (var i = 0; i < length; i++) {
-		search_place(places[i]);
-	}
+	// var location = document.getElementById('location');
+	// var places = con.value.split(';');
+	// var length = places.length - 1;
+	// for (var i = 0; i < length; i++) {
+	// search_place(places[i]);
+	// }
 }
 
 function search_place(address) {
@@ -69,16 +73,28 @@ function search_place(address) {
 			marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location,
-				id: 1
+				id : 1
 			});
 			google.maps.event.addListener(marker, 'click', function() {
-				infowindow = get_info_of_place(marker);
-				infowindow.open(map, marker);
+				var contentString = "";
+				$.getJSON("/info/" + marker.id , function(data) {
+					if (data.results.hasOwnProperty('details')) {
+						if (data.results.image != "") {
+							contentString += "<img src='" + data.results.image + "'>";				
+						}
+						contentString += "<span>" + data.results.details + "</span>";
+						infowindow = new google.maps.InfoWindow({
+							content : contentString
+						});
+						infowindow.open(map, marker);
+					}					
+				});				
 			});
 		} else {
-			alert("Geocode was not successful for the following reason: " + status);
+			alert("Geocode was not successful for the following reason: "
+					+ status);
 		}
-	});				
+	});
 }
 
 function showSteps(directionResult) {
@@ -132,11 +148,13 @@ function callback(response, status) {
 			addMarker(origins[i], false);
 			for ( var j = 0; j < results.length; j++) {
 				addMarker(destinations[j], true);
-				outputDiv.innerHTML += "<b>" + gettext("From") + "</b>: " + origins[i] + "<br>" +
-									   "<b>" + gettext("To") + "</b>: " + destinations[j] + "<br>" +
-									   "<b>" + gettext("Distance") + "</b>: " + results[j].distance.text + "<br>" +
-									   "<b>" + gettext("Time") + "</b>: " + results[j].duration.text + " " +
-									   gettext("(by car)");
+				outputDiv.innerHTML += "<b>" + gettext("From") + "</b>: "
+						+ origins[i] + "<br>" + "<b>" + gettext("To")
+						+ "</b>: " + destinations[j] + "<br>" + "<b>"
+						+ gettext("Distance") + "</b>: "
+						+ results[j].distance.text + "<br>" + "<b>"
+						+ gettext("Time") + "</b>: " + results[j].duration.text
+						+ " " + gettext("(by car)");
 			}
 			$('#box').fadeIn('slow').show();
 			$('#show-box').hide();
