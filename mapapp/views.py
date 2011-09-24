@@ -68,3 +68,31 @@ def get_information(request, id):
         data = { "results" : {}
                }
     return HttpResponse(json.dumps(data), mimetype = "application/json")
+
+
+def kind_person_filter(request):
+    id1 = request.GET.get('id1', '')
+    id2 = request.GET.get('id2', '')
+    
+    if id1 != '' and id2 != '':
+        lst = Construction.objects.filter(kind_of_person = id1, kind_of_construction = id2)
+    else:
+        lst = Construction.objects.filter(kind_of_person = id1)
+    
+    map = {}    
+    mArray = []
+    for obj in lst:
+        temp = {}
+        temp['id'] = obj.id
+        temp['address'] = obj.get_address()
+        mArray.append(temp)
+        
+    map["results"] = mArray
+    
+    return HttpResponse(json.dumps(map), mimetype = "application/json")
+
+def kind_construction_filter(request):
+    id1 = request.GET['id1']
+    id2 = request.GET['id2']
+    
+    return HttpResponse('', mimetype = "application/json")

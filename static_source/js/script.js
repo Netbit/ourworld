@@ -75,6 +75,7 @@ function search_place(address) {
 				position : results[0].geometry.location,
 				id : 1
 			});
+			markersArray.push(marker);
 			google.maps.event.addListener(marker, 'click', function() {
 				var contentString = "";
 				$.getJSON("/info/" + marker.id , function(data) {
@@ -202,12 +203,13 @@ $(document).ready(function() {
 
 	$('#search_place').click(function() {
 		var address;
-
+		deleteOverlays();
 		address = document.getElementById("p").value;
 		search_place(address);
 	});
 
 	$('#search_path').click(function() {
+		deleteOverlays();
 		var start = document.getElementById("a").value;
 		var end = document.getElementById("b").value;
 		var request = {
@@ -290,3 +292,19 @@ $(document).ready(function() {
 		$('#box').fadeIn('slow').show();
 	});
 });
+
+function kind_construction_filter(id) {
+	var obj1 = document.getElementById('kind_construction');
+	obj1.value = id;	
+
+}
+
+function kind_person_filter(id) {
+	var obj1 = document.getElementById('kind_person');
+	obj1.value = id;
+	
+	var obj2 = document.getElementById('kind_construction');
+	
+	$.ajax({                                                                  
+		url : "/filter/kind_person/?id1=" + id + "&id2=" + obj2.value,                                                                     	success : function(data) {                                                		alert(data.results.length);    	},                                                                        	error : function(e) {                                                     		alert("No data");                                                     	}                                                                         });   
+}

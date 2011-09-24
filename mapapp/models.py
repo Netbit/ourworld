@@ -72,7 +72,7 @@ class Construction(models.Model):
         return self.name
     
     def get_address(self):
-        return '%s %s, Ho Chi Minh City' % (self.number_or_alley, self.street)
+        return '%s %s, Ho Chi Minh' % (self.number_or_alley, self.street)
 
 
     
