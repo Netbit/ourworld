@@ -60,7 +60,7 @@ function initialize() {
 	// }
 }
 
-function search_place(address) {
+function search_place(id, address) {
 
 	var marker;
 	var infowindow;
@@ -73,7 +73,7 @@ function search_place(address) {
 			marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location,
-				id : 1
+				id : id
 			});
 			markersArray.push(marker);
 			google.maps.event.addListener(marker, 'click', function() {
@@ -296,7 +296,21 @@ $(document).ready(function() {
 function kind_construction_filter(id) {
 	var obj1 = document.getElementById('kind_construction');
 	obj1.value = id;	
-
+	
+	var obj2 = document.getElementById('kind_person');
+	
+	$.ajax({                                                                  
+		url : "/filter/kind_construction/?id1=" + id + "&id2=" + obj2.value, 
+    	success : function(data) {
+    		deleteOverlays();
+    		for (var i = 0; i < data.results.length; i ++) {
+    			search_place(data.results[i].id, data.results[i].address);
+    		}
+    	},                                                                    
+    	error : function(e) {                                                 
+    		alert("No data");                                                 
+    	}                                                                     
+    });   
 }
 
 function kind_person_filter(id) {
@@ -306,5 +320,10 @@ function kind_person_filter(id) {
 	var obj2 = document.getElementById('kind_construction');
 	
 	$.ajax({                                                                  
-		url : "/filter/kind_person/?id1=" + id + "&id2=" + obj2.value,                                                                     	success : function(data) {                                                		alert(data.results.length);    	},                                                                        	error : function(e) {                                                     		alert("No data");                                                     	}                                                                         });   
+		url : "/filter/kind_person/?id1=" + id + "&id2=" + obj2.value, 
+    	success : function(data) {
+    		deleteOverlays();
+    		for (var i = 0; i < data.results.length; i ++) {
+    			search_place(data.results[i].id, data.results[i].address);
+    		}    	},                                                                        	error : function(e) {                                                     		alert("No data");                                                     	}                                                                         });   
 }

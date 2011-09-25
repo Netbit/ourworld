@@ -95,4 +95,20 @@ def kind_construction_filter(request):
     id1 = request.GET['id1']
     id2 = request.GET['id2']
     
-    return HttpResponse('', mimetype = "application/json")
+    if id1 != '' and id2 != '':
+        lst = Construction.objects.filter(kind_of_construction = id1, kind_of_person = id2)
+    else:
+        lst = Construction.objects.filter(kind_of_construction = id1)
+    
+    map = {}    
+    mArray = []
+    for obj in lst:
+        temp = {}
+        temp['id'] = obj.id
+        temp['address'] = obj.get_address()
+        mArray.append(temp)
+        
+    map["results"] = mArray
+    
+    return HttpResponse(json.dumps(map), mimetype = "application/json")
+
