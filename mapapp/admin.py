@@ -15,9 +15,9 @@ class AdminKindOfConstruction(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminConstruction(admin.ModelAdmin):
-    list_display = ['name', 'kind_of_construction', 'district',]
-    list_filter = ('name', 'kind_of_construction', 'district')
-    search_fields = ('name','kind_of_construction', 'district')
+    list_display = ['name', 'kind_of_construction', 'street', 'district',]
+    list_filter = ('name', 'kind_of_construction',  'street', 'district')
+    search_fields = ('name',)
     
 class AdminKindOfPerson(admin.ModelAdmin):
     list_display = ['name','description']

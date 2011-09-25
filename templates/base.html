@@ -23,7 +23,7 @@
 		<div class="left">
 			{% for obj in kind_person %}
 			<span class="icon">
-				<a onclick="kind_person_filter('{{ obj.id }}')"><img class="selected" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>
+				<a onclick="kind_person_filter('{{ obj.id }}')"><img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>
 			</span>
 			{% endfor %}
 			<input type="hidden" value="" name="kind_person" id="kind_person">
@@ -31,7 +31,7 @@
 		<div class="right">
 			{% for obj in kind_construction %}
 			<span class="icon">
-				<a onclick="kind_construction_filter('{{ obj.id }}')"><img title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>
+				<a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>
 			</span>
 			{% endfor %}
 			<input type="hidden" value="" name="kind_construction" id="kind_construction">

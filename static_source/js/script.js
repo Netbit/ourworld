@@ -73,7 +73,8 @@ function search_place(id, address) {
 			marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location,
-				id : id
+				id : id,
+				address : results[0].formatted_address
 			});
 			markersArray.push(marker);
 			google.maps.event.addListener(marker, 'click', function() {
@@ -83,7 +84,8 @@ function search_place(id, address) {
 						if (data.results.image != "") {
 							contentString += "<img src='" + data.results.image + "'>";				
 						}
-						contentString += "<span>" + data.results.details + "</span>";
+						contentString += "<span>" + data.results.details + "</span><br>" +
+										 "<span>" + marker.address + "</span>";
 						infowindow = new google.maps.InfoWindow({
 							content : contentString
 						});
@@ -294,13 +296,9 @@ $(document).ready(function() {
 });
 
 function kind_construction_filter(id) {
-	var obj1 = document.getElementById('kind_construction');
-	obj1.value = id;	
-	
-	var obj2 = document.getElementById('kind_person');
 	
 	$.ajax({                                                                  
-		url : "/filter/kind_construction/?id1=" + id + "&id2=" + obj2.value, 
+		url : "/filter/kind_construction/?id1=" + id, 
     	success : function(data) {
     		deleteOverlays();
     		for (var i = 0; i < data.results.length; i ++) {
@@ -314,13 +312,9 @@ function kind_construction_filter(id) {
 }
 
 function kind_person_filter(id) {
-	var obj1 = document.getElementById('kind_person');
-	obj1.value = id;
-	
-	var obj2 = document.getElementById('kind_construction');
 	
 	$.ajax({                                                                  
-		url : "/filter/kind_person/?id1=" + id + "&id2=" + obj2.value, 
+		url : "/filter/kind_person/?id1=" + id, 
     	success : function(data) {
     		deleteOverlays();
     		for (var i = 0; i < data.results.length; i ++) {
