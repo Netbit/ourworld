@@ -32,6 +32,10 @@ function get_info_of_place(marker) {
 
 function initialize() {
 	var address;
+	var location;
+	var id_location;
+	var places;
+	var length;
 
 	address = "Ho Chi Minh City";
 	geocoder = new google.maps.Geocoder();
@@ -52,12 +56,14 @@ function initialize() {
 					+ status);
 		}
 	});
-	// var location = document.getElementById('location');
-	// var places = con.value.split(';');
-	// var length = places.length - 1;
-	// for (var i = 0; i < length; i++) {
-	// search_place(places[i]);
-	// }
+	location    = document.getElementById('location');
+	id_location = document.getElementById('id_location');
+	places      = location.value.split(';');
+	id			= id_location.value.split(';');
+	length      = places.length - 1;
+	for (var i = 0; i < length; i++) {
+		search_place(id, places[i]);
+	}
 }
 
 function search_place(id, address) {
