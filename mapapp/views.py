@@ -61,9 +61,13 @@ def lookup(request):
 def get_information(request, id):
     try:
         con = Construction.objects.get(id = id)
+        if hasattr(con.link_image, 'url'):
+            url = con.link_image.url
+        else:
+            url = ""
         data = { "results" : {
                         "details" : con.description_detail,
-                        "image": con.link_image.url
+                        "image": url
                     }  
                }
     except:
