@@ -62,7 +62,7 @@ function initialize() {
 	id			= id_location.value.split(';');
 	length      = places.length - 1;
 	for (var i = 0; i < length; i++) {
-		search_place(id, places[i]);
+		search_place(id[i], places[i]);
 	}
 }
 
