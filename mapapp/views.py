@@ -31,7 +31,7 @@ def home(request):
     location          = ''
     id_location       = ''
     for con in construction:
-        id_location += con.id + ';'
+        id_location += str(con.id) + ';'
         location    += con.get_address() + ';'
                
     return render_to_response('index.html', {'kind_person'       : kind_person,
