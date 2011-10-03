@@ -28,17 +28,19 @@ def home(request):
     districts         = District.objects.all()
     default_district  = District.objects.get(unsigned_name = "Quan 1")
     construction      = Construction.objects.filter(district = default_district.id)
+    """
     location          = ''
     id_location       = ''
     for con in construction:
         id_location += str(con.id) + ';'
         location    += con.get_address() + ';'
+    """
                
     return render_to_response('index.html', {'kind_person'       : kind_person,
                                              'kind_construction' : kind_construction,
-                                             'location'          : location, 
-                                             'id_location'       : id_location,
-                                             'districts'         : districts,
+                                           #  'location'          : location, 
+                                           #  'id_location'       : id_location,
+                                           #  'districts'         : districts,
                                              }, 
                               context_instance = RequestContext(request))
     
@@ -106,3 +108,18 @@ def kind_construction_filter(request):
     
     return HttpResponse(json.dumps(map), mimetype = "application/json")
 
+def district_filter(request):
+    id_district  = request.GET['id_district']
+    construction = Construction.objects.filter(district = id_district ) 
+    map          = {}
+    tmp          = {}
+    mArray       = []
+    for obj in construction:
+        tmp['id']      = obj.id
+        tmp['address'] = obj.get_address()
+        mArray.append(tmp)
+    map["results"] = mArray
+    
+    return HttpResponse(json.dumps(map), mimetype = "application/json")
+    
+    
