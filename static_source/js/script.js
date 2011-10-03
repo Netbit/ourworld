@@ -213,7 +213,7 @@ $(document).ready(function() {
 		var address;
 		deleteOverlays();
 		address = document.getElementById("p").value;
-		search_place(address);
+		search_place(-1, address);
 	});
 
 	$('#search_path').click(function() {
