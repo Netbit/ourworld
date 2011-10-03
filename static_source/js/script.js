@@ -32,10 +32,11 @@ function get_info_of_place(marker) {
 
 function initialize() {
 	var address;
-	var location;
-	var id_location;
-	var places;
-	var length;
+//	var location;
+//	var id_location;
+//	var places;
+//	var length;
+	var district;
 
 	address = "Ho Chi Minh City";
 	geocoder = new google.maps.Geocoder();
@@ -56,14 +57,16 @@ function initialize() {
 					+ status);
 		}
 	});
-	location    = document.getElementById('location');
-	id_location = document.getElementById('id_location');
-	places      = location.value.split(';');
-	id			= id_location.value.split(';');
-	length      = places.length - 1;
-	for (var i = 0; i < length; i++) {
-		search_place(id[i], places[i]);
-	}
+//	location    = document.getElementById('location');
+//	id_location = document.getElementById('id_location');
+//	places      = location.value.split(';');
+//	id			= id_location.value.split(';');
+//	length      = places.length - 1;
+//	for (var i = 0; i < length; i++) {
+//		search_place(id[i], places[i]);
+//	}
+	district = document.getElementById('district');
+	district_filter(district.options[district.selectedIndex].value);
 }
 
 function search_place(id, address) {
@@ -299,6 +302,18 @@ $(document).ready(function() {
 		$('#show-box').hide();
 		$('#box').fadeIn('slow').show();
 	});
+	
+	$('#district').change(function() {
+		var district;
+		var id_district;
+		try {
+			district 	= document.getElementById('district');
+			id_district = district.options[district.selectedIndex].value;
+			district_filter(id_district);
+		} catch (e) {
+			alert(e);
+		}
+	});
 });
 
 function kind_construction_filter(id) {
@@ -307,7 +322,7 @@ function kind_construction_filter(id) {
 		url : "/filter/kind_construction/?id1=" + id, 
     	success : function(data) {
     		deleteOverlays();
-    		for (var i = 0; i < data.results.length; i ++) {
+    		for (var i = 0; i < data.results.length; i++) {
     			search_place(data.results[i].id, data.results[i].address);
     		}
     	},                                                                    
@@ -323,7 +338,23 @@ function kind_person_filter(id) {
 		url : "/filter/kind_person/?id1=" + id, 
     	success : function(data) {
     		deleteOverlays();
-    		for (var i = 0; i < data.results.length; i ++) {
+    		for (var i = 0; i < data.results.length; i++) {
     			search_place(data.results[i].id, data.results[i].address);
     		}    	},                                                                        	error : function(e) {                                                     		alert("No data");                                                     	}                                                                         });   
+}
+
+function district_filter(id_district) {
+
+	$.ajax({
+		url : "/filter/district/?id_district=" + id_district,
+		success : function(data) {
+			deleteOverlays();
+    		for (var i = 0; i < data.results.length; i++) {
+    			search_place(data.results[i].id, data.results[i].address);
+    		}
+		},
+		error : function(e) {
+			alert("No data");
+		}
+	});
 }
