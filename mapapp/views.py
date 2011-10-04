@@ -92,7 +92,7 @@ def kind_construction_filter(request):
         mArray.append(temp)        
     mData["results"] = mArray
     
-    return HttpResponse(json.dumps(map), mimetype = "application/json")
+    return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
 def district_filter(request):
     id_district  = request.GET['id_district']
