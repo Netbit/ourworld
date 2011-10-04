@@ -2,11 +2,11 @@
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District
-from django.utils import translation, simplejson
+from django.utils import translation
 from django.http import HttpResponse
 from django.db.models import Q
 from django.conf import settings
-from compiler.pycodegen import TRY_FINALLY
+
 import json
 
     
@@ -26,21 +26,10 @@ def home(request):
     kind_person       = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()
-    default_district  = District.objects.get(unsigned_name = "Quan 1")
-    construction      = Construction.objects.filter(district = default_district.id)
-    """
-    location          = ''
-    id_location       = ''
-    for con in construction:
-        id_location += str(con.id) + ';'
-        location    += con.get_address() + ';'
-    """
-               
+                   
     return render_to_response('index.html', {'kind_person'       : kind_person,
                                              'kind_construction' : kind_construction,
-                                           #  'location'          : location, 
-                                           #  'id_location'       : id_location,
-                                           #  'districts'         : districts,
+                                             'districts'         : districts,
                                              }, 
                               context_instance = RequestContext(request))
     
@@ -60,9 +49,9 @@ def lookup(request):
     else:
         return HttpResponse("")
 
-def get_information(request, id):
+def get_information(request, id_object):
     try:
-        con = Construction.objects.get(id = id)
+        con = Construction.objects.get(id = id_object)
         if hasattr(con.link_image, 'url'):
             url = con.link_image.url
         else:
@@ -73,38 +62,35 @@ def get_information(request, id):
                     }  
                }
     except:
-        data = { "results" : {}
-               }
+        data = { "results" : {} }
     return HttpResponse(json.dumps(data), mimetype = "application/json")
 
 
 def kind_person_filter(request):
     id1 = request.GET.get('id1', '')
     lst = Construction.objects.filter(kind_of_person = id1)
-    map = {}    
+    mData = {}    
     mArray = []
     for obj in lst:
         temp = {}
         temp['id'] = obj.id
         temp['address'] = obj.get_address()
-        mArray.append(temp)
-        
-    map["results"] = mArray
+        mArray.append(temp)        
+    mData["results"] = mArray
     
-    return HttpResponse(json.dumps(map), mimetype = "application/json")
+    return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
 def kind_construction_filter(request):
     id1 = request.GET['id1']
     lst = Construction.objects.filter(kind_of_construction = id1)
-    map = {}    
+    mData = {}    
     mArray = []
     for obj in lst:
         temp = {}
         temp['id'] = obj.id
         temp['address'] = obj.get_address()
-        mArray.append(temp)
-        
-    map["results"] = mArray
+        mArray.append(temp)        
+    mData["results"] = mArray
     
     return HttpResponse(json.dumps(map), mimetype = "application/json")
 
