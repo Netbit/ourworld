@@ -90,11 +90,14 @@ function search_place(id, address) {
 				var contentString = "";
 				$.getJSON("/info/" + marker.id , function(data) {
 					if (data.results.hasOwnProperty('details')) {
+						contentString += "<div>";
 						if (data.results.image != "") {
-							contentString += "<img src='" + data.results.image + "'>";				
+							contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
 						}
-						contentString += "<span>" + data.results.details + "</span><br>" +
-										 "<span>" + marker.address + "</span>";
+						contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
+										 "<span class='place_address'>" + marker.address + "</span><br>" +
+										 "<span class='place_details'>" + data.results.details + "</span><br>" +
+										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,width=550,height=450')\">" + gettext("Details...") + "</a></span></div>";
 						infowindow = new google.maps.InfoWindow({
 							content : contentString
 						});
@@ -326,7 +329,8 @@ function kind_construction_filter(id) {
     			search_place(data.results[i].id, data.results[i].address);
     		}
     	},                                                                    
-    	error : function(e) {                                                 
+    	error : function(e) {  
+    		alert(e);
     		alert("No data");                                                 
     	}                                                                     
     });   

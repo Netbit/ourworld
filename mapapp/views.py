@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District
 from django.utils import translation
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db.models import Q
 from django.conf import settings
 
@@ -57,8 +57,10 @@ def get_information(request, id_object):
         else:
             url = ""
         data = { "results" : {
+                        "id"      : str(con.id),
+                        "name"    : con.name,
                         "details" : con.description_detail,
-                        "image": url
+                        "image"   : url
                     }  
                }
     except:
@@ -108,4 +110,9 @@ def district_filter(request):
     
     return HttpResponse(json.dumps(map), mimetype = "application/json")
     
-    
+def get_details(request, id_object):
+    try:
+        con = Construction.objects.get(id = id_object)
+    except:
+        raise Http404()
+    return HttpResponse(con.description_detail)    
