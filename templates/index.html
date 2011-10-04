@@ -34,9 +34,9 @@
 			<select id='district' class="district">
 				{% for dis in districts %}
 					{% if "Quan 1" != dis.name %}
-						<option id="{{ dis.id }}"> {{ dis.name }} </option>
+						<option value="{{ dis.id }}"> {{ dis.name }} </option>
 					{% else %}
-						<option id="{{ dis.id }}" selected> {{ dis.name }} </option>
+						<option value="{{ dis.id }}" selected> {{ dis.name }} </option>
 					{% endif %}
 				{% endfor %}
 			</select>
