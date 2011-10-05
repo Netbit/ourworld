@@ -126,3 +126,9 @@ msgstr "Loại công trình"
 
 msgid "Kind of Constructions"
 msgstr "Danh sách loại công trình"
+
+msgid "Details..."
+msgstr "Chi tiết..."
+
+msgid "Couldn't get the data!"
+msgstr "Không thể lấy được dữ liệu!"

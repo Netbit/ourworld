@@ -35,3 +35,9 @@ msgstr ""
 #: .\static_source\js\script.js.py:120
 msgid "(by car)"
 msgstr ""
+
+msgid "Details..."
+msgstr ""
+
+msgid "Couldn't get the data!"
+msgstr ""

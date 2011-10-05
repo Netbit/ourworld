@@ -128,3 +128,9 @@ msgstr ""
 
 msgid "Kind of Constructions"
 msgstr ""
+
+msgid "Details..."
+msgstr ""
+
+msgid "Couldn't get the data!"
+msgstr ""
