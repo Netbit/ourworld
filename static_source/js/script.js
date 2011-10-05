@@ -97,7 +97,7 @@ function search_place(id, address) {
 						contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
 										 "<span class='place_address'>" + marker.address + "</span><br>" +
 										 "<span class='place_details'>" + data.results.details + "</span><br>" +
-										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,width=550,height=450')\">" + gettext("Details...") + "</a></span></div>";
+										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
 						infowindow = new google.maps.InfoWindow({
 							content : contentString
 						});
@@ -314,7 +314,6 @@ $(document).ready(function() {
 			id_district = district.options[district.selectedIndex].value;
 			district_filter(id_district);
 		} catch (e) {
-			alert(e);
 		}
 	});
 });
@@ -330,8 +329,7 @@ function kind_construction_filter(id) {
     		}
     	},                                                                    
     	error : function(e) {  
-    		alert(e);
-    		alert("No data");                                                 
+    		alert(gettext("Couldn't get the data!"));                                                 
     	}                                                                     
     });   
 }
@@ -344,7 +342,7 @@ function kind_person_filter(id) {
     		deleteOverlays();
     		for (var i = 0; i < data.results.length; i++) {
     			search_place(data.results[i].id, data.results[i].address);
-    		}    	},                                                                        	error : function(e) {                                                     		alert("No data");                                                     	}                                                                         });   
+    		}    	},                                                                        	error : function(e) {                                                     		alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
 }
 
 function district_filter(id_district) {
@@ -358,7 +356,7 @@ function district_filter(id_district) {
     		}
 		},
 		error : function(e) {
-			alert("No data");
+			alert(gettext("Couldn't get the data!"));
 		}
 	});
 }
