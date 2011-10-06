@@ -59,7 +59,7 @@ def get_information(request, id_object):
         data = { "results" : {
                         "id"      : str(con.id),
                         "name"    : con.name,
-                        "details" : con.description_detail,
+                        "details" : con.description_detail.replace('\n', '<br>'),
                         "image"   : url
                     }  
                }
@@ -115,4 +115,4 @@ def get_details(request, id_object):
         con = Construction.objects.get(id = id_object)
     except:
         raise Http404()
-    return HttpResponse(con.description_detail)    
+    return HttpResponse(con.description_detail.replace('\n', '<br>'))    
