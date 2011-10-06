@@ -193,7 +193,8 @@ function addMarker(location, isDestination) {
 			var marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location,
-				icon : icon
+				icon : icon,
+				zIndex: Math.ceil(Math.random()*1111)
 			});
 			markersArray.push(marker);
 		} else {
