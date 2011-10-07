@@ -25,9 +25,9 @@
 			<select id='lang' name="language" class="language">
 				{% for code, name in LANGUAGES %}
 					{% if code == LANGUAGE_CODE %}
-					<option value="{{ code }}" selected="selected">{{ name }}</option>
+					<option value="{{ code }}" selected="selected">{{ name|strip }}</option>
 					{% else %}
-					<option value="{{ code }}">{{ name }}</option>
+					<option value="{{ code }}">{{ name|strip }}</option>
 					{% endif %}
 				{% endfor %}
 			</select>
