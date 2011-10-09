@@ -51,10 +51,6 @@ body {
 	margin-right: 10px;
 }
 
-.selected {
-	border:2px double purple;
-}
-
 .icon a img:hover {
 	color: rgba(255, 255, 255, 0.7);
 	-webkit-transform: scale(1.5);
@@ -183,9 +179,20 @@ body {
 
 .localization {
 	float: right;
-	bottom: 5px;
+	top: 5px;
 	position: relative;
 	margin-right: 5px;
+}
+.language {
+	top: 0px;
+	position: relative;
+	float: left;
+}
+
+.district {
+	top: 0px;
+	position: relative;
+	float: right;
 }
 
 .box {
@@ -198,6 +205,9 @@ body {
 	overflow: auto;
 	right: 0px;
 	display: none;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	border: 4px thick;
 }
 .show-box {
 	position: fixed;

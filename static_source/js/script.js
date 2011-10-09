@@ -5,37 +5,8 @@ var originIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=
 var geocoder;
 var bounds;
 
-function get_info_of_place(marker) {
-	var contentString = '';
-//	$.ajax({
-//		url : "/info/" + "1",
-//		beforeSend : function() {
-//
-//		},
-//		success : function(data) {
-//			if (data.results.image != "") {
-//				contentString += "<img src='" + data.results.image + "'>";				
-//			}
-//			contentString += "<div>" + data.results.details + "</div>";
-//			alert(contentString);
-//		},
-//		error : function(e) {
-//			alert("No data");
-//		}
-//	});
-	
-	var infowindow = new google.maps.InfoWindow({
-		content : contentString
-	});
-	return infowindow;
-}
-
 function initialize() {
 	var address;
-//	var location;
-//	var id_location;
-//	var places;
-//	var length;
 	var district;
 
 	address = "Ho Chi Minh City";
@@ -57,14 +28,7 @@ function initialize() {
 					+ status);
 		}
 	});
-//	location    = document.getElementById('location');
-//	id_location = document.getElementById('id_location');
-//	places      = location.value.split(';');
-//	id			= id_location.value.split(';');
-//	length      = places.length - 1;
-//	for (var i = 0; i < length; i++) {
-//		search_place(id[i], places[i]);
-//	}
+
 	district = document.getElementById('district');
 	district_filter(district.options[district.selectedIndex].value);
 }
@@ -213,7 +177,19 @@ function deleteOverlays() {
 	}
 }
 
-$(document).ready(function() {
+$(document).ready(function() {	
+	try {
+		$("#lang").msDropDown();
+		$("#lang_msdd").css('width', '120px');
+		$("#lang_child").css('width', '118px');
+		if (navigator.userAgent.indexOf("Firefox") != -1 || navigator.userAgent.indexOf("MSIE") != -1) {
+			$(".dd").css('top', '0px');
+		}
+		
+	} catch(e) {
+		alert(e.message);
+	}
+	
 	initialize();
 
 	$('#search_place').click(function() {
@@ -287,16 +263,6 @@ $(document).ready(function() {
 		multipleSeparator : " "
 	});
 
-	$('.language').change(function() {
-		try {
-			var obj = document.getElementById('lang');
-			var value = obj.options[obj.selectedIndex].value;
-			window.open('?lang=' + value, '_self', false);
-		} catch (e) {
-			alert(e);
-		}
-	});
-
 	$('#hidden-popup').click(function() {
 		$('#box').fadeOut('slow').hide();
 		$('#show-box').show();
@@ -316,11 +282,14 @@ $(document).ready(function() {
 			district_filter(id_district);
 		} catch (e) {
 		}
-	});
+	});	
 });
 
-function kind_construction_filter(id) {
-	
+function changedLanguage(value) {
+	window.open('?lang=' + value, '_self', false);
+}
+
+function kind_construction_filter(id) {	
 	$.ajax({                                                                  
 		url : "/filter/kind_construction/?id1=" + id, 
     	success : function(data) {
@@ -335,8 +304,7 @@ function kind_construction_filter(id) {
     });   
 }
 
-function kind_person_filter(id) {
-	
+function kind_person_filter(id) {	
 	$.ajax({                                                                  
 		url : "/filter/kind_person/?id1=" + id, 
     	success : function(data) {
@@ -347,7 +315,6 @@ function kind_person_filter(id) {
 }
 
 function district_filter(id_district) {
-
 	$.ajax({
 		url : "/filter/district/?id_district=" + id_district,
 		success : function(data) {
