@@ -361,3 +361,8 @@ function district_filter(id_district) {
 		}
 	});
 }
+
+function image_slider() {
+	
+
+}
