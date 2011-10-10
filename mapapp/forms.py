@@ -1,8 +1,8 @@
 from django import forms
+from mapapp.models import Comments
 
-class SearchBox(forms.Form):
-    place = forms.CharField(max_length = 100)
+class CommentForm(forms.ModelForm):    
+    class Meta:
+        model = Comments
+        exclude = ("comment_date",)
     
-class SearchPath(forms.Form):
-    from_place = forms.CharField(max_length = 100)
-    to_place = forms.CharField(max_length = 100)

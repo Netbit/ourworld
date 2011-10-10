@@ -74,5 +74,10 @@ class Construction(models.Model):
     def get_address(self):
         return '%s %s, Ho Chi Minh' % (self.number_or_alley, self.street)
 
+class Comments(models.Model):
+    email = models.EmailField()
+    content = models.TextField()
+    comment_date = models.DateTimeField(auto_now_add = True)
+
 
     

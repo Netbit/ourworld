@@ -8,6 +8,8 @@ from django.db.models import Q
 from django.conf import settings
 
 import json
+from mapapp.forms import CommentForm
+from django.views.decorators.csrf import csrf_protect
 
     
 def home(request):
@@ -99,20 +101,29 @@ def kind_construction_filter(request):
 def district_filter(request):
     id_district  = request.GET['id_district']
     construction = Construction.objects.filter(district = id_district ) 
-    map          = {}
+    mData          = {}
     tmp          = {}
     mArray       = []
     for obj in construction:
         tmp['id']      = obj.id
         tmp['address'] = obj.get_address()
         mArray.append(tmp)
-    map["results"] = mArray
+    mData["results"] = mArray
     
-    return HttpResponse(json.dumps(map), mimetype = "application/json")
-    
+    return HttpResponse(json.dumps(mData), mimetype = "application/json")
+
+@csrf_protect    
 def get_details(request, id_object):
     try:
         con = Construction.objects.get(id = id_object)
     except:
         raise Http404()
-    return HttpResponse(con.description_detail.replace('\n', '<br>'))    
+    
+    if request.method == "POST":
+        comment = CommentForm(request.POST)
+    else:
+        comment = CommentForm()
+
+    return render_to_response('details.html', 
+                        { "form" : comment, "con" : con},
+                        context_instance = RequestContext(request))    
