@@ -22,12 +22,12 @@
 		{% get_current_language as LANGUAGE_CODE %}
 		{% get_available_languages as LANGUAGES %}
 		<div class='localization'>
-			<select id='lang' name="language" class="language">
+			<select id='lang' name="lang" class="language" onchange="changedLanguage(this.value)">
 				{% for code, name in LANGUAGES %}
 					{% if code == LANGUAGE_CODE %}
-					<option value="{{ code }}" selected="selected">{{ name|strip }}</option>
+					<option title="{{STATIC_URL}}images/flags/{{ code }}.png" value="{{ code }}" selected="selected">{{ name|strip }}</option>
 					{% else %}
-					<option value="{{ code }}">{{ name|strip }}</option>
+					<option title="{{STATIC_URL}}images/flags/{{ code }}.png" value="{{ code }}">{{ name|strip }}</option>
 					{% endif %}
 				{% endfor %}
 			</select>
