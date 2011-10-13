@@ -1,8 +1,8 @@
 from django import forms
-from mapapp.models import Comments
+from mapapp.models import Comment
 
 class CommentForm(forms.ModelForm):    
     class Meta:
-        model = Comments
-        exclude = ("comment_date",)
+        model = Comment
+        exclude = ("comment_date", "construction")
     

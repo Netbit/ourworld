@@ -121,6 +121,10 @@ def get_details(request, id_object):
     
     if request.method == "POST":
         comment = CommentForm(request.POST)
+        if comment.is_valid():
+            comment.save(commit=False)
+            comment.construction = id_object
+            comment.save()            
     else:
         comment = CommentForm()
 

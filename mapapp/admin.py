@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mapapp.models import District, KindOfConstruction, Construction,\
-    KindOfPerson, Street
+    KindOfPerson, Street, Comment
 from modeltranslation.admin import TranslationAdmin
 
 
@@ -8,16 +8,26 @@ class AdminDistrict(admin.ModelAdmin):
     list_display = ['name', 'description']
     list_filter = ('name',)
     search_fields = ('name',)
+    list_per_page = 20
     
 class AdminKindOfConstruction(admin.ModelAdmin):
     list_display = ['name','description']
     list_filter = ('name',)
     search_fields = ('name',)
     
+class AdminComment(admin.ModelAdmin):
+    list_display = ['email', 'content', 'comment_date', 'construction']
+    list_filter = ('comment_date', 'construction')
+    search_fields = ('construction__name', 'construction__unsigned_name')
+    list_per_page = 25
+    
 class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
     list_filter = ('name', 'kind_of_construction',  'street', 'district')
     search_fields = ('name',)
+    list_per_page = 30
+    readonly_fields = ('location',)
+    save_on_top = True
     
 class AdminKindOfPerson(admin.ModelAdmin):
     list_display = ['name','description']
@@ -41,5 +51,6 @@ admin.site.register(KindOfConstruction, AdminKindOfConstruction)
 admin.site.register(Construction, AdminConstruction)
 admin.site.register(KindOfPerson, AdminKindOfPerson)
 admin.site.register(Street, AdminStreet)
+admin.site.register(Comment, AdminComment)
 
 

@@ -74,10 +74,18 @@ class Construction(models.Model):
     def get_address(self):
         return '%s %s, Ho Chi Minh' % (self.number_or_alley, self.street)
 
-class Comments(models.Model):
-    email = models.EmailField()
-    content = models.TextField()
-    comment_date = models.DateTimeField(auto_now_add = True)
+class Comment(models.Model):
+    email = models.EmailField(verbose_name = _('Email'))
+    content = models.TextField(verbose_name = _('Content'))
+    comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Comment date'))
+    construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
+    
+    def __unicode__(self):
+        return self.content
+    
+    class Meta:
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
 
 
     
