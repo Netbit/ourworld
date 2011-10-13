@@ -101,13 +101,13 @@ msgid "Street"
 msgstr "Đường"
 
 msgid "Streets"
-msgstr "Danh sách các con Đường"
+msgstr "Danh sách các con đường"
 
 msgid "District"
 msgstr "Quận"
 
 msgid "Districts"
-msgstr "Danh sách các quận"
+msgstr "Danh sách các Quận"
 
 msgid "Description detail"
 msgstr "Mô tả chi tiết"
@@ -132,3 +132,23 @@ msgstr "Chi tiết..."
 
 msgid "Couldn't get the data!"
 msgstr "Không thể lấy được dữ liệu!"
+
+
+
+msgid "Content"
+msgstr "Nội dung"
+
+msgid "Comment date"
+msgstr "Ngày bình luận"
+
+msgid "Comments"
+msgstr "Danh sách các Bình luận"
+
+msgid "Comment"
+msgstr "Bình luận"
+
+msgid "Posted by"
+msgstr "Được đăng bởi"
+
+msgid "at"
+msgstr "vào lúc"

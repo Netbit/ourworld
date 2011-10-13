@@ -134,3 +134,22 @@ msgstr ""
 
 msgid "Couldn't get the data!"
 msgstr ""
+
+
+msgid "Content"
+msgstr ""
+
+msgid "Comment date"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Posted by"
+msgstr ""
+
+msgid "at"
+msgstr ""
