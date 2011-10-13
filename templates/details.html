@@ -1,7 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Information of {{ con.name }}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/info.css" />
+</head>
+<body>
+<div>
+	{{ con.description_detail|linebreaksbr }}
+</div>
+<hr>
+<div>
+	<form action="" method="post">{% csrf_token %}
+		<div class='comment-form'>
+			<ul class="comment">
+				{{ form.as_ul }}
+			</ul>
+			<input class="submit" type="submit" name="submit" value="Submit">
+		</div>	
+	</form>
+</div>
 
-{{ con.description_detail|linebreaksbr }}
-<form action="" method="post">{% csrf_token %}
-	{{ form.as_ul }}
-</form>
+
+</body>
+</html>
 
    
