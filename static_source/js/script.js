@@ -61,7 +61,7 @@ function search_place(id, address) {
 						contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
 										 "<span class='place_address'>" + marker.address + "</span><br>" +
 										 "<span class='place_details'>" + data.results.details + "</span><br>" +
-										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
+										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
 						infowindow = new google.maps.InfoWindow({
 							content : contentString
 						});
