@@ -1,15 +1,16 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District
+from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District,\
+    Comment
 from django.utils import translation
 from django.http import HttpResponse, Http404
-from django.db.models import Q
-from django.conf import settings
-
-import json
 from mapapp.forms import CommentForm
 from django.views.decorators.csrf import csrf_protect
+from django.utils.translation import ugettext_lazy as _
+
+import json
+
 
     
 def home(request):
@@ -114,20 +115,25 @@ def district_filter(request):
 
 @csrf_protect    
 def get_details(request, id_object):
+    msg = None
     try:
         con = Construction.objects.get(id = id_object)
+        comments = Comment.objects.filter(construction = con).order_by('-comment_date')
     except:
         raise Http404()
     
     if request.method == "POST":
-        comment = CommentForm(request.POST)
-        if comment.is_valid():
-            comment.save(commit=False)
-            comment.construction = id_object
-            comment.save()            
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = Comment(email = form.data['email'], 
+                              content = form.data['content'])
+            comment.construction = con
+            comment.save()
+            msg = _('Your comment sent.') 
+            form = CommentForm()                   
     else:
-        comment = CommentForm()
+        form = CommentForm()
 
     return render_to_response('details.html', 
-                        { "form" : comment, "con" : con},
+                        { "form" : form, "con" : con, 'msg' : msg, 'comments' : comments},
                         context_instance = RequestContext(request))    
