@@ -1,8 +1,7 @@
 from django import forms
-from mapapp.models import Comment
+from django.utils.translation import ugettext_lazy as _
 
-class CommentForm(forms.ModelForm):    
-    class Meta:
-        model = Comment
-        exclude = ("comment_date", "construction")
+class CommentForm(forms.Form): 
+    email = forms.EmailField(label = _('Email'))
+    content = forms.CharField(label = _('Content'), widget=forms.Textarea())   
     
