@@ -1,27 +1,59 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Information of {{ con.name }}</title>
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/info.css" />
+
 </head>
 <body>
 <div>
 	{{ con.description_detail|linebreaksbr }}
 </div>
-<hr>
-<div>
-	<form action="" method="post">{% csrf_token %}
+<div class="form-row"></div>
+<div id='comment-form'>
+	<span class='button-comment' id='insert-form' onclick="show()">Comment</span>
+	{% if msg %}
+	<span id='msg' class="msg">{% trans msg %}</span>
+	<script type="text/javascript">
+	function remove() {
+		var msg = document.getElementById("msg");		
+		var p = document.getElementById("comment-form");
+		p.removeChild(msg);
+	}
+	setTimeout(remove,2500);
+	</script>	
+	{% endif %}
+	<form id='comment' class='comment-form' action="" method="post">{% csrf_token %}
 		<div class='comment-form'>
 			<ul class="comment">
 				{{ form.as_ul }}
 			</ul>
-			<input class="submit" type="submit" name="submit" value="Submit">
+			<input class="submit" type="submit" name="submit" value="{% trans 'Send' %}">
 		</div>	
-	</form>
+	</form>	
+	{% if form.errors %}
+	<script type="text/javascript">
+	var form = document.getElementById("comment");
+	form.style.visibility = 'visible';
+	var insert = document.getElementById("insert-form");
+	insert.style.visibility = 'hidden';
+	</script>
+	{% else %}
+	<script type="text/javascript">
+	var form = document.getElementById("comment");
+	form.style.visibility = 'hidden';
+	</script>
+	{% endif %}
 </div>
-
-
+<div>
+	{% for comment in comments %}
+		<blockquote>{{ comment.content|linebreaksbr }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>
+		<div class="form-row"></div>
+	{% endfor %}
+</div>
+<script type="text/javascript" src="{{ STATIC_URL }}js/details.js"></script>
 </body>
 </html>
 
