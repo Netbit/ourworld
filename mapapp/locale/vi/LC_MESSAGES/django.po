@@ -152,3 +152,9 @@ msgstr "Được đăng bởi"
 
 msgid "at"
 msgstr "vào lúc"
+
+msgid "Your comment sent."
+msgstr "Bình luận của bạn đã được gửi."
+
+msgid "Send"
+msgstr "Gửi"

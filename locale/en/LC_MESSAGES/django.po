@@ -153,3 +153,9 @@ msgstr ""
 
 msgid "at"
 msgstr ""
+
+msgid "Your comment sent."
+msgstr ""
+
+msgid "Send"
+msgstr ""
