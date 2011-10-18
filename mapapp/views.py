@@ -1,4 +1,6 @@
 # Create your views here.
+import json
+
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District,\
@@ -8,8 +10,10 @@ from django.http import HttpResponse, Http404
 from mapapp.forms import CommentForm
 from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.query_utils import Q
 
-import json
+
+
 
 
     
@@ -52,14 +56,14 @@ def lookup(request):
     else:
         return HttpResponse("")
 
-def get_information(request, id_object):
+def get_detail_of_construction(id_object):
     try:
         con = Construction.objects.get(id = id_object)
         if hasattr(con.link_image, 'url'):
             url = con.link_image.url
         else:
             url = ""
-        data = { "results" : {
+        return { "results" : {
                         "id"      : str(con.id),
                         "name"    : con.name,
                         "details" : con.description_detail.replace('\n', '<br>'),
@@ -67,8 +71,25 @@ def get_information(request, id_object):
                     }  
                }
     except:
-        data = { "results" : {} }
-    return HttpResponse(json.dumps(data), mimetype = "application/json")
+        raise Exception('Object not found')
+    
+def get_information(request, id_object):
+    try:        
+        data = get_detail_of_construction(id_object)
+    except:
+        if request.GET.has_key(u'address'):
+            address = request.GET['address'].split(',')[0].strip()
+            number_or_alley = address[: address.find(' ')] 
+            street_name = address[address.find(' ') + 1 :].strip()
+            
+            result = Construction.objects.filter(Q(number_or_alley__exact = number_or_alley),
+                                                 Q(street__name = street_name) | Q(street__unsigned_name = street_name))
+            
+            if len(result) > 0:
+                data = get_detail_of_construction(result[0].id)
+        else:
+            data = { "results" : {} }
+    return HttpResponse(json.dumps(data, indent=2), mimetype = "application/json")
 
 
 def kind_person_filter(request):

@@ -52,7 +52,7 @@ function search_place(id, address) {
 			markersArray.push(marker);
 			google.maps.event.addListener(marker, 'click', function() {
 				var contentString = "";
-				$.getJSON("/info/" + marker.id , function(data) {
+				$.getJSON("/info/" + marker.id + "/?address=" + address, function(data) {
 					if (data.results.hasOwnProperty('details')) {
 						contentString += "<div>";
 						if (data.results.image != "") {
@@ -196,7 +196,7 @@ $(document).ready(function() {
 		var address;
 		deleteOverlays();
 		address = document.getElementById("p").value;
-		search_place(-1, address);
+		search_place(0, address);
 	});
 
 	$('#search_path').click(function() {

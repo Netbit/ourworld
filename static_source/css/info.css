@@ -8,6 +8,10 @@
 	top: 130px;
 	left: 40px;
 	width: 65px;	
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+	-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
 }
 
 .comment {
@@ -57,7 +61,6 @@
 
 hr {
 	position: relative; 
-	width: 690px; 
 	float: left; 
 	border-top-width: 1px;
 	border-top-style: solid;
@@ -106,7 +109,7 @@ blockquote {
 	overflow: hidden;
 	padding: 8px 12px;
 	font-size: 11px;
-	border-bottom: 1px solid #EEE;
+	border-bottom: 1px solid #ddd;
 }
 
 #comment-form {
