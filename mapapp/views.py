@@ -74,6 +74,7 @@ def get_detail_of_construction(id_object):
         raise Exception('Object not found')
     
 def get_information(request, id_object):
+    data = { "results" : {} }
     try:        
         data = get_detail_of_construction(id_object)
     except:
@@ -87,8 +88,7 @@ def get_information(request, id_object):
             
             if len(result) > 0:
                 data = get_detail_of_construction(result[0].id)
-        else:
-            data = { "results" : {} }
+            
     return HttpResponse(json.dumps(data, indent=2), mimetype = "application/json")
 
 
