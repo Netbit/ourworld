@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Information of {{ con.name }}</title>
+<title>{% trans 'Information of' %} {{ con.name }}</title>
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/info.css" />
 
 </head>
@@ -13,7 +13,7 @@
 </div>
 <div class="form-row"></div>
 <div id='comment-form'>
-	<span class='button-comment' id='insert-form' onclick="show()">Comment</span>
+	<span class='button-comment' id='insert-form' onclick="show()">{% trans 'Comment' %}</span>
 	{% if msg %}
 	<span id='msg' class="msg">{% trans msg %}</span>
 	<script type="text/javascript">
