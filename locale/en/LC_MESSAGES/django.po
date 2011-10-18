@@ -159,3 +159,6 @@ msgstr ""
 
 msgid "Send"
 msgstr ""
+
+msgid "Information of"
+msgstr ""

@@ -158,3 +158,6 @@ msgstr "Bình luận của bạn đã được gửi."
 
 msgid "Send"
 msgstr "Gửi"
+
+msgid "Information of"
+msgstr "Thông tin về"
