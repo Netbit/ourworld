@@ -108,3 +108,8 @@ blockquote {
 	font-size: 11px;
 	border-bottom: 1px solid #EEE;
 }
+
+#comment-form {
+	position: relative;
+	height: 50px;
+}

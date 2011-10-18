@@ -22,7 +22,7 @@
 		var p = document.getElementById("comment-form");
 		p.removeChild(msg);
 	}
-	setTimeout(remove,2500);
+	setTimeout(remove,2000);
 	</script>	
 	{% endif %}
 	<form id='comment' class='comment-form' action="" method="post">{% csrf_token %}
@@ -36,14 +36,18 @@
 	{% if form.errors %}
 	<script type="text/javascript">
 	var form = document.getElementById("comment");
+	var base = document.getElementById("comment-form");
 	form.style.visibility = 'visible';
+	base.style.height = '270px';
 	var insert = document.getElementById("insert-form");
 	insert.style.visibility = 'hidden';
 	</script>
 	{% else %}
 	<script type="text/javascript">
 	var form = document.getElementById("comment");
+	var base = document.getElementById("comment-form");
 	form.style.visibility = 'hidden';
+	base.style.height = '50px';
 	</script>
 	{% endif %}
 </div>
