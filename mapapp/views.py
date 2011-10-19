@@ -169,7 +169,7 @@ def get_kind_person_contruction(request):
     for person in kind_person:
         tmp['id']    = person.id
         tmp['name']  = person.name
-        tmp['image'] = person.image
+        tmp['image'] = person.image.url
         mArray.append(tmp)
     mData["kind_person"] = mArray
     
@@ -178,7 +178,7 @@ def get_kind_person_contruction(request):
     for con in kind_construction:
         tmp['id']    = con.id
         tmp['name']  = con.name
-        tmp['image'] = con.image 
+        tmp['image'] = con.image.url
         mArray.append(tmp)
     mData["kind_construction"] = mArray
     
