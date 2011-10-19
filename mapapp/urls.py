@@ -8,4 +8,5 @@ urlpatterns = patterns('mapapp.views',
     url(r'^filter/district/$', 'district_filter'),
     url(r'^filter/kind_person/$', 'kind_person_filter'),
     url(r'^filter/kind_construction/$', 'kind_construction_filter'),
+    url(r'^get/person_construction/$', 'get_kind_person_contruction'),
 )

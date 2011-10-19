@@ -4,6 +4,15 @@ var destinationIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&
 var originIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000";
 var geocoder;
 var bounds;
+var kind_person;
+var kind_construction;
+var index_kind_person;
+var index_kind_construction;
+
+kind_person       		= new Array();
+kind_construction 		= new Array();
+index_kind_person 		= 0;
+index_kind_construction = 0;
 
 function initialize() {
 	var address;
@@ -178,6 +187,10 @@ function deleteOverlays() {
 }
 
 $(document).ready(function() {	
+
+	get_kind_of_person_construction()
+	add_image_slider(kind_person, "left_slider");
+	
 	try {
 		$("#lang").msDropDown();
 		$("#lang_msdd").css('width', '120px');
@@ -329,7 +342,53 @@ function district_filter(id_district) {
 	});
 }
 
-function image_slider() {
+function add_image_slider(images, id_div) {
+	var i;
+	var dv;   //Define a tag <div>
+	var span; //Define a tag <span>
+	var a;    //Define a tag <a>
+	var img;  //Define a tag <img>
 	
+	dv = document.getElementById(id_div);
+	
+	//Add button prev
+	for (i = 0; i < images.length; i++) {
+		span           = document.createElement("span");
+		span.className = "icon";
+		
+		a 			   = document.createElement("a");
+		a.onclick 	   = "kind_construction_filter(" + images[i].id + ")";
+		
+		img            = document.createElement("img");
+		img.id 		   = images[i].id
+		img.title	   = images[i].name;
+		img.height     = 32 
+		img.alt 	   = images[i].name;
+		img.src 	   = "{{ STATIC_URL }}images/" + images[i].name;
+		
+		a.appendChild(img);
+		span.appendChild(a);
+		dv.appendChild(span);
+	}
+	//Add button next
 
+}
+
+function get_kind_of_person_construction() {
+	$.ajax({
+		url : "/get/person_construction/",
+		success : function(data) {
+			var i;
+    		for (i = 0; i < data.kind_person.length; i++) {
+    			kind_person.push(data.kind_person[i]);
+    		}
+    		
+    		for (i = 0; i < data.kind_construction.length; i++) {
+    			kind_construction.push(data.kind_construction[i]);
+    		}
+		},
+		error : function(e) {
+			alert(gettext("Couldn't get the data of kind of person and construction!"));
+		}
+	});
 }

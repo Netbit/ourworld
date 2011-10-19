@@ -30,12 +30,12 @@ def home(request):
         request.session['django_language'] = lang
         
     translation.activate(lang)        
-    kind_person       = KindOfPerson.objects.all()
-    kind_construction = KindOfConstruction.objects.all()
+    #kind_person       = KindOfPerson.objects.all()
+    #kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()
                    
-    return render_to_response('index.html', {'kind_person'       : kind_person,
-                                             'kind_construction' : kind_construction,
+    return render_to_response('index.html', {#'kind_person'       : kind_person,
+                                             #'kind_construction' : kind_construction,
                                              'districts'         : districts,
                                              }, 
                               context_instance = RequestContext(request))
@@ -157,4 +157,27 @@ def get_details(request, id_object):
 
     return render_to_response('details.html', 
                         { "form" : form, "con" : con, 'msg' : msg, 'comments' : comments},
-                        context_instance = RequestContext(request))    
+                        context_instance = RequestContext(request))   
+    
+def get_kind_person_contruction(request):
+    kind_person       = KindOfPerson.objects.all()
+    kind_construction = KindOfConstruction.objects.all()
+    mData             = {}
+    mArray            = []
+    tmp               = {}
+    
+    for person in kind_person:
+        tmp['id']   = person.id
+        tmp['name'] = person.name
+        mArray.append(tmp)
+    mData["kind_person"] = mArray
+    
+    mArray = []
+    
+    for con in kind_construction:
+        tmp['id']   = con.id
+        tmp['name'] = con.name
+        mArray.append(tmp)
+    mData["kind_construction"] = mArray
+    
+    return HttpResponse(json.dumps(mData), mimetype = "application/json") 
