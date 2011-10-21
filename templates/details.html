@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load tagslib %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 
 </head>
 <body>
-<div>
+<div class='content'>
 	{{ con.description_detail|linebreaksbr }}
 </div>
 <div class="form-row"></div>
@@ -53,7 +54,7 @@
 </div>
 <div>
 	{% for comment in comments %}
-		<blockquote>{{ comment.content|linebreaksbr }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>
+		<blockquote>{{ comment.content|linebreaksbr }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email|nickname }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>
 		<div class="form-row"></div>
 	{% endfor %}
 </div>
