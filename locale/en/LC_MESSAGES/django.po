@@ -162,3 +162,18 @@ msgstr ""
 
 msgid "Information of"
 msgstr ""
+
+msgid "Your comment here..."
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Hidden"
+msgstr ""
+
+msgid "Mark selected comments as hidden"
+msgstr ""

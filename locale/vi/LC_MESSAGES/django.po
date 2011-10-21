@@ -161,3 +161,18 @@ msgstr "Gửi"
 
 msgid "Information of"
 msgstr "Thông tin về"
+
+msgid "Your comment here..."
+msgstr "Ghi bình luận..."
+
+msgid "Status"
+msgstr "Trạng thái"
+
+msgid "Published"
+msgstr "Hiển thị"
+
+msgid "Hidden"
+msgstr "Ẩn"
+
+msgid "Mark selected comments as hidden"
+msgstr "Chuyển bình luận đã chọn thành trạng thái ẩn"
