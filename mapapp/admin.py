@@ -2,6 +2,8 @@ from django.contrib import admin
 from mapapp.models import District, KindOfConstruction, Construction,\
     KindOfPerson, Street, Comment
 from modeltranslation.admin import TranslationAdmin
+from django.utils.translation import ugettext_lazy as _
+
 
 
 class AdminDistrict(admin.ModelAdmin):
@@ -16,10 +18,16 @@ class AdminKindOfConstruction(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminComment(admin.ModelAdmin):
-    list_display = ['email', 'content', 'comment_date', 'construction']
-    list_filter = ('comment_date', 'construction')
+    list_display = ['email', 'content', 'comment_date', 'construction', 'status']
+    list_filter = ('comment_date', 'construction', 'status')
     search_fields = ('construction__name', 'construction__unsigned_name')
     list_per_page = 25
+    
+    actions = ['make_hidden']
+
+    def make_hidden(self, request, queryset):
+        queryset.update(status='h')
+    make_hidden.short_description = _("Mark selected comments as hidden")
     
 class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
