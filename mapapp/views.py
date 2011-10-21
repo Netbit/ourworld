@@ -139,7 +139,7 @@ def get_details(request, id_object):
     msg = None
     try:
         con = Construction.objects.get(id = id_object)
-        comments = Comment.objects.filter(construction = con).order_by('-comment_date')
+        comments = Comment.objects.filter(construction = con, status='p').order_by('-comment_date')
     except:
         raise Http404()
     
