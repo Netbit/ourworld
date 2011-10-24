@@ -364,7 +364,7 @@ function add_image_slider(images, id_div) {
 		img.title	   = images[i].name;
 		img.height     = 32 
 		img.alt 	   = images[i].name;
-		img.src 	   = "/static/" + images[i].image;
+		img.src 	   = "{{ STATIC_URL }}" + images[i].image;
 		
 		a.appendChild(img);
 		span.appendChild(a);
