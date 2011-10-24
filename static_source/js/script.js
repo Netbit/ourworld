@@ -189,7 +189,7 @@ function deleteOverlays() {
 $(document).ready(function() {	
 
 	get_kind_of_person_construction()
-	add_image_slider(kind_person, "left_slider");
+	//add_image_slider(kind_person, "left_slider");
 	
 	try {
 		$("#lang").msDropDown();
@@ -386,6 +386,8 @@ function get_kind_of_person_construction() {
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
     		}
+    		
+    		add_image_slider(kind_person, "left_slider");
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));

@@ -31,11 +31,11 @@ def home(request):
         
     translation.activate(lang)        
     #kind_person       = KindOfPerson.objects.all()
-    #kind_construction = KindOfConstruction.objects.all()
+    kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()
                    
     return render_to_response('index.html', {#'kind_person'       : kind_person,
-                                             #'kind_construction' : kind_construction,
+                                             'kind_construction' : kind_construction,
                                              'districts'         : districts,
                                              }, 
                               context_instance = RequestContext(request))
@@ -164,9 +164,9 @@ def get_kind_person_contruction(request):
     kind_construction = KindOfConstruction.objects.all()
     mData             = {}
     mArray            = []
-    tmp               = {}
     
     for person in kind_person:
+        tmp          = {}
         tmp['id']    = person.id
         tmp['name']  = person.name
         tmp['image'] = person.image.url
@@ -176,6 +176,7 @@ def get_kind_person_contruction(request):
     mArray = []
     
     for con in kind_construction:
+        tmp          = {}
         tmp['id']    = con.id
         tmp['name']  = con.name
         tmp['image'] = con.image.url
