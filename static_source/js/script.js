@@ -344,28 +344,36 @@ function district_filter(id_district) {
 
 function add_image_slider(images, id_div) {
 	var i;
+	var j;
+	var len;  //The number of image will be shown
 	var dv;   //Define a tag <div>
 	var span; //Define a tag <span>
 	var a;    //Define a tag <a>
 	var img;  //Define a tag <img>
 	
+	len = 3;
 	dv = document.getElementById(id_div);
 	
+
 	//Add button prev
-	for (i = 0; i < images.length; i++) {
+	for (i = 0, j = 0; j < len; i++, j++) {
 		span           = document.createElement("span");
 		span.className = "icon";
 		
 		a 			   = document.createElement("a");
-		a.onclick 	   = "kind_construction_filter(" + images[i].id + ")";
-		
 		img            = document.createElement("img");
-		img.id 		   = images[i].id
+		if (id_div == "left_slider") {
+			a.setAttribute('onclick',"kind_person_filter(" + images[i].id + ")");
+			img.id 	   = "p" + images[i].id
+		} else {
+			a.setAttribute('onclick',"kind_construction_filter(" + images[i].id + ")");
+			img.id 	   = "c" + images[i].id
+		}
 		img.title	   = images[i].name;
 		img.height     = 32 
 		img.alt 	   = images[i].name;
-		//img.src 	   = "{{ STATIC_URL }}" + images[i].image;
 		img.src 	   = images[i].image;		
+		
 		a.appendChild(img);
 		span.appendChild(a);
 		dv.appendChild(span);
