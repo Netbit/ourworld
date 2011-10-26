@@ -6,13 +6,17 @@ var geocoder;
 var bounds;
 var kind_person;
 var kind_construction;
-var index_kind_person;
-var index_kind_construction;
+var start_image_person; //Start index to show images of kind of person
+var end_image_person;   //End index to show images of kind of person
+var start_image_con;	//Start index to show images of kind of construction
+var end_image_con;		//End index to show images of kind of construction
 
 kind_person       		= new Array();
 kind_construction 		= new Array();
-index_kind_person 		= 0;
-index_kind_construction = 0;
+var start_image_person  = 0;
+var end_image_person;   = 3;
+var start_image_con;	= 0;
+var end_image_con;		= 3;
 
 function initialize() {
 	var address;
@@ -342,7 +346,8 @@ function district_filter(id_district) {
 	});
 }
 
-function add_image_slider(images, id_div) {
+function add_image_slider(images, id_div) 
+{
 	var i;
 	var j;
 	var len;  //The number of image will be shown
@@ -382,7 +387,76 @@ function add_image_slider(images, id_div) {
 
 }
 
-function get_kind_of_person_construction() {
+function create_image_list(images, start, end, id_div) 
+{
+	var dv;   //Define a tag <div>
+	var span; //Define a tag <span>
+	var a;    //Define a tag <a>
+	var img;  //Define a tag <img>
+	
+	dv = document.getElementById(id_div);
+	do {
+		span           = document.createElement("span");
+		span.className = "icon";
+		a 			   = document.createElement("a");
+		img            = document.createElement("img");
+		if (id_div == "left_slider") {
+			a.setAttribute('onclick',"kind_person_filter(" + images[start].id + ")");
+			img.id 	   = "p" + images[start].id
+		} else {
+			a.setAttribute('onclick',"kind_construction_filter(" + images[start].id + ")");
+			img.id 	   = "c" + images[start].id
+		}
+		img.title	   = images[start].name;
+		img.height     = 32 
+		img.alt 	   = images[start].name;
+		img.src 	   = images[start].image;		
+		a.appendChild(img);
+		span.appendChild(a);
+		dv.appendChild(span);
+		start++;
+	} while(start > end)
+
+}
+
+function image_slider(id_button, images)
+{
+	int start, end;
+	switch (id_button) {
+	case "left_next_buttton":
+		start_image_person++;
+		end_image_person++;
+		break;
+	case "left_pre_button":
+		start_image_person--;
+		end_image_person--;
+		break;
+	case "right_next_button":
+		start_image_con++;
+		end_image_con++;
+		break;
+	case "right_pre_button":
+		start_image_con--;
+		end_image_con--;
+		break;
+	}
+
+}
+
+function check(images, start, end, id_button)
+{
+	var img; //Define next or prev button
+	//get next or prev button by id_button
+	if (end == images.length) {
+
+	} else {
+	
+	}
+}
+
+
+function get_kind_of_person_construction()
+{
 	$.ajax({
 		url : "/get/person_construction/",
 		success : function(data) {
@@ -395,7 +469,7 @@ function get_kind_of_person_construction() {
     			kind_construction.push(data.kind_construction[i]);
     		}
     		
-    		add_image_slider(kind_person, "left_slider");
+    		add_image_slider(kind_person, "left_image");
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
