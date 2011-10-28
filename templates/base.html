@@ -14,7 +14,6 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}js/easySlider1.5.js"></script>
 
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/dd.css" />
@@ -29,11 +28,9 @@
 	
 	<div class="filter">
 		<div id="left_slider" class="left">
-			<div id="left_image">
-			</div>
 			<input type="hidden" value="" name="kind_person" id="kind_person">
 		</div>
-		<div class="right">
+		<div id="right_slider" class="right">
 			{% for obj in kind_construction %}
 			<span class="icon">
 				<a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>

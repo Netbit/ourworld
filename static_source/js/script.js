@@ -11,12 +11,12 @@ var end_image_person;   //End index to show images of kind of person
 var start_image_con;	//Start index to show images of kind of construction
 var end_image_con;		//End index to show images of kind of construction
 
-kind_person       		= new Array();
-kind_construction 		= new Array();
-var start_image_person  = 0;
-var end_image_person;   = 3;
-var start_image_con;	= 0;
-var end_image_con;		= 3;
+kind_person       	= new Array();
+kind_construction 	= new Array();
+start_image_person  = 0;
+end_image_person;   = 3;
+start_image_con;	= 0;
+end_image_con;		= 3;
 
 function initialize() {
 	var address;
@@ -192,7 +192,7 @@ function deleteOverlays() {
 
 $(document).ready(function() {	
 
-	get_kind_of_person_construction()
+	//get_kind_of_person_construction()
 	//add_image_slider(kind_person, "left_slider");
 	
 	try {
@@ -349,22 +349,16 @@ function district_filter(id_district) {
 function add_image_slider(images, id_div) 
 {
 	var i;
-	var j;
-	var len;  //The number of image will be shown
 	var dv;   //Define a tag <div>
 	var span; //Define a tag <span>
 	var a;    //Define a tag <a>
 	var img;  //Define a tag <img>
 	
-	len = 3;
 	dv = document.getElementById(id_div);
-	
-
 	//Add button prev
-	for (i = 0, j = 0; j < len; i++, j++) {
+	for (i = 0 ; i < images.length; i++) {
 		span           = document.createElement("span");
-		span.className = "icon";
-		
+		span.className = "icon";		
 		a 			   = document.createElement("a");
 		img            = document.createElement("img");
 		if (id_div == "left_slider") {
@@ -378,13 +372,11 @@ function add_image_slider(images, id_div)
 		img.height     = 32 
 		img.alt 	   = images[i].name;
 		img.src 	   = images[i].image;		
-		
 		a.appendChild(img);
 		span.appendChild(a);
 		dv.appendChild(span);
 	}
 	//Add button next
-
 }
 
 function create_image_list(images, start, end, id_div) 
@@ -419,41 +411,32 @@ function create_image_list(images, start, end, id_div)
 
 }
 
-function image_slider(id_button, images)
+function image_slider(id_button)
 {
-	int start, end;
 	switch (id_button) {
 	case "left_next_buttton":
 		start_image_person++;
 		end_image_person++;
+		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
 		break;
 	case "left_pre_button":
 		start_image_person--;
 		end_image_person--;
+		create_image_list();
+		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
 		break;
 	case "right_next_button":
 		start_image_con++;
 		end_image_con++;
+		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
 		break;
 	case "right_pre_button":
 		start_image_con--;
 		end_image_con--;
+		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
 		break;
 	}
-
 }
-
-function check(images, start, end, id_button)
-{
-	var img; //Define next or prev button
-	//get next or prev button by id_button
-	if (end == images.length) {
-
-	} else {
-	
-	}
-}
-
 
 function get_kind_of_person_construction()
 {
@@ -469,7 +452,7 @@ function get_kind_of_person_construction()
     			kind_construction.push(data.kind_construction[i]);
     		}
     		
-    		add_image_slider(kind_person, "left_image");
+    		add_image_slider(kind_person, "left_slider");
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
