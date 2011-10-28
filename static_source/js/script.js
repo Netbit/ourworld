@@ -192,7 +192,7 @@ function deleteOverlays() {
 
 $(document).ready(function() {	
 
-	//get_kind_of_person_construction()
+	get_kind_of_person_construction()
 	//add_image_slider(kind_person, "left_slider");
 	
 	try {
