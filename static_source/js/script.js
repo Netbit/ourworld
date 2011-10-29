@@ -356,7 +356,7 @@ function add_image_slider(images, id_div)
 	
 	dv = document.getElementById(id_div);
 	//Add button prev
-	for (i = 0 ; i < images.length; i++) {
+	for (i = 0 ; i < images.length-1; i++) {
 		span           = document.createElement("span");
 		span.className = "icon";		
 		a 			   = document.createElement("a");
@@ -379,6 +379,27 @@ function add_image_slider(images, id_div)
 	//Add button next
 }
 
+function create_button(id_div, id_button)
+{
+	var dv;   //Define a tag <div>
+	var span; //Define a tag <span>
+	var a;    //Define a tag <a>
+	var img;  //Define a tag <img>
+	
+	dv  		   = document.getElementById(id_div);
+	span           = document.createElement("span");
+	span.className = "icon";
+	a 			   = document.createElement("a");
+	a.setAttribute('onclick',"image_slider(" + id_button + ")");
+	img            = document.createElement("img");
+	img.id 	   	   = id_button;
+	img.height 	   = 25;
+	img.src        = "/static/images/" + id_button + ".png";		
+	a.appendChild(img);
+	span.appendChild(a);
+	dv.appendChild(span);
+}
+
 function create_image_list(images, start, end, id_div) 
 {
 	var dv;   //Define a tag <div>
@@ -386,7 +407,7 @@ function create_image_list(images, start, end, id_div)
 	var a;    //Define a tag <a>
 	var img;  //Define a tag <img>
 	
-	dv = document.getElementById(id_div);
+	dv  = document.getElementById(id_div);	
 	do {
 		span           = document.createElement("span");
 		span.className = "icon";
@@ -406,9 +427,8 @@ function create_image_list(images, start, end, id_div)
 		a.appendChild(img);
 		span.appendChild(a);
 		dv.appendChild(span);
-		start++;
-	} while(start > end)
-
+		start += 1;
+	} while(start < end)
 }
 
 function image_slider(id_button)
@@ -419,10 +439,9 @@ function image_slider(id_button)
 		end_image_person++;
 		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
 		break;
-	case "left_pre_button":
+	case "left_prev_button":
 		start_image_person--;
 		end_image_person--;
-		create_image_list();
 		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
 		break;
 	case "right_next_button":
@@ -430,7 +449,7 @@ function image_slider(id_button)
 		end_image_con++;
 		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
 		break;
-	case "right_pre_button":
+	case "right_prev_button":
 		start_image_con--;
 		end_image_con--;
 		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
@@ -451,8 +470,10 @@ function get_kind_of_person_construction()
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
     		}
-    		
-    		add_image_slider(kind_person, "left_slider");
+    		create_button("left_slider","left_prev_button");     		
+ //   		add_image_slider(kind_person, "left_slider");
+ 			create_image_list(kind_person, start_image_person, end_image_person, "left_slider");  
+    		create_button("left_slider","left_next_buttton"); 	
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
