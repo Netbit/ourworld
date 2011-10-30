@@ -346,39 +346,6 @@ function district_filter(id_district) {
 	});
 }
 
-function add_image_slider(images, id_div) 
-{
-	var i;
-	var dv;   //Define a tag <div>
-	var span; //Define a tag <span>
-	var a;    //Define a tag <a>
-	var img;  //Define a tag <img>
-	
-	dv = document.getElementById(id_div);
-	//Add button prev
-	for (i = 0 ; i < images.length-1; i++) {
-		span           = document.createElement("span");
-		span.className = "icon";		
-		a 			   = document.createElement("a");
-		img            = document.createElement("img");
-		if (id_div == "left_slider") {
-			a.setAttribute('onclick',"kind_person_filter(" + images[i].id + ")");
-			img.id 	   = "p" + images[i].id
-		} else {
-			a.setAttribute('onclick',"kind_construction_filter(" + images[i].id + ")");
-			img.id 	   = "c" + images[i].id
-		}
-		img.title	   = images[i].name;
-		img.height     = 32 
-		img.alt 	   = images[i].name;
-		img.src 	   = images[i].image;		
-		a.appendChild(img);
-		span.appendChild(a);
-		dv.appendChild(span);
-	}
-	//Add button next
-}
-
 function create_button(id_div, id_button)
 {
 	var dv;   //Define a tag <div>
@@ -401,38 +368,7 @@ function create_button(id_div, id_button)
 	dv.appendChild(span);
 }
 
-function create_image_list(images, start, end, id_div) 
-{
-	var dv;   //Define a tag <div>
-	var span; //Define a tag <span>
-	var a;    //Define a tag <a>
-	var img;  //Define a tag <img>
-	
-	dv  = document.getElementById(id_div);	
-	do {
-		span           = document.createElement("span");
-		span.className = "icon";
-		a 			   = document.createElement("a");
-		img            = document.createElement("img");
-		if (id_div == "left") {
-			a.setAttribute('onclick',"kind_person_filter(" + images[start].id + ")");
-			img.id 	   = "p" + images[start].id
-		} else {
-			a.setAttribute('onclick',"kind_construction_filter(" + images[start].id + ")");
-			img.id 	   = "c" + images[start].id
-		}
-		img.title	   = images[start].name;
-		img.height     = 32 
-		img.alt 	   = images[start].name;
-		img.src 	   = images[start].image;		
-		a.appendChild(img);
-		span.appendChild(a);
-		dv.appendChild(span);
-		start += 1;
-	} while(start < end)
-}
-
-function demo(images, start, end, id_div)
+function create_image_list(images, start, end, id_div)
 {
 	var htmlString;
 	htmlString = "";
@@ -448,7 +384,7 @@ function demo(images, start, end, id_div)
 		htmlString += " title=" + images[start].name  
 					   + " height=32" 
 					   + " alt=" + images[start].name 
-					   + " src=" + images[start].image
+					   + " src=" + images[start].image + ">"
 					   + "</img></a></span>";
 		start++;
 	}while (start < end)
@@ -497,9 +433,7 @@ function get_kind_of_person_construction()
     			kind_construction.push(data.kind_construction[i]);
     		}
     		create_button("left","left_prev_button");     		
- //   		add_image_slider(kind_person, "left_slider");
-// 			create_image_list(kind_person, start_image_person, end_image_person, "left");  
- 			htmlString = demo(kind_person, start_image_person, end_image_person, "left");
+ 			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
  			$('#left').html(htmlString);  
     		create_button("left","left_next_buttton"); 	
 		},
