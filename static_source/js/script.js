@@ -428,10 +428,10 @@ function get_kind_of_person_construction()
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
     		}	
- 			htmlString = create_element("", "left_prev_buttton", "/static/images/left_prev_buttton.png", 
+ 			htmlString = create_element("", "left_prev_button", "/static/images/left_prev_button.png", 
  											"image_slider", null)	
  						+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
- 						+ create_element("", "left_next_buttton", "/static/images/left_next_buttton.png", 
+ 						+ create_element("", "left_next_button", "/static/images/left_next_button.png", 
  											"image_slider", null);	
  			$('#left').html(htmlString);
 		},
