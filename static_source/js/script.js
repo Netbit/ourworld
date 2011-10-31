@@ -373,37 +373,67 @@ function create_image_list(images, start, end, id_div)
 	var htmlString;
 	htmlString = "";
 	do {
-		htmlString += "<span class='icon'>";
+//		htmlString += "<span class='icon'>";
+//		if ("left" == id_div) {
+//			htmlString += "<a onclick='kind_person_filter(" + images[start].id + ")'>"
+//						  + "<img id='p" + images[start].id + "'";
+//		} else {
+//			htmlString += "<a onclick='kind_construction_filter(" + images[start].id + ")'>"
+//						  + "<img id='c" + images[start].id + "'";		
+//		}
+//		htmlString += " title='" + images[start].name + "'"  
+//					   + " height='32'" 
+//					   + " alt='" + images[start].name + "'" 
+//					   + " src='" + images[start].image + "'>"
+//					   + "</img></a></span>";
 		if ("left" == id_div) {
-			htmlString += "<a onclick=kind_person_filter(" + images[start].id + ")>"
-						  + "<img id=p" + images[start].id;
+			htmlString += creat_element(images[start].name, images[start].id, images[start].image, 
+											"kind_person_filter", "left");
 		} else {
-			htmlString += "<a onclick=kind_construction_filter(" + images[start].id + ")>"
-						  + "<img id=c" + images[start].id;		
-		}
-		htmlString += " title=" + images[start].name  
-					   + " height=32" 
-					   + " alt=" + images[start].name 
-					   + " src=" + images[start].image + ">"
-					   + "</img></a></span>";
+			htmlString += creat_element(images[start].name, images[start].id, images[start].image, 
+											"kind_construction_filter", "right");
+		}		
 		start++;
 	}while (start < end)
 	
 	return htmlString;
 }
 
+function create_element(name, id, image, func, id_div)
+{
+	var htmlString;
+	htmlString = "<span class='icon'>";
+	if ("left" == id_div) {
+		htmlString += "<a onclick='" + func + "(" + id + ")'>"
+					  + "<img id='p" + id + "'";
+	} else if ("right" == id_div){
+		htmlString += "<a onclick='" + func + "(" + id + ")'>"
+					  + "<img id='p" + id + "'";	
+	} else {
+		htmlString += "<a onclick='" + func + "('" + id + "')'>"
+			  + "<img id='" + id + "'";
+	}
+	htmlString += " title='" + name + "'"  
+				   + " height='32'" 
+				   + " alt='" + name + "'" 
+				   + " src='" + image + "'>"
+				   + "</img></a></span>";
+	return htmlString;
+}
+
 function image_slider(id_button)
 {
+	alert(id_button);
 	switch (id_button) {
 	case "left_next_buttton":
 		start_image_person++;
 		end_image_person++;
-		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
+		create_image_list(kind_person, start_image_person, end_image_person, "left");
 		break;
 	case "left_prev_button":
 		start_image_person--;
 		end_image_person--;
-		create_image_list(kind_person, start_image_person, end_image_person, "left_slider");
+		create_image_list(kind_person, start_image_person, end_image_person, "left");
 		break;
 	case "right_next_button":
 		start_image_con++;
@@ -431,11 +461,9 @@ function get_kind_of_person_construction()
     		
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
-    		}
-    		create_button("left","left_prev_button");     		
+    		}		
  			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
  			$('#left').html(htmlString);  
-    		create_button("left","left_next_buttton"); 	
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
