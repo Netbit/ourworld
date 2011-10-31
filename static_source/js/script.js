@@ -346,51 +346,16 @@ function district_filter(id_district) {
 	});
 }
 
-function create_button(id_div, id_button)
-{
-	var dv;   //Define a tag <div>
-	var span; //Define a tag <span>
-	var a;    //Define a tag <a>
-	var img;  //Define a tag <img>
-	
-	dv  		   = document.getElementById(id_div);
-	span           = document.createElement("span");
-	span.className = "icon";
-	a 			   = document.createElement("a");
-	a.id 		   = id_button;
-	a.setAttribute('onclick',"image_slider('" + id_button + "')");
-	img            = document.createElement("img");
-//	img.id 	   	   = id_button;
-	img.height 	   = 25;
-	img.src        = "/static/images/" + id_button + ".png";		
-	a.appendChild(img);
-	span.appendChild(a);
-	dv.appendChild(span);
-}
-
 function create_image_list(images, start, end, id_div)
 {
 	var htmlString;
 	htmlString = "";
 	do {
-//		htmlString += "<span class='icon'>";
-//		if ("left" == id_div) {
-//			htmlString += "<a onclick='kind_person_filter(" + images[start].id + ")'>"
-//						  + "<img id='p" + images[start].id + "'";
-//		} else {
-//			htmlString += "<a onclick='kind_construction_filter(" + images[start].id + ")'>"
-//						  + "<img id='c" + images[start].id + "'";		
-//		}
-//		htmlString += " title='" + images[start].name + "'"  
-//					   + " height='32'" 
-//					   + " alt='" + images[start].name + "'" 
-//					   + " src='" + images[start].image + "'>"
-//					   + "</img></a></span>";
 		if ("left" == id_div) {
-			htmlString += creat_element(images[start].name, images[start].id, images[start].image, 
+			htmlString += create_element(images[start].name, images[start].id, images[start].image, 
 											"kind_person_filter", "left");
 		} else {
-			htmlString += creat_element(images[start].name, images[start].id, images[start].image, 
+			htmlString += create_element(images[start].name, images[start].id, images[start].image, 
 											"kind_construction_filter", "right");
 		}		
 		start++;
@@ -455,15 +420,20 @@ function get_kind_of_person_construction()
 		success : function(data) {
 			var i;
 			var htmlString;
+			htmlString = "";
     		for (i = 0; i < data.kind_person.length; i++) {
     			kind_person.push(data.kind_person[i]);
     		}
     		
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
-    		}		
- 			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
- 			$('#left').html(htmlString);  
+    		}	
+ 			htmlString = create_element("", "left_prev_buttton", "/static/images/left_prev_buttton.png", 
+ 											"image_slider", null)	
+ 						+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
+ 						+ create_element("", "left_next_buttton", "/static/images/left_next_buttton.png", 
+ 											"image_slider", null);	
+ 			$('#left').html(htmlString);
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
