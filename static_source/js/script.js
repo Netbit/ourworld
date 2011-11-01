@@ -369,13 +369,13 @@ function create_element(name, id, image, func, id_div)
 	var htmlString;
 	htmlString = "<span class='icon'>";
 	if ("left" == id_div) {
-		htmlString += "<a onclick='" + func + "(" + id + ")'>"
+		htmlString += "<a onclick=" + func + "('" + id + "')>"
 					  + "<img id='p" + id + "'";
-	} else if ("right" == id_div){
-		htmlString += "<a onclick='" + func + "(" + id + ")'>"
+	} else if ("right" == id_div) {
+		htmlString += "<a onclick=" + func + "('" + id + "')>"
 					  + "<img id='p" + id + "'";	
 	} else {
-		htmlString += "<a onclick='" + func + "('" + id + "')'>"
+		htmlString += "<a onclick=" + func + "('" + id + "')>"
 			  + "<img id='" + id + "'";
 	}
 	htmlString += " title='" + name + "'"  
@@ -387,10 +387,9 @@ function create_element(name, id, image, func, id_div)
 }
 
 function image_slider(id_button)
-{
-	alert(id_button);
+{		
 	switch (id_button) {
-	case "left_next_buttton":
+	case "left_next_button":
 		start_image_person++;
 		end_image_person++;
 		create_image_list(kind_person, start_image_person, end_image_person, "left");
