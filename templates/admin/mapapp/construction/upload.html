@@ -1,0 +1,19 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Update data from CSV file{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h1>Select file:</h1>
+  <form action="" enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+  	{{ form.as_p }}
+  	<input type="submit" value="Submit">
+  </form>
+  {% if flag == 2 %}
+  	<span>Cập nhật thành công data</span>
+  {% endif%}
+  {% if flag == 1 %}
+  	<span> Dòng {{ msgs }} bị lỗi không thể cập nhật được</span>
+  {% endif%}
+</div>
+{% endblock %}

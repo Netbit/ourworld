@@ -13,7 +13,7 @@ class KindOfConstructionTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
     
 class ConstructionTranslationOptions(TranslationOptions):
-    fields = ('name', 'description_detail')    
+    fields = ('name', 'description_detail', 'description_other')    
 
 
 translator.register(District, DistrictTranslationOptions)

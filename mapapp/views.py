@@ -7,16 +7,16 @@ from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street
     Comment
 from django.utils import translation
 from django.http import HttpResponse, Http404
-from mapapp.forms import CommentForm
+from mapapp.forms import CommentForm, InputFile
 from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.query_utils import Q
+from django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required
+import codecs
+from mapapp.utils import unsigned_vi, CsvUnicodeReader
 
 
-
-
-
-    
 def home(request):
     lang = request.GET.get("lang", '')
     
@@ -45,9 +45,7 @@ def home(request):
 def lookup(request):
     if request.GET.has_key(u'q'):
         value = request.GET[u'q']
-        lst = Street.objects.filter(name__contains = value)
-        if len(lst) < 2:
-            lst.extend(Street.objects.filter(unsgined_name__contains = value))
+        lst = Street.objects.filter(Q(name__contains = value) | Q(unsgined_name__contains = value))
         
         data = ""
         for i in lst:
@@ -134,6 +132,7 @@ def district_filter(request):
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
+@cache_page(60*15)
 @csrf_protect    
 def get_details(request, id_object):
     msg = None
@@ -184,3 +183,58 @@ def get_kind_person_contruction(request):
     mData["kind_construction"] = mArray
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json") 
+
+@login_required
+@csrf_protect 
+def upload_file(request):
+    messages = []
+    flag = 0
+    if request.method == "POST":
+        if request.user.is_superuser:
+            data_form = InputFile(request.POST, request.FILES)
+            if data_form.is_valid():
+                fo = codecs.open('temp.csv', 'w', 'utf-8')
+                for line in request.FILES['data'].chunks():
+                    fo.write(unicode(line,'utf-8'))
+                fo.close()
+                reader = CsvUnicodeReader(open('temp.csv', 'r'))
+                index = -1                
+                for row in reader:
+                    index += 1  
+                    if index == 0:
+                        continue                                  
+                    try: 
+                        try:
+                            obj = Construction.objects.get(name = row[0])
+                        except:
+                            obj = Construction()                            
+                        obj.name = row[0]
+                        obj.name_vi = row[0]
+                        obj.unsigned_name = unsigned_vi(row[0])
+                        obj.name_en = row[1]
+                        obj.number_or_alley = row[2]
+                        obj.street = Street.objects.get_or_create(name = row[3])[0]
+                        obj.district = District.objects.get_or_create(name = row[4])[0]
+                        obj.description_detail = row[5]
+                        obj.description_detail_vi = row[5]
+                        obj.description_detail_en = row[6]
+                        obj.description_other = row[7]
+                        obj.description_other_vi = row[7]
+                        obj.description_other_en = row[8]
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[9])[0]
+                        obj.save()
+                        obj.kind_of_person.add(KindOfPerson.objects.get_or_create(name = row[10])[0])
+                        obj.save()
+                        if flag == 0:
+                            flag = 2                        
+                    except:
+                        messages.append(index)
+                        flag = 1
+                        continue
+    else:
+        data_form = InputFile()
+        
+    return render_to_response('admin/mapapp/construction/upload.html', {'form': data_form, "msgs" : ", ".join(messages), 'flag' : flag}, 
+                              context_instance = RequestContext(request))         
+            
+                

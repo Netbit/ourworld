@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class District(models.Model):
-    name        = models.CharField(max_length = 60, verbose_name = _('District name'))
+    name        = models.CharField(max_length = 60, unique = True, verbose_name = _('District name'))
     unsigned_name = models.CharField(max_length = 50, verbose_name = _('District unsigned name'))
     location    = models.CharField(max_length = 30, blank = True, verbose_name = _('Location (on map)'))
     description = models.TextField(blank = True, verbose_name = _('Description'))
@@ -17,7 +17,7 @@ class District(models.Model):
         return self.name
 
 class Street(models.Model):
-    name    = models.CharField(max_length = 100, verbose_name = _('Street name'))
+    name    = models.CharField(max_length = 100, unique = True, verbose_name = _('Street name'))
     unsigned_name = models.CharField(max_length = 80, verbose_name = _('Street unsigned name'))
     
     class Meta:
@@ -28,7 +28,7 @@ class Street(models.Model):
         return self.name
    
 class KindOfPerson(models.Model):
-    name        = models.CharField(max_length = 100, verbose_name = _('Kind of person name'))
+    name        = models.CharField(max_length = 100, unique = True, verbose_name = _('Kind of person name'))
     image       = models.ImageField(upload_to = 'images/person', blank = True, verbose_name = _('Image'))
     description = models.TextField(blank = True, verbose_name = _('Description'))
     
@@ -40,7 +40,7 @@ class KindOfPerson(models.Model):
         return self.name
     
 class KindOfConstruction(models.Model):
-    name = models.CharField(max_length = 100, verbose_name = _('Kind of construction name'))
+    name = models.CharField(max_length = 100, unique = True, verbose_name = _('Kind of construction name'))
     image = models.ImageField(upload_to = 'images/kind', blank = True, verbose_name = _('Image'))
     description = models.TextField(blank = True, verbose_name = _('Description'))
     
@@ -52,7 +52,7 @@ class KindOfConstruction(models.Model):
         return self.name
 
 class Construction(models.Model):   
-    name               = models.CharField(max_length = 100, verbose_name = _('Construction name'))
+    name               = models.CharField(max_length = 100, unique = True, verbose_name = _('Construction name'))
     unsigned_name      = models.CharField(max_length = 80, verbose_name = _('Construction unsigned name'))
     number_or_alley    = models.CharField(max_length = 20, blank = True, verbose_name = _('Number or alley'))
     street             = models.ForeignKey(Street, verbose_name = _('Street'))
@@ -62,7 +62,7 @@ class Construction(models.Model):
     description_detail = models.TextField(blank = True, verbose_name = _('Description detail'))
     description_other  = models.TextField(blank = True, verbose_name = _('Description other'))
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
-    kind_of_person     = models.ManyToManyField(KindOfPerson, verbose_name = _('Kind of Person'))
+    kind_of_person     = models.ManyToManyField(KindOfPerson, verbose_name = _('Kind of Person'), blank = True)
     
     class Meta:
         verbose_name = _("Construction")
@@ -81,7 +81,7 @@ STATUS_CHOICES = (
 
 class Comment(models.Model):
     email = models.EmailField(verbose_name = _('Email'))
-    content = models.TextField(verbose_name = _('Content'))
+    content = models.TextField(verbose_name = _('Content'),  unique = True)
     comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Comment date'))
     construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
     status = models.CharField(max_length = 2, default = 'p', verbose_name = _('Status'), choices = STATUS_CHOICES)
