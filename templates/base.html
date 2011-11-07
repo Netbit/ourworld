@@ -37,11 +37,12 @@
 			<input type="hidden" value="" name="kind_person" id="kind_person">
 		</div>
 		<div id="right_slider" class="right">
-			{% for obj in kind_construction %}
-			<span class="icon">
-				<a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}"></a>
-			</span>
-			{% endfor %}
+			<div id="right_prev">
+			</div>
+			<div id="right">
+			</div>
+			<div id="right_next">
+			</div>
 			<input type="hidden" value="" name="kind_construction" id="kind_construction">
 		</div>
 	</div>

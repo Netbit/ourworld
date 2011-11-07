@@ -433,6 +433,13 @@ function get_kind_of_person_construction()
  						+ create_element("", "left_next_button", "/static/images/left_next_button.png", 
  											"image_slider", null);	
  			$('#left').html(htmlString);
+ 			
+ 			htmlString = create_element("", "right_prev_button", "/static/images/right_prev_button.png", 
+								"image_slider", null)	
+						+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
+						+ create_element("", "right_next_button", "/static/images/right_next_button.png", 
+											"image_slider", null);	
+ 			$('#right').html(htmlString);
 		},
 		error : function(e) {
 			alert(gettext("Couldn't get the data of kind of person and construction!"));
