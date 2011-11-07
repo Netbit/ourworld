@@ -1,8 +1,9 @@
-from django.contrib import admin
+from django.contrib import admin, databrowse
 from mapapp.models import District, KindOfConstruction, Construction,\
     KindOfPerson, Street, Comment
 from modeltranslation.admin import TranslationAdmin
 from django.utils.translation import ugettext_lazy as _
+from django.http import HttpResponseRedirect
 
 
 
@@ -31,11 +32,17 @@ class AdminComment(admin.ModelAdmin):
     
 class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
-    list_filter = ('name', 'kind_of_construction',  'street', 'district')
+    list_filter = ('kind_of_construction',  'street', 'district')
     search_fields = ('name',)
     list_per_page = 30
     readonly_fields = ('location',)
     save_on_top = True
+    
+    actions = ['import_data']
+    
+    def import_data(self, request, queryset):
+        return HttpResponseRedirect("/admin/mapapp/construction/upload/")
+    import_data.short_description = _("Import data from a CSV file")
     
 class AdminKindOfPerson(admin.ModelAdmin):
     list_display = ['name','description']
@@ -60,5 +67,3 @@ admin.site.register(Construction, AdminConstruction)
 admin.site.register(KindOfPerson, AdminKindOfPerson)
 admin.site.register(Street, AdminStreet)
 admin.site.register(Comment, AdminComment)
-
-

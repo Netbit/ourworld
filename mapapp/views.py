@@ -47,25 +47,19 @@ def lookup(request):
         value = request.GET[u'q']
         lst = Street.objects.filter(Q(name__contains = value) | Q(unsgined_name__contains = value))
         
-        data = ""
-        for i in lst:
-            data += i.name + "\n"
+        data = "\n".join([i.name for i in lst])
         return HttpResponse(data)
     else:
-        return HttpResponse("")
+        return HttpResponse("\n")
 
 def get_detail_of_construction(id_object):
     try:
         con = Construction.objects.get(id = id_object)
-        if hasattr(con.link_image, 'url'):
-            url = con.link_image.url
-        else:
-            url = ""
         return { "results" : {
                         "id"      : str(con.id),
                         "name"    : con.name,
                         "details" : con.description_detail.replace('\n', '<br>'),
-                        "image"   : url
+                        "image"   : con.get_image()
                     }  
                }
     except:
@@ -93,28 +87,16 @@ def get_information(request, id_object):
 def kind_person_filter(request):
     id1 = request.GET.get('id1', '')
     lst = Construction.objects.filter(kind_of_person = id1)
-    mData = {}    
-    mArray = []
-    for obj in lst:
-        temp = {}
-        temp['id'] = obj.id
-        temp['address'] = obj.get_address()
-        mArray.append(temp)        
-    mData["results"] = mArray
+    mData = {}           
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in lst]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
 def kind_construction_filter(request):
     id1 = request.GET['id1']
     lst = Construction.objects.filter(kind_of_construction = id1)
-    mData = {}    
-    mArray = []
-    for obj in lst:
-        temp = {}
-        temp['id'] = obj.id
-        temp['address'] = obj.get_address()
-        mArray.append(temp)        
-    mData["results"] = mArray
+    mData = {}           
+    mData["results"] = mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in lst]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
@@ -122,17 +104,10 @@ def district_filter(request):
     id_district  = request.GET['id_district']
     construction = Construction.objects.filter(district = id_district ) 
     mData          = {}
-    tmp          = {}
-    mArray       = []
-    for obj in construction:
-        tmp['id']      = obj.id
-        tmp['address'] = obj.get_address()
-        mArray.append(tmp)
-    mData["results"] = mArray
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in construction]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
-@cache_page(60*15)
 @csrf_protect    
 def get_details(request, id_object):
     msg = None
@@ -162,25 +137,10 @@ def get_kind_person_contruction(request):
     kind_person       = KindOfPerson.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     mData             = {}
-    mArray            = []
-    
-    for person in kind_person:
-        tmp          = {}
-        tmp['id']    = person.id
-        tmp['name']  = person.name
-        tmp['image'] = person.image.url
-        mArray.append(tmp)
-    mData["kind_person"] = mArray
-    
-    mArray = []
-    
-    for con in kind_construction:
-        tmp          = {}
-        tmp['id']    = con.id
-        tmp['name']  = con.name
-        tmp['image'] = con.image.url
-        mArray.append(tmp)
-    mData["kind_construction"] = mArray
+    mData["kind_person"]        = [{'id' : obj.id, 'name' : obj.name, 'image' : obj.get_image()} 
+                                   for obj in kind_person]
+    mData["kind_construction"]  = [{'id' : obj.id, 'name' : obj.name, 'image' : obj.get_image()} 
+                                   for obj in kind_construction]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json") 
 

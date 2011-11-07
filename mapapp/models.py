@@ -35,6 +35,12 @@ class KindOfPerson(models.Model):
     class Meta:
         verbose_name = _("Kind of Person")
         verbose_name_plural = _("Kind of Persons")
+        
+    def get_image(self):
+        if hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return ""
     
     def __unicode__(self):
         return self.name
@@ -47,6 +53,12 @@ class KindOfConstruction(models.Model):
     class Meta:
         verbose_name = _("Kind of Construction")
         verbose_name_plural = _("Kind of Constructions")
+        
+    def get_image(self):
+        if hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return ""
     
     def __unicode__(self):
         return self.name
@@ -67,6 +79,12 @@ class Construction(models.Model):
     class Meta:
         verbose_name = _("Construction")
         verbose_name_plural = _("Constructions")
+        
+    def get_image(self):
+        if hasattr(self.link_image, 'url'):
+            return self.link_image.url
+        else:
+            return ""
     
     def __unicode__(self):
         return self.name
