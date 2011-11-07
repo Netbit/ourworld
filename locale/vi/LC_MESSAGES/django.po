@@ -176,3 +176,6 @@ msgstr "Ẩn"
 
 msgid "Mark selected comments as hidden"
 msgstr "Chuyển bình luận đã chọn thành trạng thái ẩn"
+
+msgid "Import data from a CSV file"
+msgstr "Nhập dữ liệu từ file CSV"

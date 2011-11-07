@@ -177,3 +177,6 @@ msgstr ""
 
 msgid "Mark selected comments as hidden"
 msgstr ""
+
+msgid "Import data from a CSV file"
+msgstr ""
