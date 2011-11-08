@@ -392,25 +392,49 @@ function image_slider(id_button)
 	case "left_next_button":
 		start_image_person++;
 		end_image_person++;
+		if (kind_person.length == end_image_person) {
+			//disable left_next button
+			disable_button(id_button)
+		}
 		create_image_list(kind_person, start_image_person, end_image_person, "left");
 		break;
 	case "left_prev_button":
 		start_image_person--;
 		end_image_person--;
+		if (0 == start_image_person) {
+			//disable left_prev_button
+			disable_button(id_button)
+		}
 		create_image_list(kind_person, start_image_person, end_image_person, "left");
 		break;
 	case "right_next_button":
 		start_image_con++;
 		end_image_con++;
+		if (kind_construction.length == end_image_con) {
+			//disable right_next_button
+			disable_button(id_button)
+		}
 		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
 		break;
 	case "right_prev_button":
 		start_image_con--;
 		end_image_con--;
+		if (0 == start_image_con) {
+			//disable left_prev_button
+			disable_button(id_button)
+		}
 		create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
 		break;
 	}
 }
+
+function disable_button(id_button)
+{
+	var img;
+	img = document.getElementById(id_button);
+	img.disabled = true;
+}
+
 
 function get_kind_of_person_construction()
 {
