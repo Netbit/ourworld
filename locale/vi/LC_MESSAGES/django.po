@@ -179,3 +179,15 @@ msgstr "Chuyển bình luận đã chọn thành trạng thái ẩn"
 
 msgid "Import data from a CSV file"
 msgstr "Nhập dữ liệu từ file CSV"
+
+msgid "Map site admin"
+msgstr "Trang quản trị bản đồ tiếp cận"
+
+msgid "Map administration"
+msgstr "Trang quản trị bản đồ tiếp cận"
+
+msgid "Error found at line(s)"
+msgstr "Lỗi phát sinh tại dòng"
+
+msgid "Update data successful."
+msgstr "Cập nhật dữ liệu thành công."

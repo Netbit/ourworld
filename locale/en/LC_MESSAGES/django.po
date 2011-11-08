@@ -180,3 +180,18 @@ msgstr ""
 
 msgid "Import data from a CSV file"
 msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Map site admin"
+msgstr ""
+
+msgid "Map administration"
+msgstr ""
+
+msgid "Error found at line(s)"
+msgstr ""
+
+msgid "Update data successful."
+msgstr ""
