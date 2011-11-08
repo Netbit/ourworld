@@ -1,19 +1,46 @@
 {% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+{% load url from future %}
 
 {% block title %}Update data from CSV file{% endblock %}
 
+{{ block.super }}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="/admin/">
+        {% trans "Home" %}
+      </a>
+      &rsaquo;
+       <a href="/admin/mapapp/">
+         {% trans "Mapapp" %}
+      </a>
+      &rsaquo;
+      <a href="/admin/mapapp/construction/">
+         {% trans "Constructions" %}
+      </a>
+      &rsaquo;
+      {% trans "Upload" %}
+    </div>
+{% endblock %}
+
 {% block content %}
-<div id="content-main">
-  <h1>Select file:</h1>
-  <form action="" enctype="multipart/form-data" action="" method="post">{% csrf_token %}
-  	{{ form.as_p }}
-  	<input type="submit" value="Submit">
-  </form>
-  {% if flag == 2 %}
-  	<span>Cập nhật thành công data</span>
-  {% endif%}
-  {% if flag == 1 %}
-  	<span> Dòng {{ msgs }} bị lỗi không thể cập nhật được</span>
-  {% endif%}
+<div id="content-main" style="margin: auto;">
+	<div >
+	  <h1>Select file:</h1>
+	  <form action="" enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+	  	{{ form.as_p }}
+	  	<input type="submit" value="Submit">
+	  </form>
+	  {% if flag == 2 %}
+	  	<span>{% trans 'Update data successful.' %}</span>
+	  {% endif%}
+	  {% if flag == 1 %}
+	  	<span>{% trans 'Error found at line(s)' %} {{ msgs }}</span>
+	  {% endif%}
+	  {% if flag == 3 %}
+	  	<span>{{ msgs }}</span>
+	  {% endif%}
+  </div>
 </div>
 {% endblock %}
