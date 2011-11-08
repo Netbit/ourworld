@@ -150,8 +150,11 @@ def upload_file(request):
     messages = []
     flag = 0
     if request.method == "POST":
-        if request.user.is_superuser:
-            data_form = InputFile(request.POST, request.FILES)
+        data_form = InputFile(request.POST, request.FILES)
+        if request.FILES['data'].content_type != 'application/vnd.ms-excel':
+            messages.append("Invalid file input!!")
+            flag = 3
+        elif request.user.is_superuser:            
             if data_form.is_valid():
                 fo = codecs.open('temp.csv', 'w', 'utf-8')
                 for line in request.FILES['data'].chunks():
@@ -165,9 +168,11 @@ def upload_file(request):
                         continue                                  
                     try: 
                         try:
-                            obj = Construction.objects.get(name = row[0])
+                            obj = Construction.objects.get(Q(name_vi = row[0]) | Q(name_en = row[1]))
                         except:
-                            obj = Construction()                            
+                            obj = Construction() 
+                        if len(row) != 11:
+                            raise Exception()                           
                         obj.name = row[0]
                         obj.name_vi = row[0]
                         obj.unsigned_name = unsigned_vi(row[0])
@@ -188,9 +193,12 @@ def upload_file(request):
                         if flag == 0:
                             flag = 2                        
                     except:
-                        messages.append(index)
+                        messages.append(str(index))
                         flag = 1
                         continue
+        else:
+            messages.append("You must login by superuser permission to upload file")
+            flag = 3
     else:
         data_form = InputFile()
         

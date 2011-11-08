@@ -19,7 +19,7 @@ class AdminKindOfConstruction(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminComment(admin.ModelAdmin):
-    list_display = ['email', 'content', 'comment_date', 'construction', 'status']
+    list_display = ['email', 'content', 'date_format', 'construction', 'get_status']
     list_filter = ('comment_date', 'construction', 'status')
     search_fields = ('construction__name', 'construction__unsigned_name')
     list_per_page = 25
@@ -37,12 +37,6 @@ class AdminConstruction(admin.ModelAdmin):
     list_per_page = 30
     readonly_fields = ('location',)
     save_on_top = True
-    
-    actions = ['import_data']
-    
-    def import_data(self, request, queryset):
-        return HttpResponseRedirect("/admin/mapapp/construction/upload/")
-    import_data.short_description = _("Import data from a CSV file")
     
 class AdminKindOfPerson(admin.ModelAdmin):
     list_display = ['name','description']

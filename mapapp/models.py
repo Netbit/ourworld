@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import date
+from django.conf import settings
 
 
 # Create your models here.
@@ -103,6 +105,21 @@ class Comment(models.Model):
     comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Comment date'))
     construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
     status = models.CharField(max_length = 2, default = 'p', verbose_name = _('Status'), choices = STATUS_CHOICES)
+    
+    def date_format(self):
+        return date(self.comment_date, 'd-m-Y H:i:s')
+    date_format.admin_order_field = 'comment_date'
+    date_format.short_description = _('Comment date')
+    
+    def get_status(self):
+        if self.status == "p":
+            status = "<span style='margin: auto'><img src='" + settings.STATIC_URL + "images/activate.gif' title='Published'></span>"
+        else:
+            status = "<span style='margin: auto'><img src='" + settings.STATIC_URL + "images/deactivate.gif' title='Hidden'></span>"
+        return status
+    get_status.allow_tags = True
+    get_status.admin_order_field = 'status'
+    get_status.short_description = _('Status')
     
     def __unicode__(self):
         return self.content
