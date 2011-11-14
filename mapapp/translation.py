@@ -1,12 +1,12 @@
 from modeltranslation.translator import translator, TranslationOptions
-from mapapp.models import District, KindOfPerson, KindOfConstruction,\
-    Construction
+from mapapp.models import District, KindPersonOfAccess, KindOfConstruction,\
+    Construction, Ward
 
 
 class DistrictTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
     
-class KindOfPersonTranslationOptions(TranslationOptions):
+class KindPersonOfAccessTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
     
 class KindOfConstructionTranslationOptions(TranslationOptions):
@@ -15,8 +15,11 @@ class KindOfConstructionTranslationOptions(TranslationOptions):
 class ConstructionTranslationOptions(TranslationOptions):
     fields = ('name', 'description_detail', 'description_other')    
 
-
+class WardTranslationOptions(TranslationOptions):
+    fields = ('name',)
+    
 translator.register(District, DistrictTranslationOptions)
-translator.register(KindOfPerson, KindOfPersonTranslationOptions)
+translator.register(KindPersonOfAccess, KindPersonOfAccessTranslationOptions)
 translator.register(KindOfConstruction, KindOfConstructionTranslationOptions)
 translator.register(Construction, ConstructionTranslationOptions)
+translator.register(Ward, WardTranslationOptions)

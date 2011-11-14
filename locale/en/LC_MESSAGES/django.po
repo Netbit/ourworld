@@ -117,10 +117,19 @@ msgstr ""
 msgid "Description other"
 msgstr ""
 
-msgid "Kind of Person"
+msgid "Kind Person of Access"
 msgstr ""
 
-msgid "Kind of Persons"
+msgid "Kind People of Access"
+msgstr ""
+
+msgid "Kind person of access"
+msgstr ""
+
+msgid "Kind person of access name"
+msgstr ""
+
+msgid "Access level"
 msgstr ""
 
 msgid "Kind of Construction"
@@ -135,6 +144,14 @@ msgstr ""
 msgid "Couldn't get the data!"
 msgstr ""
 
+msgid "Ward"
+msgstr ""
+
+msgid "Wards"
+msgstr ""
+
+msgid "Ward name"
+msgstr ""
 
 msgid "Content"
 msgstr ""
@@ -176,6 +193,9 @@ msgid "Hidden"
 msgstr ""
 
 msgid "Mark selected comments as hidden"
+msgstr ""
+
+msgid "Mark selected comments as published"
 msgstr ""
 
 msgid "Import data from a CSV file"

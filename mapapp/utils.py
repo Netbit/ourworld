@@ -5,6 +5,7 @@ import re
 import csv
 import codecs
 import cStringIO
+from mapapp.models import Ward
 
 def unsigned_vi(vi_str):
     if isinstance(vi_str, unicode): 
@@ -18,6 +19,9 @@ def unsigned_vi(vi_str):
     replaces_dict = dict(zip(text_to_find, text_to_replace))
     return r.sub(lambda m: replaces_dict[m.group(0)], vi_str)
 
+def get_wards():
+    ward = Ward.objects.all()
+    
 
 class UTF8Recoder:
     """
