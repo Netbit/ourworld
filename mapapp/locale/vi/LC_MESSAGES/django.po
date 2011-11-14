@@ -101,7 +101,7 @@ msgid "Street"
 msgstr "Đường"
 
 msgid "Streets"
-msgstr "Danh sách các con đường"
+msgstr "Danh sách các Con đường"
 
 msgid "District"
 msgstr "Quận"
@@ -115,17 +115,26 @@ msgstr "Mô tả chi tiết"
 msgid "Description other"
 msgstr "Mô tả khác"
 
-msgid "Kind of Person"
+msgid "Kind Person of Access"
 msgstr "Loại người tiếp cận"
 
-msgid "Kind of Persons"
-msgstr "Danh sách loại người tiếp cận"
+msgid "Kind People of Access"
+msgstr "Danh sách Loại người tiếp cận"
+
+msgid "Kind person of access"
+msgstr "Loại người tiếp cận"
+
+msgid "Kind person of access name"
+msgstr "Tên loại người tiếp cận"
+
+msgid "Access level"
+msgstr "Mức tiếp cận"
 
 msgid "Kind of Construction"
 msgstr "Loại công trình"
 
 msgid "Kind of Constructions"
-msgstr "Danh sách loại công trình"
+msgstr "Danh sách Loại công trình"
 
 msgid "Details..."
 msgstr "Chi tiết..."
@@ -133,7 +142,14 @@ msgstr "Chi tiết..."
 msgid "Couldn't get the data!"
 msgstr "Không thể lấy được dữ liệu!"
 
+msgid "Ward"
+msgstr "Phường"
 
+msgid "Wards"
+msgstr "Danh sách các Phường"
+
+msgid "Ward name"
+msgstr "Tên phường"
 
 msgid "Content"
 msgstr "Nội dung"
@@ -175,7 +191,10 @@ msgid "Hidden"
 msgstr "Ẩn"
 
 msgid "Mark selected comments as hidden"
-msgstr "Chuyển bình luận đã chọn thành trạng thái ẩn"
+msgstr "Ẩn các bình luận đã chọn"
+
+msgid "Mark selected comments as published"
+msgstr "Hiển thị các bình luận đã chọn"
 
 msgid "Import data from a CSV file"
 msgstr "Nhập dữ liệu từ file CSV"

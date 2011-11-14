@@ -3,7 +3,7 @@ import json
 
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from mapapp.models import KindOfPerson, KindOfConstruction, Construction, Street, District,\
+from mapapp.models import KindPersonOfAccess, KindOfConstruction, Construction, Street, District,\
     Comment
 from django.utils import translation
 from django.http import HttpResponse, Http404
@@ -11,10 +11,9 @@ from mapapp.forms import CommentForm, InputFile
 from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.query_utils import Q
-from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
-import codecs
-from mapapp.utils import unsigned_vi, CsvUnicodeReader
+from mapapp.utils import unsigned_vi
+import xlrd
 
 
 def home(request):
@@ -134,7 +133,7 @@ def get_details(request, id_object):
                         context_instance = RequestContext(request))   
     
 def get_kind_person_contruction(request):
-    kind_person       = KindOfPerson.objects.all()
+    kind_person       = KindPersonOfAccess.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     mData             = {}
     mData["kind_person"]        = [{'id' : obj.id, 'name' : obj.name, 'image' : obj.get_image()} 
@@ -151,21 +150,17 @@ def upload_file(request):
     flag = 0
     if request.method == "POST":
         data_form = InputFile(request.POST, request.FILES)
-        if request.FILES['data'].content_type != 'application/vnd.ms-excel':
+        if request.FILES['data'].content_type != 'application/excel':
             messages.append("Invalid file input!!")
             flag = 3
         elif request.user.is_superuser:            
             if data_form.is_valid():
-                fo = codecs.open('temp.csv', 'w', 'utf-8')
+                fo = open('temp.xls', 'wb')
                 for line in request.FILES['data'].chunks():
-                    fo.write(unicode(line,'utf-8'))
+                    fo.write(line)
                 fo.close()
-                reader = CsvUnicodeReader(open('temp.csv', 'r'))
-                index = -1                
-                for row in reader:
-                    index += 1  
-                    if index == 0:
-                        continue                                  
+                reader = xlrd.open_workbook('temp.xls', encoding_override = 'utf-8').sheets()[0]                
+                for row in (1, reader.nrow + 1):                                
                     try: 
                         try:
                             obj = Construction.objects.get(Q(name_vi = row[0]) | Q(name_en = row[1]))
@@ -188,12 +183,12 @@ def upload_file(request):
                         obj.description_other_en = row[8]
                         obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[9])[0]
                         obj.save()
-                        obj.kind_of_person.add(KindOfPerson.objects.get_or_create(name = row[10])[0])
+                        obj.access_level.add(KindPersonOfAccess.objects.get_or_create(name = row[10])[0])
                         obj.save()
                         if flag == 0:
                             flag = 2                        
                     except:
-                        messages.append(str(index))
+                        messages.append(str(row))
                         flag = 1
                         continue
         else:
