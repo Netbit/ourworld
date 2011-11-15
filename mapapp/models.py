@@ -73,7 +73,8 @@ class Ward(models.Model):
         verbose_name = _("Ward")
         verbose_name_plural = _("Wards")
 
-WARD_CHOICE = Ward.objects.all().values_list()
+WARD_CHOICE = ()
+#WARD_CHOICE = Ward.objects.all().values_list()
 
 class Construction(models.Model):   
     name               = models.CharField(max_length = 100, unique = True, verbose_name = _('Construction name'))
