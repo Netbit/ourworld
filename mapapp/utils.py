@@ -18,9 +18,6 @@ def unsigned_vi(vi_str):
     r = re.compile("|".join(text_to_find))
     replaces_dict = dict(zip(text_to_find, text_to_replace))
     return r.sub(lambda m: replaces_dict[m.group(0)], vi_str)
-
-def get_wards():
-    ward = Ward.objects.all()
     
 
 class UTF8Recoder:
