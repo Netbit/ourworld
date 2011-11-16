@@ -22,7 +22,20 @@ function initialize() {
 	});
 }
 
-$(document).ready(function() {	
+$(document).ready(function() {
+	$('#id_name').css('width', '400px');
+	$('#id_name_vi').css('width', '400px');
+	$('#id_name_en').css('width', '400px');
+	$('#id_unsigned_name').css('width', '400px');
+	
+	$('#id_description_detail_vi').css('width', '610px');
+	$('#id_description_detail_en').css('width', '610px');
+	$('#id_description_other_vi').css('width', '610px');
+	$('#id_description_other_en').css('width', '610px');
+	$('#id_location').css('width', '400px');
+	$('#id_location').attr('readonly', true);
+	
+	
 	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
 	initialize();
 });
