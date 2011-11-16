@@ -37,8 +37,6 @@ class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
     list_filter = ('kind_of_construction',  'street', 'district')
     search_fields = ('name',)
-    list_per_page = 30
-    readonly_fields = ('location',)
     save_on_top = True
     
 class AdminKindPersonOfAccess(admin.ModelAdmin):

@@ -30,8 +30,8 @@ class Street(models.Model):
         return self.name
    
 class KindPersonOfAccess(models.Model):
-    access_level = models.CharField(max_length = 10, unique = True,verbose_name = _('Access level'))
-    name        = models.CharField(max_length = 100, verbose_name = _('Kind person of access name'))
+    access_level = models.CharField(max_length = 10, unique = True, verbose_name = _('Access level'))
+    name        = models.CharField(max_length = 100, blank = True, verbose_name = _('Kind person of access name'))
     image       = models.ImageField(upload_to = 'images/person', blank = True, verbose_name = _('Image'))
     description = models.TextField(blank = True, verbose_name = _('Description'))
     
@@ -43,10 +43,10 @@ class KindPersonOfAccess(models.Model):
         if hasattr(self.image, 'url'):
             return self.image.url
         else:
-            return ""
+            return settings.STATIC_URL + "images/noimage.jpg"
     
     def __unicode__(self):
-        return self.name
+        return self.access_level + ": " + self.name
     
 class KindOfConstruction(models.Model):
     name = models.CharField(max_length = 100, unique = True, verbose_name = _('Kind of construction name'))
@@ -61,7 +61,7 @@ class KindOfConstruction(models.Model):
         if hasattr(self.image, 'url'):
             return self.image.url
         else:
-            return ""
+            return settings.STATIC_URL + "images/noimage.jpg"
     
     def __unicode__(self):
         return self.name
@@ -74,7 +74,7 @@ class Ward(models.Model):
         verbose_name_plural = _("Wards")
 
 WARD_CHOICE = ()
-#WARD_CHOICE = Ward.objects.all().values_list()
+WARD_CHOICE = Ward.objects.all().values_list()
 
 class Construction(models.Model):   
     name               = models.CharField(max_length = 100, unique = True, verbose_name = _('Construction name'))
@@ -82,13 +82,13 @@ class Construction(models.Model):
     number_or_alley    = models.CharField(max_length = 20, blank = True, verbose_name = _('Number or alley'))
     street             = models.ForeignKey(Street, verbose_name = _('Street'))
     ward               = models.CharField(max_length = 10, default = '', blank = True, choices = WARD_CHOICE,verbose_name = _('Ward'))
-    district           = models.ForeignKey(District, verbose_name = _('District'))
-    location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
+    district           = models.ForeignKey(District, verbose_name = _('District'))    
     link_image         = models.ImageField(upload_to = 'images/place', blank = True, verbose_name = _('Image'))
     description_detail = models.TextField(blank = True, verbose_name = _('Description detail'))
     description_other  = models.TextField(blank = True, verbose_name = _('Description other'))
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
     kind_of_person        = models.ManyToManyField(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
+    location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
     
     class Meta:
         verbose_name = _("Construction")

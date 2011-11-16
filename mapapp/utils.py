@@ -5,7 +5,6 @@ import re
 import csv
 import codecs
 import cStringIO
-from mapapp.models import Ward
 
 def unsigned_vi(vi_str):
     if isinstance(vi_str, unicode): 
@@ -19,7 +18,28 @@ def unsigned_vi(vi_str):
     replaces_dict = dict(zip(text_to_find, text_to_replace))
     return r.sub(lambda m: replaces_dict[m.group(0)], vi_str)
     
-
+def get_address(address):
+    lst = address.split(',')
+    result = []
+    result.append(lst[0][:lst[0].find(' ')])
+    result.append(lst[0][lst[0].find(' ') + 1 :])
+    if lst[1].find(u'Phường'.encode('utf-8')) <> -1:
+        result.append(lst[1].strip())
+    else:
+        result.append('')
+        if lst[1].find(u'Quận'.encode('utf-8')) <> -1:
+            result.append(lst[1].strip()) 
+            
+    if len(lst) > 2:
+        if lst[2].find(u'Quận'.encode('utf-8')) <> -1:
+            result.append(lst[2].strip())
+    
+    return result
+    
+    
+    
+    
+    pass
 class UTF8Recoder:
     """
     Iterator that reads an encoded stream and reencodes the input to UTF-8

@@ -4,7 +4,7 @@ import json
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from mapapp.models import KindPersonOfAccess, KindOfConstruction, Construction, Street, District,\
-    Comment
+    Comment, Ward
 from django.utils import translation
 from django.http import HttpResponse, Http404
 from mapapp.forms import CommentForm, InputFile
@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
-from mapapp.utils import unsigned_vi
+from mapapp.utils import unsigned_vi, get_address
 import xlrd
 
 
@@ -150,7 +150,7 @@ def upload_file(request):
     flag = 0
     if request.method == "POST":
         data_form = InputFile(request.POST, request.FILES)
-        if request.FILES['data'].content_type != 'application/excel':
+        if request.FILES['data'].content_type != 'application/vnd.ms-excel':
             messages.append("Invalid file input!!")
             flag = 3
         elif request.user.is_superuser:            
@@ -160,30 +160,33 @@ def upload_file(request):
                     fo.write(line)
                 fo.close()
                 reader = xlrd.open_workbook('temp.xls', encoding_override = 'utf-8').sheets()[0]                
-                for row in (1, reader.nrow + 1):                                
+                for line in range(1, reader.nrows):
+                    row = reader.row(line)                             
                     try: 
                         try:
-                            obj = Construction.objects.get(Q(name_vi = row[0]) | Q(name_en = row[1]))
+                            obj = Construction.objects.get(Q(name_vi = row[0].value) | Q(name_en = row[1].value))
                         except:
                             obj = Construction() 
-                        if len(row) != 11:
-                            raise Exception()                           
-                        obj.name = row[0]
-                        obj.name_vi = row[0]
-                        obj.unsigned_name = unsigned_vi(row[0])
-                        obj.name_en = row[1]
-                        obj.number_or_alley = row[2]
-                        obj.street = Street.objects.get_or_create(name = row[3])[0]
-                        obj.district = District.objects.get_or_create(name = row[4])[0]
-                        obj.description_detail = row[5]
-                        obj.description_detail_vi = row[5]
-                        obj.description_detail_en = row[6]
-                        obj.description_other = row[7]
-                        obj.description_other_vi = row[7]
-                        obj.description_other_en = row[8]
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[9])[0]
+                         
+                        obj.name_vi = row[0].value
+                        obj.unsigned_name = unsigned_vi(row[0].value)
+                        obj.name_en = row[1].value
+                        address = get_address(row[2].value.encode('utf-8'))
+                        obj.number_or_alley = address[0]
+                        obj.street = Street.objects.get_or_create(name = address[1])[0]
+                        if address[2] != '':
+                            ward = Ward.objects.get_or_create(name = address[2])[0]
+                            obj.ward = ward.id                            
+                        obj.district = District.objects.get_or_create(name = address[3])[0]
+                        obj.description_detail = row[3].value
+                        obj.description_detail_vi = row[3].value
+                        obj.description_detail_en = row[4].value
+                        obj.description_other = row[5].value
+                        obj.description_other_vi = row[5].value
+                        obj.description_other_en = row[6].value
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value)[0]
                         obj.save()
-                        obj.access_level.add(KindPersonOfAccess.objects.get_or_create(name = row[10])[0])
+                        obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(row[8].value))[0])
                         obj.save()
                         if flag == 0:
                             flag = 2                        
