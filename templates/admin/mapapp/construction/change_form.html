@@ -1,7 +1,13 @@
 {% extends "admin/change_form.html" %}
-
 {% load tagslib %}
 
+
 {% block after_field_sets %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language=vi&region=vn">
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/admin_map.js"></script>
+
   {% if object_id %}{% display_comments object_id %}{% endif %}
 {% endblock %}
