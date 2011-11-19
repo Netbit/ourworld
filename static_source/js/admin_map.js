@@ -22,25 +22,6 @@ function initialize() {
 	});
 }
 
-function animate_marker(map,location)
-{	
-	var marker;
-	marker = new google.maps.Marker({
-    	map:map,
-    	draggable:true,
-    	animation: google.maps.Animation.DROP,
-    	position: location,
-  	});
-  	google.maps.event.addListener(marker, 'click', function(marker) {
-  		if (marker.getAnimation() != null) {
-  			marker.setAnimation(null);
-  		} else {
-    		marker.setAnimation(google.maps.Animation.BOUNCE);
-  		}
-  	});
-  	return marker;
-}
-
 function search_place()
 {
 	var marker;
