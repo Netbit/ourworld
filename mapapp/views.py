@@ -176,7 +176,7 @@ def upload_file(request):
                         obj.street = Street.objects.get_or_create(name = address[1])[0]
                         if address[2] != '':
                             ward = Ward.objects.get_or_create(name = address[2])[0]
-                            obj.ward = ward.id                            
+                            obj.ward = ward                            
                         obj.district = District.objects.get_or_create(name = address[3])[0]
                         obj.description_detail = row[3].value
                         obj.description_detail_vi = row[3].value
@@ -191,7 +191,7 @@ def upload_file(request):
                         if flag == 0:
                             flag = 2                        
                     except:
-                        messages.append(str(row))
+                        messages.append(str(line))
                         flag = 1
                         continue
         else:

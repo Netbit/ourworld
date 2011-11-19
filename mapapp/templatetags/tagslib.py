@@ -17,3 +17,8 @@ def display_comments(object_id):
 @register.filter
 def nickname(email):
     return email.split('@')[0]
+
+@register.filter
+def get_pos(object_id):
+    con = Construction.objects.get(id = object_id)
+    return con.location

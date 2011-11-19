@@ -72,16 +72,16 @@ class Ward(models.Model):
     class Meta:
         verbose_name = _("Ward")
         verbose_name_plural = _("Wards")
-
-WARD_CHOICE = ()
-WARD_CHOICE = Ward.objects.all().values_list()
+        
+    def __unicode__(self):
+        return self.name
 
 class Construction(models.Model):   
     name               = models.CharField(max_length = 100, unique = True, verbose_name = _('Construction name'))
     unsigned_name      = models.CharField(max_length = 80, verbose_name = _('Construction unsigned name'))
     number_or_alley    = models.CharField(max_length = 20, blank = True, verbose_name = _('Number or alley'))
     street             = models.ForeignKey(Street, verbose_name = _('Street'))
-    ward               = models.CharField(max_length = 10, default = '', blank = True, choices = WARD_CHOICE,verbose_name = _('Ward'))
+    ward               = models.ForeignKey(Ward, blank = True, null = True, verbose_name = _('Ward'))
     district           = models.ForeignKey(District, verbose_name = _('District'))    
     link_image         = models.ImageField(upload_to = 'images/place', blank = True, verbose_name = _('Image'))
     description_detail = models.TextField(blank = True, verbose_name = _('Description detail'))
