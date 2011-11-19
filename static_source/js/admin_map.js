@@ -55,6 +55,7 @@ function search_place()
 	}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			map.setCenter(results[0].geometry.location);
+			document.getElementById('id_location').value = "(" + results[0].geometry.location.Pa + "," + results[0].geometry.location.Qa + ")";
 			marker = new google.maps.Marker({
 				map : map,
     			draggable:true,
