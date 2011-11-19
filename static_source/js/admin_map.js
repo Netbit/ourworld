@@ -1,6 +1,6 @@
 function initialize() {
 	var address;
-
+	
 	address = "Ho Chi Minh City";
 	geocoder = new google.maps.Geocoder();
 	bounds = new google.maps.LatLngBounds();
@@ -9,12 +9,60 @@ function initialize() {
 	}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			var myOptions = {
-				zoom : 20,
+				zoom : 16,
 				center : results[0].geometry.location,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
 			map = new google.maps.Map(document.getElementById("my_map"),
 					myOptions);
+		} else {
+			alert("Geocode was not successful for the following reason: "
+					+ status);
+		}
+	});
+}
+
+function animate_marker(map,location)
+{	
+	var marker;
+	marker = new google.maps.Marker({
+    	map:map,
+    	draggable:true,
+    	animation: google.maps.Animation.DROP,
+    	position: location,
+  	});
+  	google.maps.event.addListener(marker, 'click', function(marker) {
+  		if (marker.getAnimation() != null) {
+  			marker.setAnimation(null);
+  		} else {
+    		marker.setAnimation(google.maps.Animation.BOUNCE);
+  		}
+  	});
+  	return marker;
+}
+
+function search_place()
+{
+	var marker;
+	var address;
+	address = document.getElementById('id_number_or_alley').value + " "
+			  + $("#id_street option:selected").text() + " "
+			  + document.getElementById('id_ward').value + " "
+			  + document.getElementById('id_district').value + " ,Ho Chi Minh" ;
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({
+		'address' : address
+	}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			map.setCenter(results[0].geometry.location);
+			marker = new google.maps.Marker({
+				map : map,
+    			draggable:true,
+				position : results[0].geometry.location,
+				address : results[0].formatted_address
+			});
+			google.maps.event.addListener(marker, 'click', function() {				
+			});
 		} else {
 			alert("Geocode was not successful for the following reason: "
 					+ status);
@@ -37,5 +85,7 @@ $(document).ready(function() {
 	
 	
 	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
+	$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
 	initialize();
 });
+
