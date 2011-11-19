@@ -61,7 +61,8 @@ function search_place()
 				position : results[0].geometry.location,
 				address : results[0].formatted_address
 			});
-			google.maps.event.addListener(marker, 'click', function() {				
+			google.maps.event.addListener(marker, 'drag', function() {	
+				document.getElementById('id_location').value = "(" + marker.position.Pa + "," + marker.position.Qa + ")";
 			});
 		} else {
 			alert("Geocode was not successful for the following reason: "
