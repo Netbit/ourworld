@@ -12,10 +12,12 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
-from mapapp.utils import unsigned_vi, get_address
+from mapapp.utils import unsigned_vi, get_address, LocationGetter
 import xlrd
 
-
+#t = LocationGetter()
+#t.start()
+    
 def home(request):
     lang = request.GET.get("lang", '')
     
@@ -146,6 +148,8 @@ def get_kind_person_contruction(request):
 @login_required
 @csrf_protect 
 def upload_file(request):
+    request.session['django_language'] = 'vi'
+    translation.activate('vi')
     messages = []
     flag = 0
     if request.method == "POST":

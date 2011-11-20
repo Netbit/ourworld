@@ -5,6 +5,13 @@ import re
 import csv
 import codecs
 import cStringIO
+from mapapp.models import Construction
+import json
+import urllib2
+from django.utils.http import urlquote
+import threading
+from threading import Thread
+from timeit import Timer
 
 def unsigned_vi(vi_str):
     if isinstance(vi_str, unicode): 
@@ -36,7 +43,30 @@ def get_address(address):
     
     return result
     
+def get_location():
+    con_lst = Construction.objects.filter(location = '')[:1]
+    if len(con_lst) != 0:
+        con = con_lst[0]
+        address = con.get_address()
+        req = json.load(urllib2.urlopen('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + 
+                        urlquote(address)))
+        if req['status'] == u'OK':
+            lat = req['results'][0]['geometry']['location']['lat']
+            lng = req['results'][0]['geometry']['location']['lng']
+            con.location = '(%s, %s)' % (str(lat), str(lng))
+            con.save()
+            f = open('d:/test.txt', 'a')
+            f.write('(%s, %s)\n' % (str(lat), str(lng)))
+            f.close()
+            #time.sleep(2)
+
+class LocationGetter(threading.Thread):
+    def __init__(self):
+        Thread.__init__(self,)
     
+    def run(self):
+        t = Timer("get_location()", "from mapapp.utils import get_location")
+        t.repeat(1)    
     
     
     pass

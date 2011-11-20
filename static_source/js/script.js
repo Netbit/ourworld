@@ -31,6 +31,9 @@ function initialize() {
 		if (status == google.maps.GeocoderStatus.OK) {
 			var myOptions = {
 				zoom : 13,
+				streetViewControl: true,
+				panControl: true,
+				overviewMapControl: true,
 				center : results[0].geometry.location,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
