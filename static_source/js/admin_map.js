@@ -1,4 +1,5 @@
-var last_address = "";
+var marker = null;
+var map;
 
 function initialize() {
 	var address;
@@ -26,17 +27,14 @@ function initialize() {
 
 function search_place()
 {
-	var marker;
 	var address;
 	address = document.getElementById('id_number_or_alley').value + " "
 			  + $("#id_street option:selected").text() + " "
 			  + document.getElementById('id_ward').value + " "
 			  + document.getElementById('id_district').value + " ,Ho Chi Minh" ;
-	if (address == last_address)
-	{
-		return 0;
+	if (null != marker) {
+		marker.setMap(null);
 	}
-	last_address = address;
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({
 		'address' : address
