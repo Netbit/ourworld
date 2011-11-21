@@ -36,7 +36,9 @@ class AdminComment(admin.ModelAdmin):
 class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
     list_filter = ('kind_of_construction',  'street', 'district')
-    search_fields = ('name',)
+    search_fields = ('name_vi', 'unsigned_name', 'street__name', 'street__unsigned_name', 
+                     'ward__name', 'district__name', 'district__unsigned_name', 
+                     'kind_of_construction__name_vi')
     save_on_top = True
     
 class AdminKindPersonOfAccess(admin.ModelAdmin):

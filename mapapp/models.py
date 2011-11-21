@@ -104,7 +104,10 @@ class Construction(models.Model):
         return self.name
     
     def get_address(self):
-        return '%s %s, Ho Chi Minh' % (self.number_or_alley, self.street)
+        if self.ward:
+            return u'%s %s, %s, Ho Chi Minh' % (self.number_or_alley, self.street, self.ward.name)
+        else:
+            return '%s %s, Ho Chi Minh' % (self.number_or_alley, self.street)
 
 STATUS_CHOICES = (
     ('p', _('Published')),

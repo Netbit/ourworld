@@ -15,8 +15,8 @@ from django.contrib.auth.decorators import login_required
 from mapapp.utils import unsigned_vi, get_address, LocationGetter
 import xlrd
 
-#t = LocationGetter()
-#t.start()
+t = LocationGetter()
+t.start()
     
 def home(request):
     lang = request.GET.get("lang", '')

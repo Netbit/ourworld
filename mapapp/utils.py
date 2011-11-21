@@ -12,6 +12,7 @@ from django.utils.http import urlquote
 import threading
 from threading import Thread
 from timeit import Timer
+import time
 
 def unsigned_vi(vi_str):
     if isinstance(vi_str, unicode): 
@@ -44,9 +45,8 @@ def get_address(address):
     return result
     
 def get_location():
-    con_lst = Construction.objects.filter(location = '')[:1]
-    if len(con_lst) != 0:
-        con = con_lst[0]
+    con_lst = Construction.objects.filter(location = '')
+    for con in con_lst:
         address = con.get_address()
         req = json.load(urllib2.urlopen('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + 
                         urlquote(address)))
@@ -58,7 +58,7 @@ def get_location():
             f = open('d:/test.txt', 'a')
             f.write('(%s, %s)\n' % (str(lat), str(lng)))
             f.close()
-            #time.sleep(2)
+            time.sleep(1)
 
 class LocationGetter(threading.Thread):
     def __init__(self):
