@@ -193,9 +193,10 @@ function deleteOverlays() {
 	}
 }
 
-$(document).ready(function() {	
-
-	get_kind_of_person_construction()
+$(document).ready(function() {
+	
+	$('#load').hide();
+	get_kind_of_person_construction();
 	//add_image_slider(kind_person, "left_slider");
 	
 	try {
@@ -309,16 +310,56 @@ function changedLanguage(value) {
 	window.open('?lang=' + value, '_self', false);
 }
 
+function set_location(id, address, location) {
+	var pos = new google.maps.LatLng(location[0], location[1]);
+	var marker = new google.maps.Marker({
+		map : map,
+		id: id,
+		address : address,
+		position : pos,
+		zIndex: Math.ceil(Math.random()*1111)
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+		var contentString = "";
+		$.getJSON("/info/" + marker.id + "/?address=" + address, function(data) {
+			if (data.results.hasOwnProperty('details')) {
+				contentString += "<div>";
+				if (data.results.image != "") {
+					contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
+				}
+				contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
+								 "<span class='place_address'>" + marker.address + "</span><br>" +
+								 "<span class='place_details'>" + data.results.details + "</span><br>" +
+								 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
+				infowindow = new google.maps.InfoWindow({
+					content : contentString
+				});
+				infowindow.open(map, marker);
+			}					
+		});				
+	});
+	markersArray.push(marker);
+}
+
 function kind_construction_filter(id) {	
 	$.ajax({                                                                  
-		url : "/filter/kind_construction/?id1=" + id, 
+		url : "/filter/kind_construction/?id1=" + id,
+		beforeSend : function() {
+			$('#load').show();
+		},
     	success : function(data) {
     		deleteOverlays();
     		for (var i = 0; i < data.results.length; i++) {
-    			search_place(data.results[i].id, data.results[i].address);
+    			if (data.results[i].location.length == 0) {
+					search_place(data.results[i].id, data.results[i].address);
+    			} else {
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    			}    			
     		}
+    		$('#load').hide();
     	},                                                                    
-    	error : function(e) {  
+    	error : function(e) { 
+    		$('#load').hide();
     		alert(gettext("Couldn't get the data!"));                                                 
     	}                                                                     
     });   
@@ -327,23 +368,41 @@ function kind_construction_filter(id) {
 function kind_person_filter(id) {	
 	$.ajax({                                                                  
 		url : "/filter/kind_person/?id1=" + id, 
+		beforeSend : function() {
+			$('#load').show();
+		},
     	success : function(data) {
     		deleteOverlays();
     		for (var i = 0; i < data.results.length; i++) {
-    			search_place(data.results[i].id, data.results[i].address);
-    		}    	},                                                                        	error : function(e) {                                                     		alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
+    			if (data.results[i].location.length == 0) {
+					search_place(data.results[i].id, data.results[i].address);
+    			} else {
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    			}
+    		}
+    		$('#load').hide();    	},                                                                        	error : function(e) {         
+    		$('#load').hide();    		alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
 }
 
 function district_filter(id_district) {
 	$.ajax({
 		url : "/filter/district/?id_district=" + id_district,
+		beforeSend : function() {
+			$('#load').show();
+		},
 		success : function(data) {
 			deleteOverlays();
     		for (var i = 0; i < data.results.length; i++) {
-    			search_place(data.results[i].id, data.results[i].address);
+    			if (data.results[i].location.length == 0) {
+					search_place(data.results[i].id, data.results[i].address);
+    			} else {
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    			}
     		}
+    		$('#load').hide();
 		},
 		error : function(e) {
+			$('#load').hide();
 			alert(gettext("Couldn't get the data!"));
 		}
 	});
