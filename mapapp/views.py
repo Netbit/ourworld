@@ -60,7 +60,8 @@ def get_detail_of_construction(id_object):
                         "id"      : str(con.id),
                         "name"    : con.name,
                         "details" : con.description_detail.replace('\n', '<br>'),
-                        "image"   : con.get_image()
+                        "image"   : con.get_image(),
+                        "location" : con.get_location()
                     }  
                }
     except:
@@ -89,15 +90,15 @@ def kind_person_filter(request):
     id1 = request.GET.get('id1', '')
     lst = Construction.objects.filter(kind_of_person = id1)
     mData = {}           
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in lst]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
     
-    return HttpResponse(json.dumps(mData), mimetype = "application/json")
+    return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 
 def kind_construction_filter(request):
     id1 = request.GET['id1']
     lst = Construction.objects.filter(kind_of_construction = id1)
     mData = {}           
-    mData["results"] = mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in lst]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
@@ -105,9 +106,9 @@ def district_filter(request):
     id_district  = request.GET['id_district']
     construction = Construction.objects.filter(district = id_district ) 
     mData          = {}
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address()} for obj in construction]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location()} for obj in construction]
     
-    return HttpResponse(json.dumps(mData), mimetype = "application/json")
+    return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 
 @csrf_protect    
 def get_details(request, id_object):
