@@ -28,12 +28,17 @@ function initialize() {
 function search_place()
 {
 	var address;
-	address = document.getElementById('id_number_or_alley').value + " "
-			  + $("#id_street option:selected").text() + " "
-			  + document.getElementById('id_ward').value + " "
-			  + document.getElementById('id_district').value + " ,Ho Chi Minh" ;
+	var district;
+	
+	district = document.getElementById('id_district').value;
+	address  = document.getElementById('id_number_or_alley').value + " "
+			   + $("#id_street option:selected").text() + " "
+			   + document.getElementById('id_ward').value + " "
+			   + district + " ,Ho Chi Minh" ;
 	if (null != marker) {
 		marker.setMap(null);
+	} else if ( ""== district) {
+		return 0;
 	}
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({
@@ -59,6 +64,7 @@ function search_place()
 }
 
 $(document).ready(function() {
+	
 	$('#id_name').css('width', '400px');
 	$('#id_name_vi').css('width', '400px');
 	$('#id_name_en').css('width', '400px');
@@ -71,9 +77,13 @@ $(document).ready(function() {
 	$('#id_location').css('width', '400px');
 	$('#id_location').attr('readonly', true);
 	
+	$('#id_district').change(function () {
+    	search_place();  
+    });
 	
 	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
-	$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
+	//$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
 	initialize();
+	search_place();
 });
 
