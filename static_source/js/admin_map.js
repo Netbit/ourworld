@@ -37,7 +37,7 @@ function search_place()
 			   + district + " ,Ho Chi Minh" ;
 	if (null != marker) {
 		marker.setMap(null);
-	} else if ( ""== district) {
+	} else if ("" == district) {
 		return 0;
 	}
 	geocoder = new google.maps.Geocoder();
@@ -82,7 +82,7 @@ $(document).ready(function() {
     });
 	
 	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
-	//$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
+	$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
 	initialize();
 	search_place();
 });
