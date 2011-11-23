@@ -3,6 +3,8 @@ var map;
 
 function initialize() {
 	var address;
+	var location;
+	var pos;
 	
 	address = "Ho Chi Minh City";
 	geocoder = new google.maps.Geocoder();
@@ -23,14 +25,6 @@ function initialize() {
 					+ status);
 		}
 	});
-}
-
-function search_place()
-{
-	var address;
-	var district;
-	var location;
-	var pos;
 	
 	location = document.getElementById('id_location').value;
 	
@@ -48,7 +42,14 @@ function search_place()
 			draggable:true,
 			position : pos,
 		});		
-	} //else {		
+	}
+}
+
+function search_place()
+{
+//	var address;
+//	var district;
+//		
 //		district = document.getElementById('id_district').value;
 //		address  = document.getElementById('id_number_or_alley').value + " "
 //				   + $("#id_street option:selected").text() + " "
@@ -78,7 +79,6 @@ function search_place()
 //						+ status);
 //			}
 //		});
-//	}
 }
 
 $(document).ready(function() {
@@ -95,13 +95,8 @@ $(document).ready(function() {
 	$('#id_location').css('width', '400px');
 	$('#id_location').attr('readonly', true);
 	
-	$('#id_district').change(function () {
-    	search_place();  
-    });
-	
 	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
 	$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
 	initialize();
-	search_place();
 });
 
