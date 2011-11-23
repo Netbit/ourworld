@@ -50,13 +50,11 @@ function initialize() {
 function search_place()
 {
 	var address;
-	var district;
-		
-	district = document.getElementById('id_district').value;
+	
 	address  = document.getElementById('id_number_or_alley').value + " "
-			   + $("#id_street option:selected").text() + " "
-			   + document.getElementById('id_ward').value + " "
-			   + district + " Ho Chi Minh" ;
+			   + $("#id_street option:selected").text() + ", "
+			   + $("#id_ward option:selected").text() + ", "
+			   + $("#id_district option:selected").text() + ", Ho Chi Minh" ;
 	if (null != marker) {
 		marker.setMap(null);
 	}
