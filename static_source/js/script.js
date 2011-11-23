@@ -158,12 +158,7 @@ function callback(response, status) {
 }
 
 function addMarker(location, isDestination) {
-	var icon;
-	if (isDestination) {
-		icon = destinationIcon;
-	} else {
-		icon = originIcon;
-	}
+
 	geocoder.geocode({
 		'address' : location
 	}, function(results, status) {
@@ -173,7 +168,6 @@ function addMarker(location, isDestination) {
 			var marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location,
-				icon : icon,
 				zIndex: Math.ceil(Math.random()*1111)
 			});
 			markersArray.push(marker);
@@ -518,17 +512,17 @@ function get_kind_of_person_construction()
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
     		}	
- 			htmlString = create_element("", "left_prev_button", "/static/images/left_prev_button.png", 
+ 			htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
  											"image_slider", null)	
  						+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
- 						+ create_element("", "left_next_button", "/static/images/left_next_button.png", 
+ 						+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
  											"image_slider", null);	
  			$('#left').html(htmlString);
  			
- 			htmlString = create_element("", "right_prev_button", "/static/images/right_prev_button.png", 
+ 			htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
 								"image_slider", null)	
 						+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
-						+ create_element("", "right_next_button", "/static/images/right_next_button.png", 
+						+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
 											"image_slider", null);	
  			$('#right').html(htmlString);
 		},
