@@ -55,10 +55,7 @@ def get_location():
             lng = req['results'][0]['geometry']['location']['lng']
             con.location = '(%s, %s)' % (str(lat), str(lng))
             con.save()
-            f = open('d:/test.txt', 'a')
-            f.write('(%s, %s)\n' % (str(lat), str(lng)))
-            f.close()
-            time.sleep(1)
+        time.sleep(3600*12)       
 
 class LocationGetter(threading.Thread):
     def __init__(self):
