@@ -339,10 +339,10 @@ function kind_construction_filter(id) {
 	$.ajax({                                                                  
 		url : "/filter/kind_construction/?id1=" + id,
 		beforeSend : function() {
-			$('#load').show();
+			deleteOverlays();
+			$('#load').show();			
 		},
-    	success : function(data) {
-    		deleteOverlays();
+    	success : function(data) {    		
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
@@ -363,10 +363,10 @@ function kind_person_filter(id) {
 	$.ajax({                                                                  
 		url : "/filter/kind_person/?id1=" + id, 
 		beforeSend : function() {
-			$('#load').show();
+			deleteOverlays();
+			$('#load').show();			
 		},
-    	success : function(data) {
-    		deleteOverlays();
+    	success : function(data) {    		
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
@@ -382,10 +382,10 @@ function district_filter(id_district) {
 	$.ajax({
 		url : "/filter/district/?id_district=" + id_district,
 		beforeSend : function() {
-			$('#load').show();
-		},
-		success : function(data) {
 			deleteOverlays();
+			$('#load').show();						
+		},
+		success : function(data) {			
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
