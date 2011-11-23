@@ -55,7 +55,8 @@ def get_location():
             lng = req['results'][0]['geometry']['location']['lng']
             con.location = '(%s, %s)' % (str(lat), str(lng))
             con.save()
-        time.sleep(3600*12)       
+            
+    time.sleep(3600*12)       
 
 class LocationGetter(threading.Thread):
     def __init__(self):
