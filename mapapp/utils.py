@@ -58,7 +58,7 @@ def get_address(address):
 
 @transaction.autocommit    
 def get_location():
-    logger.info("\t\t ****************** Starting get location at " + datetime.datetime.now() + " ******************")
+    logger.info("\t\t ****************** Starting get location at " + str(datetime.datetime.now()) + " ******************")
     con_lst = Construction.objects.filter(location = '')
     for con in con_lst:
         address = con.get_address()
@@ -71,7 +71,7 @@ def get_location():
             con.save()
             logger.info(address + ': (%s, %s)' % (str(lat), str(lng)))
             
-    logger.info("\t\t ****************** End get location at " + datetime.datetime.now() + " ******************")        
+    logger.info("\t\t ****************** End get location at " + str(datetime.datetime.now()) + " ******************")        
     time.sleep(3600)       
 
 class LocationGetter(threading.Thread):

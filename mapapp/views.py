@@ -205,7 +205,7 @@ def upload_file(request):
                         if flag == 0:
                             flag = 2                        
                     except Exception as e:
-                        logger.error("Row " + str(line + 1) + ": " + e)
+                        logger.error("Row " + str(line + 1) + ": " + str(e))
                         messages.append(str(line + 1))
                         flag = 1
                         continue
