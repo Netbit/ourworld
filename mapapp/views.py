@@ -14,6 +14,10 @@ from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
 from mapapp.utils import unsigned_vi, get_address, LocationGetter
 import xlrd
+from django.db import transaction
+import logging
+
+logger = logging.getLogger(__name__)
 
 t = LocationGetter()
 t.start()
@@ -148,6 +152,7 @@ def get_kind_person_contruction(request):
 
 @login_required
 @csrf_protect 
+@transaction.commit_on_success
 def upload_file(request):
     request.session['django_language'] = 'vi'
     translation.activate('vi')
@@ -169,34 +174,39 @@ def upload_file(request):
                     row = reader.row(line)                             
                     try: 
                         try:
-                            obj = Construction.objects.get(Q(name_vi = row[0].value) | Q(name_en = row[1].value))
+                            obj = Construction.objects.get(Q(name_vi = row[0].value.strip()) | Q(name_en = row[1].value.strip()))
                         except:
                             obj = Construction() 
-                         
-                        obj.name_vi = row[0].value
+
+                        obj.name_vi = row[0].value.strip()
                         obj.unsigned_name = unsigned_vi(row[0].value)
-                        obj.name_en = row[1].value
+                        obj.name_en = row[1].value.strip()
                         address = get_address(row[2].value.encode('utf-8'))
-                        obj.number_or_alley = address[0]
-                        obj.street = Street.objects.get_or_create(name = address[1])[0]
+                        obj.number_or_alley = address[0].strip()
+                        obj.street = Street.objects.get_or_create(name = address[1].strip())[0]
                         if address[2] != '':
-                            ward = Ward.objects.get_or_create(name = address[2])[0]
+                            ward = Ward.objects.get_or_create(name = address[2].strip())[0]
                             obj.ward = ward                            
-                        obj.district = District.objects.get_or_create(name = address[3])[0]
+                        obj.district = District.objects.get_or_create(name = address[3].strip())[0]
                         obj.description_detail = row[3].value
                         obj.description_detail_vi = row[3].value
                         obj.description_detail_en = row[4].value
                         obj.description_other = row[5].value
                         obj.description_other_vi = row[5].value
                         obj.description_other_en = row[6].value
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value)[0]
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value.strip())[0]
                         obj.save()
-                        obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(row[8].value))[0])
-                        obj.save()
+                        value = str(row[8].value)
+                        if value.find(".") != -1:
+                            value = value[:value.find(".")]            
+                        if value != '':
+                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value.strip()))[0])
+                            obj.save()
                         if flag == 0:
                             flag = 2                        
-                    except:
-                        messages.append(str(line))
+                    except Exception as e:
+                        logger.error("Row " + str(line + 1) + ": " + e)
+                        messages.append(str(line + 1))
                         flag = 1
                         continue
         else:

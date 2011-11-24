@@ -13,6 +13,12 @@ import threading
 from threading import Thread
 from timeit import Timer
 import time
+from django.db import transaction
+import logging
+import datetime
+
+
+logger = logging.getLogger(__name__)
 
 def unsigned_vi(vi_str):
     if isinstance(vi_str, unicode): 
@@ -35,16 +41,24 @@ def get_address(address):
         result.append(lst[1].strip())
     else:
         result.append('')
-        if lst[1].find(u'Quận'.encode('utf-8')) <> -1:
-            result.append(lst[1].strip()) 
+        try:
+            if lst[1].find(u'Quận'.encode('utf-8')) <> -1:
+                result.append(lst[1].strip())
+        except:
+            raise Exception("Missed District") 
             
     if len(lst) > 2:
-        if lst[2].find(u'Quận'.encode('utf-8')) <> -1:
-            result.append(lst[2].strip())
+        try:
+            if lst[2].find(u'Quận'.encode('utf-8')) <> -1:
+                result.append(lst[2].strip())
+        except:
+            raise Exception("Missed District")
     
     return result
-    
+
+@transaction.autocommit    
 def get_location():
+    logger.info("\t\t ****************** Starting get location at " + datetime.datetime.now() + " ******************")
     con_lst = Construction.objects.filter(location = '')
     for con in con_lst:
         address = con.get_address()
@@ -55,8 +69,10 @@ def get_location():
             lng = req['results'][0]['geometry']['location']['lng']
             con.location = '(%s, %s)' % (str(lat), str(lng))
             con.save()
+            logger.info(address + ': (%s, %s)' % (str(lat), str(lng)))
             
-    time.sleep(3600*12)       
+    logger.info("\t\t ****************** End get location at " + datetime.datetime.now() + " ******************")        
+    time.sleep(3600)       
 
 class LocationGetter(threading.Thread):
     def __init__(self):

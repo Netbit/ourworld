@@ -20,6 +20,9 @@ DATABASES = {
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {
+            'timeout': 120,
+        }
     }
 }
 
@@ -156,7 +159,11 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': os.path.join(PROJECT_DIR, 'sys.log')
+        },
     },
     'loggers': {
         'django.request': {
@@ -164,5 +171,16 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'mapapp': {
+            'handlers': ['logfile'],
+            'level': 'INFO', # Or maybe INFO or DEBUG
+            'propogate': False
+        },
     }
 }
+
