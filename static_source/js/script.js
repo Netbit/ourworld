@@ -449,41 +449,41 @@ function image_slider(id_button)
 	case "left_next_button":
 		start_image_person++;
 		end_image_person++;
-		if (kind_person.length == end_image_person) {
-			//disable left_next button
-			disable_button(id_button);
-		}
-		htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
+		htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
+										"image_slider", null)	
+					+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
+					+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
+										"image_slider", null);	
 		$('#left').html(htmlString);
 		break;
 	case "left_prev_button":
 		start_image_person--;
 		end_image_person--;
-		if (0 == start_image_person) {
-			//disable left_prev_button
-			disable_button(id_button);
-		}
-		htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
+		htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
+										"image_slider", null)	
+					+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
+					+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
+										"image_slider", null);	
 		$('#left').html(htmlString);
 		break;
 	case "right_next_button":
 		start_image_con++;
 		end_image_con++;
-		if (kind_construction.length == end_image_con) {
-			//disable right_next_button
-			disable_button(id_button);
-		}
-		htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
+		htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
+							"image_slider", null)	
+					+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
+					+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
+										"image_slider", null);	
 		$('#right').html(htmlString);
 		break;
 	case "right_prev_button":
 		start_image_con--;
 		end_image_con--;
-		if (0 == start_image_con) {
-			//disable left_prev_button
-			disable_button(id_button);
-		}
-		htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right_slider");
+		htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
+							"image_slider", null)	
+					+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
+					+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
+										"image_slider", null);	
 		$('#right').html(htmlString);
 		break;
 	}
