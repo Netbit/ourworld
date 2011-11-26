@@ -184,9 +184,12 @@ def upload_file(request):
                         address = get_address(row[2].value.encode('utf-8'))
                         obj.number_or_alley = address[0].strip()
                         obj.street = Street.objects.get_or_create(name = address[1].strip())[0]
-                        if address[2] != '':
-                            ward = Ward.objects.get_or_create(name = address[2].strip())[0]
-                            obj.ward = ward                            
+                        try :
+                            if address[2] != '':
+                                ward = Ward.objects.get_or_create(name = address[2].strip())[0]
+                                obj.ward = ward 
+                        except:
+                            logger.error(row[2].value + ": Missed District")                           
                         obj.district = District.objects.get_or_create(name = address[3].strip())[0]
                         obj.description_detail = row[3].value
                         obj.description_detail_vi = row[3].value
