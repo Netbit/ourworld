@@ -526,7 +526,8 @@ function get_kind_of_person_construction()
  			if (kind_person.length > end_image_person) {
  				htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
  											"image_slider", null);
- 			}   				
+ 			}   
+ 							
  			$('#left').html(htmlString);
  			
  			htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right");
@@ -534,6 +535,7 @@ function get_kind_of_person_construction()
  				htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
 											"image_slider", null);	
  			}  	
+ 			
  			$('#right').html(htmlString);
 		},
 		error : function(e) {
