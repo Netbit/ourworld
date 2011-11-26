@@ -13,7 +13,10 @@ var end_image_con;		//End index to show images of kind of construction
 
 kind_person       	= new Array();
 kind_construction 	= new Array();
-
+start_image_person  = 0;
+end_image_person    = 3;
+start_image_con 	= 0;
+end_image_con		= 3;
 
 function initialize() {
 	var address;
@@ -510,10 +513,6 @@ function get_kind_of_person_construction()
 			var i;
 			var htmlString;
 			htmlString = "";
-			start_image_person  = 0;
-			end_image_person    = 3;
-			start_image_con 	= 0;
-			end_image_con		= 3;
     		for (i = 0; i < data.kind_person.length; i++) {
     			kind_person.push(data.kind_person[i]);
     		}
@@ -522,14 +521,19 @@ function get_kind_of_person_construction()
     			kind_construction.push(data.kind_construction[i]);
     		}	
     		
+    		if (end_image_person > kind_person.length) {
+    			end_image_person = kind_person.length;
+    		}
  			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
  			if (kind_person.length > end_image_person) {
  				htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
  											"image_slider", null);
- 			}   
- 							
+ 			}   				
  			$('#left').html(htmlString);
  			
+ 			if (end_image_con > kind_construction.length) {
+    			end_image_person = kind_construction.length;
+    		}
  			htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right");
  			if (kind_construction.length > end_image_con) {
  				htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
