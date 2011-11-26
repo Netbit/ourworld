@@ -14,9 +14,9 @@ var end_image_con;		//End index to show images of kind of construction
 kind_person       	= new Array();
 kind_construction 	= new Array();
 start_image_person  = 0;
-end_image_person    = 3;
+end_image_person    = 6;
 start_image_con 	= 0;
-end_image_con		= 3;
+end_image_con		= 6;
 
 function initialize() {
 	var address;

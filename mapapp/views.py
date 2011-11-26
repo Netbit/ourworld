@@ -49,10 +49,11 @@ def home(request):
     
 def lookup(request):
     if request.GET.has_key(u'q'):
-        value = request.GET[u'q']
-        lst = Street.objects.filter(Q(name__contains = value) | Q(unsgined_name__contains = value))
-        
+        value = request.GET[u'q']        
+        lst = Street.objects.filter(Q(name__contains = value) | Q(unsigned_name__contains = value))
+        district_ls = District.objects.filter(Q(name__contains = value) | Q(unsigned_name__contains = value))      
         data = "\n".join([i.name for i in lst])
+        data += "\n".join([i.name for i in district_ls])
         return HttpResponse(data)
     else:
         return HttpResponse("\n")
@@ -174,36 +175,37 @@ def upload_file(request):
                     row = reader.row(line)                             
                     try: 
                         try:
-                            obj = Construction.objects.get(Q(name_vi = row[0].value.strip()) | Q(name_en = row[1].value.strip()))
+                            obj = Construction.objects.get(Q(name_vi = row[0].value.strip("\xff ")) | Q(name_en = row[1].value.strip("\xff ")))
                         except:
                             obj = Construction() 
 
-                        obj.name_vi = row[0].value.strip()
-                        obj.unsigned_name = unsigned_vi(row[0].value)
-                        obj.name_en = row[1].value.strip()
+                        obj.name_vi = row[0].value.strip("\xff \n")
+                        obj.unsigned_name = unsigned_vi(row[0].value.strip("\xff \n"))
+                        obj.name_en = row[1].value.strip("\xff \n")
                         address = get_address(row[2].value.encode('utf-8'))
-                        obj.number_or_alley = address[0].strip()
-                        obj.street = Street.objects.get_or_create(name = address[1].strip())[0]
-                        try :
-                            if address[2] != '':
-                                ward = Ward.objects.get_or_create(name = address[2].strip())[0]
-                                obj.ward = ward 
+                        obj.number_or_alley = address[0].strip("\xff \n")
+                        obj.street = Street.objects.get_or_create(name = address[1].strip("\xff \n"), unsigned_name = unsigned_vi(address[1].strip("\xff \n")))[0]
+                        if address[2] != '':
+                            ward = Ward.objects.get_or_create(name = address[2].strip("\xff \n"))[0]
+                            obj.ward = ward 
+                        try :                            
+                            obj.district = District.objects.get_or_create(name = address[3].strip("\xff \n"), unsigned_name = unsigned_vi(address[3].strip("\xff \n")))[0]
                         except:
                             logger.error(row[2].value + ": Missed District")                           
-                        obj.district = District.objects.get_or_create(name = address[3].strip())[0]
+                        
                         obj.description_detail = row[3].value
                         obj.description_detail_vi = row[3].value
                         obj.description_detail_en = row[4].value
                         obj.description_other = row[5].value
                         obj.description_other_vi = row[5].value
                         obj.description_other_en = row[6].value
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value.strip())[0]
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value.strip("\xff \n"))[0]
                         obj.save()
                         value = str(row[8].value)
                         if value.find(".") != -1:
                             value = value[:value.find(".")]            
                         if value != '':
-                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value.strip()))[0])
+                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value.strip("\xff \n")))[0])
                             obj.save()
                         if flag == 0:
                             flag = 2                        
