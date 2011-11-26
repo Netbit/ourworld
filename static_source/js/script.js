@@ -13,10 +13,7 @@ var end_image_con;		//End index to show images of kind of construction
 
 kind_person       	= new Array();
 kind_construction 	= new Array();
-start_image_person  = 0;
-end_image_person    = 3;
-start_image_con 	= 0;
-end_image_con		= 3;
+
 
 function initialize() {
 	var address;
@@ -444,24 +441,28 @@ function create_element(name, id, image, func, id_div)
 
 function image_slider(id_button)
 {		
-	var htmlString;
+	var htmlString = "";
 	switch (id_button) {
 	case "left_next_button":
 		start_image_person++;
 		end_image_person++;
 		htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
-										"image_slider", null)	
-					+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
-					+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
+										"image_slider", null)
+					+ create_image_list(kind_person, start_image_person, end_image_person, "left");  
+		if (end_image_person < kind_person.length) {
+			htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
 										"image_slider", null);	
+		}
 		$('#left').html(htmlString);
 		break;
 	case "left_prev_button":
 		start_image_person--;
 		end_image_person--;
-		htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
-										"image_slider", null)	
-					+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
+		if (0 < start_image_person) {
+			htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
+										"image_slider", null);
+		}
+		htmlString += create_image_list(kind_person, start_image_person, end_image_person, "left")  
 					+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
 										"image_slider", null);	
 		$('#left').html(htmlString);
@@ -470,18 +471,22 @@ function image_slider(id_button)
 		start_image_con++;
 		end_image_con++;
 		htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
-							"image_slider", null)	
-					+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
-					+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
+										"image_slider", null)
+					+ create_image_list(kind_construction, start_image_con, end_image_con, "right");  
+		if (end_image_con < kind_construction.length) {
+			htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
 										"image_slider", null);	
+		}
 		$('#right').html(htmlString);
 		break;
 	case "right_prev_button":
 		start_image_con--;
 		end_image_con--;
-		htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
-							"image_slider", null)	
-					+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
+		if (0 < start_image_con) {
+			htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
+										"image_slider", null);
+		}
+		htmlString += create_image_list(kind_construction, start_image_con, end_image_con, "left")  
 					+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
 										"image_slider", null);	
 		$('#right').html(htmlString);
@@ -505,6 +510,10 @@ function get_kind_of_person_construction()
 			var i;
 			var htmlString;
 			htmlString = "";
+			start_image_person  = 0;
+			end_image_person    = 3;
+			start_image_con 	= 0;
+			end_image_con		= 3;
     		for (i = 0; i < data.kind_person.length; i++) {
     			kind_person.push(data.kind_person[i]);
     		}
@@ -512,18 +521,19 @@ function get_kind_of_person_construction()
     		for (i = 0; i < data.kind_construction.length; i++) {
     			kind_construction.push(data.kind_construction[i]);
     		}	
- 			htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
- 											"image_slider", null)	
- 						+ create_image_list(kind_person, start_image_person, end_image_person, "left")  
- 						+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
- 											"image_slider", null);	
+    		
+ 			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
+ 			if (kind_person.length > end_image_person) {
+ 				htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
+ 											"image_slider", null);
+ 			}   				
  			$('#left').html(htmlString);
  			
- 			htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
-								"image_slider", null)	
-						+ create_image_list(kind_construction, start_image_con, end_image_con, "right")  
-						+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
+ 			htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right");
+ 			if (kind_construction.length > end_image_con) {
+ 				htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
 											"image_slider", null);	
+ 			}  	
  			$('#right').html(htmlString);
 		},
 		error : function(e) {
