@@ -41,18 +41,12 @@ def get_address(address):
         result.append(lst[1].strip())
     else:
         result.append('')
-        try:
-            if lst[1].find(u'Quận'.encode('utf-8')) <> -1:
-                result.append(lst[1].strip())
-        except:
-            raise Exception("Missed District") 
-            
+        if lst[1].find(u'Quận'.encode('utf-8')) <> -1:
+            result.append(lst[1].strip())
     if len(lst) > 2:
-        try:
             if lst[2].find(u'Quận'.encode('utf-8')) <> -1:
                 result.append(lst[2].strip())
-        except:
-            raise Exception("Missed District")
+
     
     return result
 
@@ -60,17 +54,19 @@ def get_address(address):
 def get_location():
     logger.info("\t\t ****************** Starting get location at " + str(datetime.datetime.now()) + " ******************")
     con_lst = Construction.objects.filter(location = '')
-    for con in con_lst:
-        address = con.get_address()
-        req = json.load(urllib2.urlopen('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + 
-                        urlquote(address)))
-        if req['status'] == u'OK':
-            lat = req['results'][0]['geometry']['location']['lat']
-            lng = req['results'][0]['geometry']['location']['lng']
-            con.location = '(%s, %s)' % (str(lat), str(lng))
-            con.save()
-            logger.info(address + ': (%s, %s)' % (str(lat), str(lng)))
-            
+    try:
+        for con in con_lst:
+            address = con.get_address()
+            req = json.load(urllib2.urlopen('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + 
+                            urlquote(address)))
+            if req['status'] == u'OK':
+                lat = req['results'][0]['geometry']['location']['lat']
+                lng = req['results'][0]['geometry']['location']['lng']
+                con.location = '(%s, %s)' % (str(lat), str(lng))
+                con.save()
+                logger.info(address + ': (%s, %s)' % (str(lat), str(lng)))
+    except:
+        pass            
     logger.info("\t\t ****************** End get location at " + str(datetime.datetime.now()) + " ******************")        
     time.sleep(3600)       
 
