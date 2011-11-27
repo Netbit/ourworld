@@ -196,8 +196,8 @@ msgstr "Ẩn các bình luận đã chọn"
 msgid "Mark selected comments as published"
 msgstr "Hiển thị các bình luận đã chọn"
 
-msgid "Import data from a CSV file"
-msgstr "Nhập dữ liệu từ file CSV"
+msgid "Import Data"
+msgstr "Nhập data từ file Excel"
 
 msgid "Map site admin"
 msgstr "Trang quản trị bản đồ tiếp cận"
@@ -210,3 +210,12 @@ msgstr "Lỗi phát sinh tại dòng"
 
 msgid "Update data successful."
 msgstr "Cập nhật dữ liệu thành công."
+
+msgid "All Districts"
+msgstr "Tất cả các Quận"
+
+msgid "Import data from Excel file"
+msgstr "Nhập dữ liệu từ file Excel"
+
+msgid "Input your file"
+msgstr "Chọn file Excel"

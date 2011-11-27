@@ -198,7 +198,7 @@ msgstr ""
 msgid "Mark selected comments as published"
 msgstr ""
 
-msgid "Import data from a CSV file"
+msgid "Import Data"
 msgstr ""
 
 msgid "Upload"
@@ -215,3 +215,13 @@ msgstr ""
 
 msgid "Update data successful."
 msgstr ""
+
+msgid "All Districts"
+msgstr ""
+
+msgid "Import data from Excel file"
+msgstr ""
+
+msgid "Input your file"
+msgstr ""
+
