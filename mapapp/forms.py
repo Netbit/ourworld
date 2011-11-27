@@ -6,5 +6,5 @@ class CommentForm(forms.Form):
     content = forms.CharField(label = _('Content'), widget=forms.Textarea(attrs={'placeholder': _('Your comment here...')}))
     
 class InputFile(forms.Form):
-    data = forms.FileField(label = 'Input your file')   
+    data = forms.FileField(label = _('Input your file'))   
     
