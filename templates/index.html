@@ -32,8 +32,9 @@
 				{% endfor %}
 			</select>
 			<select id='district' class="district">
+				<option value="">{% trans 'All Districts' %}</option>
 				{% for dis in districts %}
-					{% if "Quan 1" != dis.name %}
+					{% if "Quan 1" != dis.unsigned_name %}
 						<option value="{{ dis.id }}"> {{ dis.name }} </option>
 					{% else %}
 						<option value="{{ dis.id }}" selected> {{ dis.name }} </option>
