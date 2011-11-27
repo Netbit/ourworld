@@ -7,13 +7,13 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AdminDistrict(admin.ModelAdmin):
-    list_display = ['name', 'description']
+    list_display = ['name', 'description',]
     list_filter = ('name',)
     search_fields = ('name',)
     list_per_page = 20
     
 class AdminKindOfConstruction(admin.ModelAdmin):
-    list_display = ['name','description']
+    list_display = ['name','description', 'show_image']
     list_filter = ('name',)
     search_fields = ('name',)
     
@@ -42,7 +42,7 @@ class AdminConstruction(admin.ModelAdmin):
     save_on_top = True
     
 class AdminKindPersonOfAccess(admin.ModelAdmin):
-    list_display = ['access_level', 'name','description']
+    list_display = ['access_level', 'name','description' , 'show_image']
     list_filter = ('name',)
     search_fields = ('name',)
     

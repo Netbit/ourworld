@@ -45,6 +45,15 @@ class KindPersonOfAccess(models.Model):
         else:
             return settings.STATIC_URL + "images/noimage.jpg"
     
+    def show_image(self):
+        if hasattr(self.image, 'url'):
+            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + self.image.url + "' title='" + self.name + "'></span>"
+        else:
+            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + "images/noimage.jpg' title='" + self.name + "'></span>"
+        return img
+    show_image.allow_tags = True
+    show_image.short_description = _('Image')
+    
     def __unicode__(self):
         return self.access_level + ": " + self.name
     
@@ -62,6 +71,15 @@ class KindOfConstruction(models.Model):
             return self.image.url
         else:
             return settings.STATIC_URL + "images/noimage.jpg"
+    
+    def show_image(self):
+        if hasattr(self.image, 'url'):
+            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + self.image.url + "' title='" + self.name + "'></span>"
+        else:
+            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + "images/noimage.jpg' title='" + self.name + "'></span>"
+        return img
+    show_image.allow_tags = True
+    show_image.short_description = _('Image')
     
     def __unicode__(self):
         return self.name
