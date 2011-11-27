@@ -10,7 +10,6 @@ class AdminDistrict(admin.ModelAdmin):
     list_display = ['name', 'description',]
     list_filter = ('name',)
     search_fields = ('name',)
-    list_per_page = 20
     
 class AdminKindOfConstruction(admin.ModelAdmin):
     list_display = ['name','description', 'show_image']
@@ -21,7 +20,7 @@ class AdminComment(admin.ModelAdmin):
     list_display = ['email', 'content', 'date_format', 'construction', 'get_status']
     list_filter = ('comment_date', 'construction', 'status')
     search_fields = ('construction__name', 'construction__unsigned_name')
-    list_per_page = 25
+    list_per_page = 50
     
     actions = ['make_published', 'make_hidden']
 
@@ -40,6 +39,7 @@ class AdminConstruction(admin.ModelAdmin):
                      'ward__name', 'district__name', 'district__unsigned_name', 
                      'kind_of_construction__name_vi')
     save_on_top = True
+    list_per_page = 200
     
 class AdminKindPersonOfAccess(admin.ModelAdmin):
     list_display = ['access_level', 'name','description' , 'show_image']
