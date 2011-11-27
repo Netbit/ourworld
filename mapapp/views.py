@@ -93,7 +93,11 @@ def get_information(request, id_object):
 
 def kind_person_filter(request):
     id1 = request.GET.get('id1', '')
-    lst = Construction.objects.filter(kind_of_person = id1)
+    id2 = request.GET['district_id']
+    if id2 == '':
+        lst = Construction.objects.filter(kind_of_person = id1)
+    else:
+        lst = Construction.objects.filter(kind_of_person = id1, district = id2)
     mData = {}           
     mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
     
@@ -101,7 +105,12 @@ def kind_person_filter(request):
 
 def kind_construction_filter(request):
     id1 = request.GET['id1']
-    lst = Construction.objects.filter(kind_of_construction = id1)
+    id2 = request.GET['district_id']
+    if id2 == '':
+        lst = Construction.objects.filter(kind_of_construction = id1)
+    else:
+        lst = Construction.objects.filter(kind_of_construction = id1, district = id1)
+        
     mData = {}           
     mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
     
@@ -109,7 +118,10 @@ def kind_construction_filter(request):
 
 def district_filter(request):
     id_district  = request.GET['id_district']
-    construction = Construction.objects.filter(district = id_district ) 
+    if id_district != '':
+        construction = Construction.objects.filter(district = id_district ) 
+    else:
+        construction = Construction.objects.all()
     mData          = {}
     mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location()} for obj in construction]
     
@@ -175,21 +187,21 @@ def upload_file(request):
                     row = reader.row(line)                             
                     try: 
                         try:
-                            obj = Construction.objects.get(Q(name_vi = row[0].value.strip("\xff ")) | Q(name_en = row[1].value.strip("\xff ")))
+                            obj = Construction.objects.get(Q(name_vi = row[0].value) | Q(name_en = row[1].value))
                         except:
                             obj = Construction() 
 
-                        obj.name_vi = row[0].value.strip("\xff \n")
-                        obj.unsigned_name = unsigned_vi(row[0].value.strip("\xff \n"))
-                        obj.name_en = row[1].value.strip("\xff \n")
+                        obj.name_vi = row[0].value
+                        obj.unsigned_name = unsigned_vi(row[0].value)
+                        obj.name_en = row[1].value
                         address = get_address(row[2].value.encode('utf-8'))
-                        obj.number_or_alley = address[0].strip("\xff \n")
-                        obj.street = Street.objects.get_or_create(name = address[1].strip("\xff \n"), unsigned_name = unsigned_vi(address[1].strip("\xff \n")))[0]
+                        obj.number_or_alley = address[0]
+                        obj.street = Street.objects.get_or_create(name = address[1], unsigned_name = unsigned_vi(address[1]))[0]
                         if address[2] != '':
-                            ward = Ward.objects.get_or_create(name = address[2].strip("\xff \n"))[0]
+                            ward = Ward.objects.get_or_create(name = address[2])[0]
                             obj.ward = ward 
                         try :                            
-                            obj.district = District.objects.get_or_create(name = address[3].strip("\xff \n"), unsigned_name = unsigned_vi(address[3].strip("\xff \n")))[0]
+                            obj.district = District.objects.get_or_create(name = address[3], unsigned_name = unsigned_vi(address[3]))[0]
                         except:
                             logger.error(row[2].value + ": Missed District")                           
                         
@@ -199,13 +211,13 @@ def upload_file(request):
                         obj.description_other = row[5].value
                         obj.description_other_vi = row[5].value
                         obj.description_other_en = row[6].value
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value.strip("\xff \n"))[0]
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value)[0]
                         obj.save()
                         value = str(row[8].value)
                         if value.find(".") != -1:
                             value = value[:value.find(".")]            
                         if value != '':
-                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value.strip("\xff \n")))[0])
+                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value))[0])
                             obj.save()
                         if flag == 0:
                             flag = 2                        
