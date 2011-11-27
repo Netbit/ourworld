@@ -47,7 +47,7 @@ class KindPersonOfAccess(models.Model):
     
     def show_image(self):
         if hasattr(self.image, 'url'):
-            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + self.image.url + "' title='" + self.name + "'></span>"
+            img = "<span style='margin: auto'><img height='20' src='" + self.image.url + "' title='" + self.name + "'></span>"
         else:
             img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + "images/noimage.jpg' title='" + self.name + "'></span>"
         return img
@@ -74,7 +74,7 @@ class KindOfConstruction(models.Model):
     
     def show_image(self):
         if hasattr(self.image, 'url'):
-            img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + self.image.url + "' title='" + self.name + "'></span>"
+            img = "<span style='margin: auto'><img height='20' src='" + self.image.url + "' title='" + self.name + "'></span>"
         else:
             img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + "images/noimage.jpg' title='" + self.name + "'></span>"
         return img
