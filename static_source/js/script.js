@@ -335,9 +335,9 @@ function set_location(id, address, location) {
 	markersArray.push(marker);
 }
 
-function kind_construction_filter(id) {	
+function kind_construction_filter(id) {		
 	$.ajax({                                                                  
-		url : "/filter/kind_construction/?id1=" + id,
+		url : "/filter/kind_construction/?id1=" + id + "&district_id=" + $('#district').val(),
 		beforeSend : function() {
 			deleteOverlays();
 			$('#load').show();			
@@ -361,7 +361,7 @@ function kind_construction_filter(id) {
 
 function kind_person_filter(id) {	
 	$.ajax({                                                                  
-		url : "/filter/kind_person/?id1=" + id, 
+		url : "/filter/kind_person/?id1=" + id  + "&district_id=" + $('#district').val(), 
 		beforeSend : function() {
 			deleteOverlays();
 			$('#load').show();			
