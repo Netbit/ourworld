@@ -156,7 +156,7 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-msgid "Comment date"
+msgid "Date"
 msgstr ""
 
 msgid "Comments"

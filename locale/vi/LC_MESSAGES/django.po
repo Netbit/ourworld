@@ -154,8 +154,8 @@ msgstr "Tên phường"
 msgid "Content"
 msgstr "Nội dung"
 
-msgid "Comment date"
-msgstr "Ngày bình luận"
+msgid "Date"
+msgstr "Ngày"
 
 msgid "Comments"
 msgstr "Danh sách các Bình luận"
