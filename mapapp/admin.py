@@ -17,9 +17,9 @@ class AdminKindOfConstruction(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminComment(admin.ModelAdmin):
-    list_display = ['email', 'content', 'date_format', 'construction', 'get_status']
-    list_filter = ('comment_date', 'construction', 'status')
-    search_fields = ('construction__name', 'construction__unsigned_name')
+    list_display = ['email', 'get_content', 'date_format', 'construction', 'get_status']
+    list_filter = ('comment_date', 'status')
+    search_fields = ('email', 'construction__name', 'construction__unsigned_name')
     list_per_page = 50
     
     actions = ['make_published', 'make_hidden']
@@ -34,7 +34,7 @@ class AdminComment(admin.ModelAdmin):
     
 class AdminConstruction(admin.ModelAdmin):
     list_display = ['name', 'kind_of_construction', 'street', 'district',]
-    list_filter = ('kind_of_construction',  'street', 'district')
+    list_filter = ('district', 'kind_of_construction',  'street', )
     search_fields = ('name_vi', 'unsigned_name', 'street__name', 'street__unsigned_name', 
                      'ward__name', 'district__name', 'district__unsigned_name', 
                      'kind_of_construction__name_vi')

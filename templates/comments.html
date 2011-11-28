@@ -3,5 +3,5 @@
 {% for comment in comments %}
 <div class="form-row">
 </div>
-<blockquote>{{ comment.content|linebreaksbr }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>
+{% autoescape off %}<blockquote>{{ comment.content|linebreaksbr|urlize }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>{% endautoescape %}
 {% endfor %}

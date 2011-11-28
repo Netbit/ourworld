@@ -79,7 +79,7 @@ class KindOfConstruction(models.Model):
             img = "<span style='margin: auto'><img height='20' src='" + settings.STATIC_URL + "images/noimage.jpg' title='" + self.name + "'></span>"
         return img
     show_image.allow_tags = True
-    show_image.short_description = _('Image')
+    show_image.short_description = ''
     
     def __unicode__(self):
         return self.name
@@ -141,14 +141,14 @@ STATUS_CHOICES = (
 class Comment(models.Model):
     email = models.EmailField(verbose_name = _('Email'))
     content = models.TextField(verbose_name = _('Content'),  unique = True)
-    comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Comment date'))
+    comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Date'))
     construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
     status = models.CharField(max_length = 2, default = 'h', verbose_name = _('Status'), choices = STATUS_CHOICES)
     
     def date_format(self):
         return date(self.comment_date, 'd-m-Y H:i:s')
     date_format.admin_order_field = 'comment_date'
-    date_format.short_description = _('Comment date')
+    date_format.short_description = _('Date')
     
     def get_status(self):
         if self.status == "p":
@@ -158,7 +158,13 @@ class Comment(models.Model):
         return status
     get_status.allow_tags = True
     get_status.admin_order_field = 'status'
-    get_status.short_description = _('Status')
+    get_status.short_description = ''
+    
+    def get_content(self):
+        return self.content
+    get_content.allow_tags = True
+    get_content.admin_order_field = 'content'
+    get_content.short_description = _('Content')
     
     def __unicode__(self):
         return self.content

@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class='content'>
-	{{ con.description_detail|linebreaksbr }}
+	{% autoescape off %}{{ con.description_detail|linebreaksbr|urlize }}{% endautoescape %}
 </div>
 <div class="form-row"></div>
 <div id='comment-form'>
@@ -53,10 +53,12 @@
 	{% endif %}
 </div>
 <div>
+	
 	{% for comment in comments %}
-		<blockquote>{{ comment.content|linebreaksbr }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email|nickname }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>
+		{% autoescape off %}<blockquote>{{ comment.content|linebreaksbr|urlize }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email|nickname }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>{% endautoescape %}
 		<div class="form-row"></div>
 	{% endfor %}
+	
 </div>
 <script type="text/javascript" src="{{ STATIC_URL }}js/details.js"></script>
 </body>

@@ -16,6 +16,7 @@ from mapapp.utils import unsigned_vi, get_address, LocationGetter
 import xlrd
 from django.db import transaction
 import logging
+from django.template.defaultfilters import urlize
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +65,7 @@ def get_detail_of_construction(id_object):
         return { "results" : {
                         "id"      : str(con.id),
                         "name"    : con.name,
-                        "details" : con.description_detail.replace('\n', '<br>'),
+                        "details" : urlize(con.description_detail.replace('\n', '<br>')),
                         "image"   : con.get_image(),
                         "location" : con.get_location()
                     }  
