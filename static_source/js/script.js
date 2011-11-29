@@ -10,6 +10,8 @@ var start_image_person; //Start index to show images of kind of person
 var end_image_person;   //End index to show images of kind of person
 var start_image_con;	//Start index to show images of kind of construction
 var end_image_con;		//End index to show images of kind of construction
+var directionsService;
+var directionsDisplay;
 
 kind_person       	= new Array();
 kind_construction 	= new Array();
@@ -22,6 +24,8 @@ function initialize() {
 	var address;
 	var district;
 
+	directionsService = new google.maps.DirectionsService();
+	directionsDisplay = new google.maps.DirectionsRenderer();
 	address = "Ho Chi Minh City";
 	geocoder = new google.maps.Geocoder();
 	bounds = new google.maps.LatLngBounds();
@@ -136,13 +140,13 @@ function callback(response, status) {
 		var destinations = response.destinationAddresses;
 		var outputDiv = document.getElementById('content');
 		outputDiv.innerHTML = '';
-		deleteOverlays();
+		//deleteOverlays();
 
 		for ( var i = 0; i < origins.length; i++) {
 			var results = response.rows[i].elements;
-			addMarker(origins[i], false);
+			//addMarker(origins[i], false);
 			for ( var j = 0; j < results.length; j++) {
-				addMarker(destinations[j], true);
+				//addMarker(destinations[j], true);
 				outputDiv.innerHTML += "<b>" + gettext("From") + "</b>: "
 						+ origins[i] + "<br>" + "<b>" + gettext("To")
 						+ "</b>: " + destinations[j] + "<br>" + "<b>"
@@ -223,15 +227,15 @@ $(document).ready(function() {
 			destination : end,
 			travelMode : google.maps.TravelMode.DRIVING
 		};
-		var directionsService = new google.maps.DirectionsService();
-		var directionsDisplay = new google.maps.DirectionsRenderer();
+//		var directionsService = new google.maps.DirectionsService();
+//		var directionsDisplay = new google.maps.DirectionsRenderer();
 		directionsDisplay.setMap(map);
 
 		directionsService.route(request, function(result, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(result);
 				calculateDistances(start, end);
-				showSteps(result);
+				//showSteps(result);
 			}
 		});
 	});
