@@ -96,29 +96,29 @@ function search_place(id, address) {
 	});
 }
 
-function showSteps(directionResult) {
-	// For each step, place a marker, and add the text to the marker's
-	// info window. Also attach the marker to an array so we
-	// can keep track of it and remove it when calculating new
-	// routes.
-	var myRoute = directionResult.routes[0].legs[0];
+//function showSteps(directionResult) {
+//	// For each step, place a marker, and add the text to the marker's
+//	// info window. Also attach the marker to an array so we
+//	// can keep track of it and remove it when calculating new
+//	// routes.
+//	var myRoute = directionResult.routes[0].legs[0];
+//
+//	for ( var i = 0; i < myRoute.steps.length; i++) {
+//		var marker = new google.maps.Marker({
+//			position : myRoute.steps[i].start_point,
+//			map : map
+//		});
+//		attachInstructionText(marker, myRoute.steps[i].instructions);
+//		markerArray[i] = marker;
+//	}
+//}
 
-	for ( var i = 0; i < myRoute.steps.length; i++) {
-		var marker = new google.maps.Marker({
-			position : myRoute.steps[i].start_point,
-			map : map
-		});
-		attachInstructionText(marker, myRoute.steps[i].instructions);
-		markerArray[i] = marker;
-	}
-}
-
-function attachInstructionText(marker, text) {
-	google.maps.event.addListener(marker, 'click', function() {
-		stepDisplay.setContent(text);
-		stepDisplay.open(map, marker);
-	});
-}
+//function attachInstructionText(marker, text) {
+//	google.maps.event.addListener(marker, 'click', function() {
+//		stepDisplay.setContent(text);
+//		stepDisplay.open(map, marker);
+//	});
+//}
 
 function calculateDistances(origin, destination) {
 	var service = new google.maps.DistanceMatrixService();
@@ -140,13 +140,10 @@ function callback(response, status) {
 		var destinations = response.destinationAddresses;
 		var outputDiv = document.getElementById('content');
 		outputDiv.innerHTML = '';
-		//deleteOverlays();
 
 		for ( var i = 0; i < origins.length; i++) {
 			var results = response.rows[i].elements;
-			//addMarker(origins[i], false);
 			for ( var j = 0; j < results.length; j++) {
-				//addMarker(destinations[j], true);
 				outputDiv.innerHTML += "<b>" + gettext("From") + "</b>: "
 						+ origins[i] + "<br>" + "<b>" + gettext("To")
 						+ "</b>: " + destinations[j] + "<br>" + "<b>"
@@ -161,41 +158,41 @@ function callback(response, status) {
 	}
 }
 
-function addMarker(location, isDestination) {
-
-	geocoder.geocode({
-		'address' : location
-	}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK) {
-			bounds.extend(results[0].geometry.location);
-			map.fitBounds(bounds);
-			var marker = new google.maps.Marker({
-				map : map,
-				position : results[0].geometry.location,
-				zIndex: Math.ceil(Math.random()*1111)
-			});
-			markersArray.push(marker);
-		} else {
-			alert("Geocode was not successful for the following reason: "
-					+ status);
-		}
-	});
-}
+//function addMarker(location, isDestination) {
+//
+//	geocoder.geocode({
+//		'address' : location
+//	}, function(results, status) {
+//		if (status == google.maps.GeocoderStatus.OK) {
+//			bounds.extend(results[0].geometry.location);
+//			map.fitBounds(bounds);
+//			var marker = new google.maps.Marker({
+//				map : map,
+//				position : results[0].geometry.location,
+//				zIndex: Math.ceil(Math.random()*1111)
+//			});
+//			markersArray.push(marker);
+//		} else {
+//			alert("Geocode was not successful for the following reason: "
+//					+ status);
+//		}
+//	});
+//}
 
 function deleteOverlays() {
+	directionsDisplay.setMap(null);
 	if (markersArray) {
 		for (i in markersArray) {
 			markersArray[i].setMap(null);
 		}
 		markersArray.length = 0;
-	}
+	}	
 }
 
 $(document).ready(function() {
 	
 	$('#load').hide();
 	get_kind_of_person_construction();
-	//add_image_slider(kind_person, "left_slider");
 	
 	try {
 		$("#lang").msDropDown();
@@ -227,15 +224,12 @@ $(document).ready(function() {
 			destination : end,
 			travelMode : google.maps.TravelMode.DRIVING
 		};
-//		var directionsService = new google.maps.DirectionsService();
-//		var directionsDisplay = new google.maps.DirectionsRenderer();
-		directionsDisplay.setMap(map);
 
 		directionsService.route(request, function(result, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(result);
+				directionsDisplay.setMap(map);				
 				calculateDistances(start, end);
-				//showSteps(result);
 			}
 		});
 	});
