@@ -309,7 +309,7 @@ function set_location(id, address, location) {
 		id: id,
 		address : address,
 		position : pos,
-		zIndex: Math.ceil(Math.random()*1111)
+		zIndex: Math.round(pos.lat()*-100000)<<5
 	});
 	google.maps.event.addListener(marker, 'click', function() {
 		var contentString = "";
