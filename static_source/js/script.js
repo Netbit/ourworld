@@ -418,25 +418,31 @@ function create_image_list(images, start, end, id_div)
 	return htmlString;
 }
 
+function showTooltip(id, msg) {
+	$("#" + id).tooltip({ 
+	    bodyHandler: function() { 
+	        return "<span>" + msg + "</span>"; 
+	    }, 
+	    showURL: false 
+	});
+}
+
 function create_element(name, id, image, func, id_div)
 {
 	var htmlString;
 	htmlString = "<span class='icon'>";
 	if ("left" == id_div) {
 		htmlString += "<a onclick=" + func + "('" + id + "')>"
-					  + "<img id='p" + id + "'";
-	} else if ("right" == id_div) {
-		htmlString += "<a onclick=" + func + "('" + id + "')>"
-					  + "<img id='p" + id + "'";	
+					  + "<img id='l" + id + "'";
 	} else {
 		htmlString += "<a onclick=" + func + "('" + id + "')>"
-			  + "<img id='" + id + "'";
+					  + "<img id='r" + id + "'";	
 	}
-	htmlString += " title='" + name + "'"  
+	htmlString += " onmouseover=\"showTooltip(this.id,'" + name + "')\""  
 				   + " height='32'" 
 				   + " alt='" + name + "'" 
 				   + " src='" + image + "'>"
-				   + "</img></a></span>";
+				   + "</a></span>";
 	return htmlString;
 }
 
