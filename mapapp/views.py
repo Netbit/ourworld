@@ -195,7 +195,7 @@ def upload_file(request):
                         obj.name_vi = row[0].value
                         obj.unsigned_name = unsigned_vi(row[0].value)
                         obj.name_en = row[1].value
-                        address = get_address(row[2].value.encode('utf-8'))
+                        address = get_address(row[2].value.encode('utf-8').strip())
                         obj.number_or_alley = address[0]
                         obj.street = Street.objects.get_or_create(name = address[1], unsigned_name = unsigned_vi(address[1]))[0]
                         if address[2] != '':
