@@ -37,7 +37,7 @@ function initialize() {
 					position : pos,
 				});	
 				google.maps.event.addListener(marker, 'drag', function() {	
-					document.getElementById('id_location').value = "(" + marker.position.Pa + "," + marker.position.Qa + ")";
+					document.getElementById('id_location').value = marker.position.toString();
 				});	
 			}			
 		} else {
@@ -64,7 +64,7 @@ function search_place()
 	}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			map.setCenter(results[0].geometry.location);
-			document.getElementById('id_location').value = "(" + results[0].geometry.location.Pa + "," + results[0].geometry.location.Qa + ")";
+			document.getElementById('id_location').value = results[0].geometry.location.toString();
 			marker = new google.maps.Marker({
 				map : map,
     			draggable:true,
@@ -72,7 +72,7 @@ function search_place()
 				address : results[0].formatted_address
 			});
 			google.maps.event.addListener(marker, 'drag', function() {	
-				document.getElementById('id_location').value = "(" + marker.position.Pa + "," + marker.position.Qa + ")";
+				document.getElementById('id_location').value = marker.position.toString();
 			});
 		} else {
 			alert("Geocode was not successful for the following reason: "
