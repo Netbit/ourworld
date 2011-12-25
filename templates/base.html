@@ -58,6 +58,15 @@
     	pageTracker._initData();
     	pageTracker._trackPageview();
     </script>
+    <div style="display: none;">
+		{% for obj in kind_person %}
+			<img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}">
+		{% endfor %}
+		
+		{% for obj in kind_construction %}
+			<img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}">
+		{% endfor %}
+	</div>
 	<div class="footer">
 		Designed by SPS Group
 	</div>

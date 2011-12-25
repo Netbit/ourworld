@@ -36,11 +36,11 @@ def home(request):
         request.session['django_language'] = lang
         
     translation.activate(lang)        
-    #kind_person       = KindOfPerson.objects.all()
+    kind_person       = KindPersonOfAccess.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()
                    
-    return render_to_response('index.html', {#'kind_person'       : kind_person,
+    return render_to_response('index.html', {'kind_person'       : kind_person,
                                              'kind_construction' : kind_construction,
                                              'districts'         : districts,
                                              }, 
