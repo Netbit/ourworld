@@ -286,6 +286,18 @@ body {
 		background:url(../images/btn_next.gif) no-repeat 0 0;	
 		}								
 
-/* // slider */	
+/* // slider */
+
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #fefefe;
+	padding: 3px;
+	opacity: 0.85;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+#tooltip h3, #tooltip div { margin: 0; }
 
 
