@@ -225,3 +225,8 @@ msgstr ""
 msgid "Input your file"
 msgstr ""
 
+msgid "Loading..."
+msgstr ""
+
+msgid "Icon"
+msgstr ""

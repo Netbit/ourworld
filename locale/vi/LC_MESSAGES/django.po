@@ -219,3 +219,6 @@ msgstr "Nhập dữ liệu từ file Excel"
 
 msgid "Input your file"
 msgstr "Chọn file Excel"
+
+msgid "Loading..."
+msgstr "Đang tải dữ liệu..."
