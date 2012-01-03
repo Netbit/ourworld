@@ -107,14 +107,22 @@ class Construction(models.Model):
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
     kind_of_person        = models.ManyToManyField(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
     location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
+    icon               = models.ImageField(upload_to = 'images/icon', blank = True, verbose_name = _('Icon'))
     
     class Meta:
         verbose_name = _("Construction")
         verbose_name_plural = _("Constructions")
         
     def get_image(self):
+        '''Get image of construciton'''
         if hasattr(self.link_image, 'url'):
             return self.link_image.url
+        else:
+            return ""
+        
+    def get_icon(self):
+        if hasattr(self.icon, 'url'):
+            return self.icon.url
         else:
             return ""
     

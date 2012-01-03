@@ -67,7 +67,8 @@ def get_detail_of_construction(id_object):
                         "name"    : con.name,
                         "details" : urlize(con.description_detail.replace('\n', '<br>')),
                         "image"   : con.get_image(),
-                        "location" : con.get_location()
+                        "location" : con.get_location(),
+                        "icon"    : con.get_icon()
                     }  
                }
     except:
@@ -100,7 +101,7 @@ def kind_person_filter(request):
     else:
         lst = Construction.objects.filter(kind_of_person = id1, district = id2)
     mData = {}           
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in lst]
     
     return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 
@@ -113,7 +114,7 @@ def kind_construction_filter(request):
         lst = Construction.objects.filter(kind_of_construction = id1, district = id1)
         
     mData = {}           
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location() } for obj in lst]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in lst]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
@@ -124,7 +125,7 @@ def district_filter(request):
     else:
         construction = Construction.objects.all()
     mData          = {}
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location()} for obj in construction]
+    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in construction]
     
     return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 

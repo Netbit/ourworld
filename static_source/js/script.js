@@ -302,13 +302,14 @@ function changedLanguage(value) {
 	window.open('?lang=' + value, '_self', false);
 }
 
-function set_location(id, address, location) {
+function set_location(id, address, location, icon) {
 	var pos = new google.maps.LatLng(location[0], location[1]);
 	var marker = new google.maps.Marker({
 		map : map,
 		id: id,
 		address : address,
 		position : pos,
+		icon: icon,
 		zIndex: Math.round(pos.lat()*-100000)<<5
 	});
 	google.maps.event.addListener(marker, 'click', function() {
@@ -345,7 +346,7 @@ function kind_construction_filter(id) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
     			}    			
     		}
     		$('#load').hide();
@@ -369,7 +370,7 @@ function kind_person_filter(id) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
     			}
     		}
     		$('#load').hide();    	},                                                                        	error : function(e) {         
@@ -388,7 +389,7 @@ function district_filter(id_district) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location);
+    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
     			}
     		}
     		$('#load').hide();

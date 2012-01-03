@@ -1,5 +1,6 @@
 var marker = null;
 var map;
+var icon = "";
 
 function initialize() {
 	var address;
@@ -31,10 +32,15 @@ function initialize() {
 				location = eval(location);
 				pos = new google.maps.LatLng(location[0], location[1]);
 				map.setCenter(pos);
+				var src = $('.icon .file-upload a').attr('href');
+				if (src) {
+					icon = src; 
+				}
 				marker = new google.maps.Marker({
 					map : map,
 					draggable:true,
 					position : pos,
+					icon : icon
 				});	
 				google.maps.event.addListener(marker, 'drag', function() {	
 					document.getElementById('id_location').value = marker.position.toString();
@@ -65,11 +71,16 @@ function search_place()
 		if (status == google.maps.GeocoderStatus.OK) {
 			map.setCenter(results[0].geometry.location);
 			document.getElementById('id_location').value = results[0].geometry.location.toString();
+			var src = $('.icon .file-upload a').attr('href');
+			if (src) {
+				icon = src; 
+			}
 			marker = new google.maps.Marker({
 				map : map,
     			draggable:true,
 				position : results[0].geometry.location,
-				address : results[0].formatted_address
+				address : results[0].formatted_address,
+				icon : icon
 			});
 			google.maps.event.addListener(marker, 'drag', function() {	
 				document.getElementById('id_location').value = marker.position.toString();
@@ -82,6 +93,16 @@ function search_place()
 }
 
 $(document).ready(function() {
+	
+	var src = $('.link_image .file-upload a').html();
+	if (src) {
+		$('.link_image .file-upload a').html("<img src='/media/" + src + "' height='100'>");
+	}
+	
+	var src = $('.icon .file-upload a').html();
+	if (src) {
+		$('.icon .file-upload a').html("<img src='/media/" + src + "'>");
+	}
 	
 	$('#id_name').css('width', '400px');
 	$('#id_name_vi').css('width', '400px');
