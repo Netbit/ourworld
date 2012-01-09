@@ -4,13 +4,13 @@ from mapapp.models import District, KindPersonOfAccess, KindOfConstruction,\
 
 
 class DistrictTranslationOptions(TranslationOptions):
-    fields = ('name', 'description')
+    fields = ('name',)
     
 class KindPersonOfAccessTranslationOptions(TranslationOptions):
-    fields = ('name', 'description')
+    fields = ('name',)
     
 class KindOfConstructionTranslationOptions(TranslationOptions):
-    fields = ('name', 'description')
+    fields = ('name',)
     
 class ConstructionTranslationOptions(TranslationOptions):
     fields = ('name', 'description_detail', 'description_other')    
