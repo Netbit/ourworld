@@ -9,7 +9,6 @@ class District(models.Model):
     name        = models.CharField(max_length = 60, unique = True, verbose_name = _('District name'))
     unsigned_name = models.CharField(max_length = 50, verbose_name = _('District unsigned name'))
     location    = models.CharField(max_length = 30, blank = True, verbose_name = _('Location (on map)'))
-    description = models.TextField(blank = True, verbose_name = _('Description'))
     
     class Meta:
         verbose_name = _("District")
@@ -33,7 +32,6 @@ class KindPersonOfAccess(models.Model):
     access_level = models.CharField(max_length = 10, unique = True, verbose_name = _('Access level'))
     name        = models.CharField(max_length = 100, blank = True, verbose_name = _('Kind person of access name'))
     image       = models.ImageField(upload_to = 'images/person', blank = True, verbose_name = _('Image'))
-    description = models.TextField(blank = True, verbose_name = _('Description'))
     
     class Meta:
         verbose_name = _("Kind Person of Access")
@@ -60,7 +58,6 @@ class KindPersonOfAccess(models.Model):
 class KindOfConstruction(models.Model):
     name = models.CharField(max_length = 100, unique = True, verbose_name = _('Kind of construction name'))
     image = models.ImageField(upload_to = 'images/kind', blank = True, verbose_name = _('Image'))
-    description = models.TextField(blank = True, verbose_name = _('Description'))
     
     class Meta:
         verbose_name = _("Kind of Construction")
