@@ -8,7 +8,7 @@ from django.conf import settings
 class District(models.Model):
     name        = models.CharField(max_length = 60, unique = True, verbose_name = _('District name'))
     unsigned_name = models.CharField(max_length = 50, verbose_name = _('District unsigned name'))
-    location    = models.CharField(max_length = 30, blank = True, verbose_name = _('Location (on map)'))
+    #location    = models.CharField(max_length = 30, blank = True, verbose_name = _('Location (on map)'))
     
     class Meta:
         verbose_name = _("District")

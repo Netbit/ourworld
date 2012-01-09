@@ -86,7 +86,7 @@ msgid "Construction"
 msgstr "Công trình"
 
 msgid "Constructions"
-msgstr "Danh sách các công trình"
+msgstr "Công trình"
 
 msgid "Construction name"
 msgstr "Tên công trình"
@@ -101,13 +101,13 @@ msgid "Street"
 msgstr "Đường"
 
 msgid "Streets"
-msgstr "Danh sách các Con đường"
+msgstr "Con đường"
 
 msgid "District"
 msgstr "Quận"
 
 msgid "Districts"
-msgstr "Danh sách các Quận"
+msgstr "Quận"
 
 msgid "Description detail"
 msgstr "Mô tả chi tiết"
@@ -119,7 +119,7 @@ msgid "Kind Person of Access"
 msgstr "Loại người tiếp cận"
 
 msgid "Kind People of Access"
-msgstr "Danh sách Loại người tiếp cận"
+msgstr "Loại người tiếp cận"
 
 msgid "Kind person of access"
 msgstr "Loại người tiếp cận"
@@ -134,7 +134,7 @@ msgid "Kind of Construction"
 msgstr "Loại công trình"
 
 msgid "Kind of Constructions"
-msgstr "Danh sách Loại công trình"
+msgstr "Loại công trình"
 
 msgid "Details..."
 msgstr "Chi tiết..."
@@ -146,7 +146,7 @@ msgid "Ward"
 msgstr "Phường"
 
 msgid "Wards"
-msgstr "Danh sách các Phường"
+msgstr "Phường"
 
 msgid "Ward name"
 msgstr "Tên phường"
@@ -158,7 +158,7 @@ msgid "Date"
 msgstr "Ngày"
 
 msgid "Comments"
-msgstr "Danh sách các Bình luận"
+msgstr "Bình luận"
 
 msgid "Comment"
 msgstr "Bình luận"
