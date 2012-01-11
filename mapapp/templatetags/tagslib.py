@@ -22,3 +22,7 @@ def nickname(email):
 def get_pos(object_id):
     con = Construction.objects.get(id = object_id)
     return con.location
+
+@register.filter
+def get_image(obj):
+    return obj.get_image()

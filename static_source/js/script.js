@@ -192,7 +192,24 @@ function deleteOverlays() {
 $(document).ready(function() {
 	
 	$('#load').hide();
-	get_kind_of_person_construction();
+
+	$("#slider_left").easySlider({
+		auto: true, 
+		continuous: true,
+		prevId: 		'prevBtn_left',
+		nextId: 		'nextBtn_left',
+		firstId: 		'firstBtn_left',
+		lastId: 		'lastBtn_left'
+	});
+	
+	$("#slider_right").easySlider({
+		auto: true, 
+		continuous: true,
+		prevId: 		'prevBtn_right',
+		nextId: 		'nextBtn_right',
+		firstId: 		'firstBtn_right',
+		lastId: 		'lastBtn_right'
+	});
 	
 	try {
 		$("#lang").msDropDown();

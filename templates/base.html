@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Tìm kiếm đường đi cho người khuyết tật" />
 <meta name="keywords" content="Ban do tiep can,Bản đồ tiếp cận,map,tìm đường đi,người khuyết tật,hổ trợ người khuyết tật,tim duong di, nguoi khuyet tat,ho tro nguoi khuyet tat" />	
-
+{% load tagslib %}
 <title>Bản đồ tiếp cận cho người khuyết tật</title>
 
 <link href="{{ STATIC_URL }}favicon.ico" rel="shortcut icon"/>
@@ -13,10 +13,12 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dd.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tooltip.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/easySlider1.7.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
 
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/dd.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/screen.css" />
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.autocomplete.css">
 
 {% block extra_static %}{% endblock %}
@@ -26,23 +28,41 @@
 	{% block header %}{% endblock %}
 	
 	<div class="filter">
-		<div id="left_slider" class="left">
-			<div id="left_prev">
+<!-- 		<div id="left_slider" class="left"> -->
+<!-- 			<div id="left_prev"> -->
+<!-- 			</div> -->
+<!-- 			<div id="left"> -->
+<!-- 			</div> -->
+<!-- 			<div id="left_next"> -->
+<!-- 			</div> -->
+<!-- 			<input type="hidden" value="" name="kind_person" id="kind_person"> -->
+<!-- 		</div> -->
+<!-- 		<div id="right_slider" class="right"> -->
+<!-- 			<div id="right_prev"> -->
+<!-- 			</div> -->
+<!-- 			<div id="right"> -->
+<!-- 			</div> -->
+<!-- 			<div id="right_next"> -->
+<!-- 			</div> -->
+<!-- 			<input type="hidden" value="" name="kind_construction" id="kind_construction"> -->
+<!-- 		</div> -->
+		<div class="left">
+			<div id="slider_left">
+				<ul>
+					{% for obj in kind_person %}
+						<li><a onclick="kind_person_filter('{{ obj.id }}')"><img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<div id="left">
-			</div>
-			<div id="left_next">
-			</div>
-			<input type="hidden" value="" name="kind_person" id="kind_person">
 		</div>
-		<div id="right_slider" class="right">
-			<div id="right_prev">
+		<div class="right">
+			<div id="slider_right">
+				<ul>
+					{% for obj in kind_construction %}
+						<li><a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<div id="right">
-			</div>
-			<div id="right_next">
-			</div>
-			<input type="hidden" value="" name="kind_construction" id="kind_construction">
 		</div>
 	</div>
 	{% block map %} {% endblock %}
@@ -56,15 +76,7 @@
     	pageTracker._initData();
     	pageTracker._trackPageview();
     </script>
-    <div style="display: none;">
-		{% for obj in kind_person %}
-			<img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}">
-		{% endfor %}
-		
-		{% for obj in kind_construction %}
-			<img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ STATIC_URL }}{{ obj.image }}">
-		{% endfor %}
-	</div>
+    
 	<div class="footer">
 		Designed by SPS Group
 	</div>

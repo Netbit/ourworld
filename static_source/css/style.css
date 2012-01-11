@@ -42,7 +42,7 @@ body {
 .right {
 	float: right;
 	height: 32px;
-	width: 48%;
+	width: 47%;
 	margin-left: 5px;
 	margin-top: 4px;
 }
@@ -249,44 +249,6 @@ body {
 	text-decoration: underline;
 	text-shadow: gray;
 }
-
-/* slider */
-
-	#slider ul, #slider li{ 
-		margin:0;
-		padding:0;
-		list-style:none;
-		}	
-	#slider, #slider li{ 
-		height:220px;
-		width:696px;
-		overflow:hidden;
-		}	
-	#slider{ 
-		margin-left:5px;
-		}	
-	#prevBtn, #nextBtn{ 
-		display:block;
-		width:30px;
-		height:77px;
-		position:absolute;
-		left:-25px;
-		top:71px;
-		}	
-	#nextBtn{ 
-		left:701px;
-		}														
-	#prevBtn a, #nextBtn a{  
-		display:block;
-		width:30px;
-		height:77px;
-		background:url(../images/btn_prev.gif) no-repeat 0 0;	
-		}	
-	#nextBtn a{ 
-		background:url(../images/btn_next.gif) no-repeat 0 0;	
-		}								
-
-/* // slider */
 
 #tooltip {
 	position: absolute;
