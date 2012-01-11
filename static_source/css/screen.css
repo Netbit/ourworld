@@ -29,7 +29,7 @@
 			define width and height of list item (slide)
 			entire slider area will adjust according to the parameters provided here
 		*/
-	width: 32px;
+	width: 36px;
 	height: 32px;
 	overflow: hidden;
 	padding-right: 5px;
@@ -37,7 +37,7 @@
 
 #prevBtn_right, #prevBtn_left {
 	display: block;
-	width: 32px;
+	width: 36px;
 	height: 32px;
 	position: relative;
 	top: -32px;
@@ -48,7 +48,7 @@
 #nextBtn_right, #nextBtn_left {
 	left: 265px;
 	display: block;
-	width: 32px;
+	width: 36px;
 	height: 32px;
 	position: relative;
 	top: -64px;
