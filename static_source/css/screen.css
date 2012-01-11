@@ -31,13 +31,13 @@
 		*/
 	width: 36px;
 	height: 32px;
+	width: 12px;
 	overflow: hidden;
 	padding-right: 5px;
 }
 
 #prevBtn_right, #prevBtn_left {
 	display: block;
-	width: 36px;
 	height: 32px;
 	position: relative;
 	top: -32px;
