@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
-"Report-Msgid-Bugs-To: phi-dh\n"
-"POT-Creation-Date: 2011-08-20 20:45+0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-30 21:43+0700\n"
 "PO-Revision-Date: 2011-08-29 22:00+0700\n"
 "Last-Translator: Doan Hong Phi <hongphi.math@gmail.com>\n"
 "Language-Team: Vietnam <LL@li.org>\n"
@@ -16,209 +16,391 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-# --------------- HTML ------------------
-msgid "Get reverse directions"
-msgstr "Tìm đường theo hướng ngược lại."
-
-msgid "Start address..."
-msgstr "Địa điểm đi..."
-
-msgid "End address..."
-msgstr "Địa điểm đến..."
-
-msgid "Find position A on map"
-msgstr "Tìm địa điểm A trên bản đồ."
-
-msgid "Find direction from A to B"
-msgstr "Tìm đường đi từ A đến B"
-
-msgid "Search"
-msgstr "Tìm"
-
-msgid "Type address here..."
-msgstr "Tìm địa điểm..."
-
-msgid "From"
-msgstr "Từ"
-
-msgid "To"
-msgstr "Đến"
-
-msgid "Distance"
-msgstr "Khoảng cách"
-
-msgid "Time"
-msgstr "Thời gian"
-
-msgid "(by car)"
-msgstr "(xe ô tô)"
-
-# -------------------- ADMIN SITE ------------------
-msgid "District name"
-msgstr "Tên Quận/Huyện"
-
-msgid "District unsigned name"
-msgstr "Tên không dấu"
-
-msgid "Location (on map)"
-msgstr "Vị trí(trên bản đồ)"
-
-msgid "Description"
-msgstr "Mô tả chi tiết"
-
-msgid "Street name"
-msgstr "Tên đường"
-
-msgid "Street unsigned name"
-msgstr "Tên không dấu"
-
-msgid "Kind of person name"
-msgstr "Tên loại người tiếp cận"
-
-msgid "Image"
-msgstr "Hình ảnh"
-
-msgid "Kind of construction name"
-msgstr "Tên loại công trình"
-
-msgid "Construction"
-msgstr "Công trình"
-
-msgid "Constructions"
-msgstr "Công trình"
-
-msgid "Construction name"
-msgstr "Tên công trình"
-
-msgid "Construction unsigned name"
-msgstr "Tên không dấu"
-
-msgid "Number or alley"
-msgstr "Số/hẻm"
-
-msgid "Street"
-msgstr "Đường"
-
-msgid "Streets"
-msgstr "Con đường"
-
-msgid "District"
-msgstr "Quận"
-
-msgid "Districts"
-msgstr "Quận"
-
-msgid "Description detail"
-msgstr "Mô tả chi tiết"
-
-msgid "Description other"
-msgstr "Mô tả khác"
-
-msgid "Kind Person of Access"
-msgstr "Loại người tiếp cận"
-
-msgid "Kind People of Access"
-msgstr "Loại người tiếp cận"
-
-msgid "Kind person of access"
-msgstr "Loại người tiếp cận"
-
-msgid "Kind person of access name"
-msgstr "Tên loại người tiếp cận"
-
-msgid "Access level"
-msgstr "Mức tiếp cận"
-
-msgid "Kind of Construction"
-msgstr "Loại công trình"
-
-msgid "Kind of Constructions"
-msgstr "Loại công trình"
-
-msgid "Details..."
-msgstr "Chi tiết..."
-
-msgid "Couldn't get the data!"
-msgstr "Không thể lấy được dữ liệu!"
-
-msgid "Ward"
-msgstr "Phường"
-
-msgid "Wards"
-msgstr "Phường"
-
-msgid "Ward name"
-msgstr "Tên phường"
-
-msgid "Content"
-msgstr "Nội dung"
-
-msgid "Date"
-msgstr "Ngày"
-
-msgid "Comments"
-msgstr "Bình luận"
-
-msgid "Comment"
-msgstr "Bình luận"
-
-msgid "Posted by"
-msgstr "Được đăng bởi"
-
-msgid "at"
-msgstr "vào lúc"
-
-msgid "Your comment sent."
-msgstr "Bình luận của bạn đã được gửi."
-
-msgid "Send"
-msgstr "Gửi"
-
-msgid "Information of"
-msgstr "Thông tin về"
-
-msgid "Your comment here..."
-msgstr "Ghi bình luận..."
-
-msgid "Status"
-msgstr "Trạng thái"
-
-msgid "Published"
-msgstr "Hiển thị"
-
-msgid "Hidden"
-msgstr "Ẩn"
-
+#: .\mapapp\admin.py:29
 msgid "Mark selected comments as hidden"
 msgstr "Ẩn các bình luận đã chọn"
 
+#: .\mapapp\admin.py:33
 msgid "Mark selected comments as published"
 msgstr "Hiển thị các bình luận đã chọn"
 
-msgid "Import Data"
-msgstr "Nhập data từ file Excel"
+#: .\mapapp\forms.py:5 .\mapapp\models.py:147
+msgid "Email"
+msgstr ""
 
-msgid "Map site admin"
-msgstr "Trang quản trị bản đồ tiếp cận"
+#: .\mapapp\forms.py:6 .\mapapp\models.py:148 .\mapapp\models.py:172
+msgid "Content"
+msgstr "Nội dung"
 
-msgid "Map administration"
-msgstr "Trang quản trị bản đồ tiếp cận"
+#: .\mapapp\forms.py:6
+msgid "Your comment here..."
+msgstr "Ghi bình luận..."
 
-msgid "Error found at line(s)"
-msgstr "Lỗi phát sinh tại dòng"
-
-msgid "Update data successful."
-msgstr "Cập nhật dữ liệu thành công."
-
-msgid "All Districts"
-msgstr "Tất cả các Quận"
-
-msgid "Import data from Excel file"
-msgstr "Nhập dữ liệu từ file Excel"
-
+#: .\mapapp\forms.py:9
 msgid "Input your file"
 msgstr "Chọn file Excel"
 
+# -------------------- ADMIN SITE ------------------
+#: .\mapapp\models.py:9
+msgid "District name"
+msgstr "Tên Quận/Huyện"
+
+#: .\mapapp\models.py:10
+msgid "District unsigned name"
+msgstr "Tên không dấu"
+
+#: .\mapapp\models.py:14 .\mapapp\models.py:100
+msgid "District"
+msgstr "Quận"
+
+#: .\mapapp\models.py:15
+msgid "Districts"
+msgstr "Quận"
+
+#: .\mapapp\models.py:21
+msgid "Street name"
+msgstr "Tên đường"
+
+#: .\mapapp\models.py:22
+msgid "Street unsigned name"
+msgstr "Tên không dấu"
+
+#: .\mapapp\models.py:25 .\mapapp\models.py:98
+msgid "Street"
+msgstr "Đường"
+
+#: .\mapapp\models.py:26
+msgid "Streets"
+msgstr "Con đường"
+
+#: .\mapapp\models.py:32
+msgid "Access level"
+msgstr "Mức tiếp cận"
+
+#: .\mapapp\models.py:33
+msgid "Kind person of access name"
+msgstr "Tên loại người tiếp cận"
+
+#: .\mapapp\models.py:34 .\mapapp\models.py:53 .\mapapp\models.py:60
+#: .\mapapp\models.py:101
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: .\mapapp\models.py:37
+msgid "Kind Person of Access"
+msgstr "Loại người tiếp cận"
+
+#: .\mapapp\models.py:38
+msgid "Kind People of Access"
+msgstr "Loại người tiếp cận"
+
+#: .\mapapp\models.py:59
+msgid "Kind of construction name"
+msgstr "Tên loại công trình"
+
+#: .\mapapp\models.py:63 .\mapapp\models.py:104
+msgid "Kind of Construction"
+msgstr "Loại công trình"
+
+#: .\mapapp\models.py:64
+msgid "Kind of Constructions"
+msgstr "Loại công trình"
+
+#: .\mapapp\models.py:85
+msgid "Ward name"
+msgstr "Tên phường"
+
+#: .\mapapp\models.py:88 .\mapapp\models.py:99
+msgid "Ward"
+msgstr "Phường"
+
+#: .\mapapp\models.py:89
+msgid "Wards"
+msgstr "Phường"
+
+#: .\mapapp\models.py:95
+msgid "Construction name"
+msgstr "Tên công trình"
+
+#: .\mapapp\models.py:96
+msgid "Construction unsigned name"
+msgstr "Tên không dấu"
+
+#: .\mapapp\models.py:97
+msgid "Number or alley"
+msgstr "Số/hẻm"
+
+#: .\mapapp\models.py:102
+msgid "Description detail"
+msgstr "Mô tả chi tiết"
+
+#: .\mapapp\models.py:103
+msgid "Description other"
+msgstr "Mô tả khác"
+
+#: .\mapapp\models.py:105
+msgid "Kind person of access"
+msgstr "Loại người tiếp cận"
+
+#: .\mapapp\models.py:106
+msgid "Location (on map)"
+msgstr "Vị trí(trên bản đồ)"
+
+#: .\mapapp\models.py:107
+msgid "Icon"
+msgstr ""
+
+#: .\mapapp\models.py:110 .\mapapp\models.py:150
+msgid "Construction"
+msgstr "Công trình"
+
+#: .\mapapp\models.py:111
+#: .\templates\admin\mapapp\construction\upload.html.py:20
+msgid "Constructions"
+msgstr "Công trình"
+
+#: .\mapapp\models.py:142
+msgid "Published"
+msgstr "Hiển thị"
+
+#: .\mapapp\models.py:143
+msgid "Hidden"
+msgstr "Ẩn"
+
+#: .\mapapp\models.py:149 .\mapapp\models.py:156
+msgid "Date"
+msgstr "Ngày"
+
+#: .\mapapp\models.py:151
+msgid "Status"
+msgstr "Trạng thái"
+
+#: .\mapapp\models.py:178 .\templates\details.html.py:28
+msgid "Comment"
+msgstr "Bình luận"
+
+#: .\mapapp\models.py:179
+msgid "Comments"
+msgstr "Bình luận"
+
+#: .\mapapp\views.py:148
+msgid "Your comment sent."
+msgstr "Bình luận của bạn đã được gửi."
+
+#: .\templates\404.html.py:4 .\templates\404.html.py:8
+msgid "Page not found"
+msgstr ""
+
+#: .\templates\404.html.py:10
+msgid "We're sorry, but the requested page could not be found."
+msgstr ""
+
+#: .\templates\500.html.py:4 .\templates\admin\change_form.html.py:19
+#: .\templates\admin\change_list.html.py:42
+#: .\templates\admin\mapapp\construction\upload.html.py:12
+msgid "Home"
+msgstr ""
+
+#: .\templates\500.html.py:4
+msgid "Server error"
+msgstr ""
+
+#: .\templates\500.html.py:6
+msgid "Server error (500)"
+msgstr ""
+
+#: .\templates\500.html.py:9
+msgid "Server Error <em>(500)</em>"
+msgstr ""
+
+#: .\templates\500.html.py:10
+msgid ""
+"There's been an error. It's been reported to the site administrators via e-"
+"mail and should be fixed shortly. Thanks for your patience."
+msgstr ""
+
+#: .\templates\base.html.py:9 .\templates\index.html.py:21
+msgid "Accessible Map"
+msgstr "Bản đồ tiếp cận cho người khuyết tật"
+
+#: .\templates\comments.html.py:6 .\templates\details.html.py:69
+msgid "Posted by"
+msgstr "Được đăng bởi"
+
+#: .\templates\comments.html.py:6 .\templates\details.html.py:69
+msgid "at"
+msgstr "vào lúc"
+
+#: .\templates\details.html.py:7
+msgid "Information of"
+msgstr "Thông tin về"
+
+#: .\templates\details.html.py:13
+msgid "Zoom in"
+msgstr "Phóng to chữ"
+
+#: .\templates\details.html.py:14
+msgid "Zoom out"
+msgstr "Thu nhỏ chữ"
+
+#: .\templates\details.html.py:15
+msgid "Default"
+msgstr "Mặc định"
+
+#: .\templates\details.html.py:45
+msgid "Send"
+msgstr "Gửi"
+
+#: .\templates\index.html.py:35
+msgid "All Districts"
+msgstr "Tất cả các Quận"
+
+#: .\templates\index.html.py:48
+msgid "Login"
+msgstr ""
+
+#: .\templates\index.html.py:50
+msgid "Admin"
+msgstr ""
+
+#: .\templates\index.html.py:60
+msgid "Find position A on map"
+msgstr "Tìm địa điểm A trên bản đồ."
+
+#: .\templates\index.html.py:61
+msgid "Find direction from A to B"
+msgstr "Tìm đường đi từ A đến B"
+
+#: .\templates\index.html.py:65
+msgid "Type address here..."
+msgstr "Tìm địa điểm..."
+
+#: .\templates\index.html.py:66 .\templates\index.html.py:74
+msgid "Search"
+msgstr "Tìm"
+
+#: .\templates\index.html.py:71
+msgid "Start address..."
+msgstr "Địa điểm đi..."
+
+# --------------- HTML ------------------
+#: .\templates\index.html.py:72
+msgid "Get reverse directions"
+msgstr "Tìm đường theo hướng ngược lại."
+
+#: .\templates\index.html.py:73
+msgid "End address..."
+msgstr "Địa điểm đến..."
+
+#: .\templates\index.html.py:77
 msgid "Loading..."
 msgstr "Đang tải dữ liệu..."
+
+#: .\templates\index.html.py:81
+msgid "Hidden this box"
+msgstr ""
+
+#: .\templates\index.html.py:86
+msgid "Show details"
+msgstr ""
+
+#: .\templates\admin\base_site.html.py:4
+msgid "Map site admin"
+msgstr "Trang quản trị bản đồ tiếp cận"
+
+#: .\templates\admin\base_site.html.py:7
+msgid "Map administration"
+msgstr "Trang quản trị bản đồ tiếp cận"
+
+#: .\templates\admin\change_form.html.py:22
+msgid "Add"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:31
+msgid "History"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:32
+msgid "View on site"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:43
+#: .\templates\admin\change_list.html.py:73 .\templates\admin\login.html.py:17
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\templates\admin\change_list.html.py:64
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: .\templates\admin\change_list.html.py:84
+msgid "Filter"
+msgstr ""
+
+#: .\templates\admin\login.html.py:33
+msgid "Username:"
+msgstr ""
+
+#: .\templates\admin\login.html.py:37
+msgid "Password:"
+msgstr ""
+
+#: .\templates\admin\login.html.py:42
+#, fuzzy
+msgid "Log in"
+msgstr "Phóng to chữ"
+
+#: .\templates\admin\mapapp\construction\change_list.html.py:4
+msgid "Import Data"
+msgstr "Nhập data từ file Excel"
+
+#: .\templates\admin\mapapp\construction\upload.html.py:5
+#: .\templates\admin\mapapp\construction\upload.html.py:30
+msgid "Import data from Excel file"
+msgstr "Nhập dữ liệu từ file Excel"
+
+#: .\templates\admin\mapapp\construction\upload.html.py:16
+msgid "Mapapp"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:23
+msgid "Upload"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:36
+msgid "Update data successful."
+msgstr "Cập nhật dữ liệu thành công."
+
+#: .\templates\admin\mapapp\construction\upload.html.py:39
+msgid "Error found at line(s)"
+msgstr "Lỗi phát sinh tại dòng"
+
+#~ msgid "From"
+#~ msgstr "Từ"
+
+#~ msgid "To"
+#~ msgstr "Đến"
+
+#~ msgid "Distance"
+#~ msgstr "Khoảng cách"
+
+#~ msgid "Time"
+#~ msgstr "Thời gian"
+
+#~ msgid "(by car)"
+#~ msgstr "(xe ô tô)"
+
+#~ msgid "Description"
+#~ msgstr "Mô tả chi tiết"
+
+#~ msgid "Kind of person name"
+#~ msgstr "Tên loại người tiếp cận"
+
+#~ msgid "Details..."
+#~ msgstr "Chi tiết..."
+
+#~ msgid "Couldn't get the data!"
+#~ msgstr "Không thể lấy được dữ liệu!"

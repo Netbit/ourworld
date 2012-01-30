@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-09 23:24+0700\n"
+"POT-Creation-Date: 2012-01-30 22:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,28 +16,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\static_source\js\script.js.py:116
-msgid "From"
+#: .\static_source\js\script.js.py:83 .\static_source\js\script.js.py:321
+msgid "Default"
 msgstr ""
 
-#: .\static_source\js\script.js.py:117
-msgid "To"
+#: .\static_source\js\script.js.py:84 .\static_source\js\script.js.py:322
+msgid "Zoom in"
 msgstr ""
 
-#: .\static_source\js\script.js.py:118
-msgid "Distance"
+#: .\static_source\js\script.js.py:85 .\static_source\js\script.js.py:323
+msgid "Zoom out"
 msgstr ""
 
-#: .\static_source\js\script.js.py:119
-msgid "Time"
-msgstr ""
-
-#: .\static_source\js\script.js.py:120
-msgid "(by car)"
-msgstr ""
-
+#: .\static_source\js\script.js.py:88 .\static_source\js\script.js.py:326
 msgid "Details..."
 msgstr ""
 
+#: .\static_source\js\script.js.py:127
+msgid "From"
+msgstr ""
+
+#: .\static_source\js\script.js.py:128
+msgid "To"
+msgstr ""
+
+#: .\static_source\js\script.js.py:130
+msgid "Distance"
+msgstr ""
+
+#: .\static_source\js\script.js.py:132
+msgid "Time"
+msgstr ""
+
+#: .\static_source\js\script.js.py:133
+msgid "(by car)"
+msgstr ""
+
+#: .\static_source\js\script.js.py:356 .\static_source\js\script.js.py:380
+#: .\static_source\js\script.js.py:404
 msgid "Couldn't get the data!"
 msgstr ""

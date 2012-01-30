@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
-"Report-Msgid-Bugs-To: phi-dh\n"
-"POT-Creation-Date: 2011-08-20 20:45+0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-30 21:43+0700\n"
 "PO-Revision-Date: 2011-08-29 22:00+0700\n"
 "Last-Translator: Doan Hong Phi <hongphi.math@gmail.com>\n"
 "Language-Team: Vietnam <LL@li.org>\n"
@@ -16,217 +16,363 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-
-# --------------- HTML ------------------
-msgid "Get reverse directions"
-msgstr ""
-
-msgid "Start address..."
-msgstr ""
-
-msgid "End address..."
-msgstr ""
-
-msgid "Find position A on map"
-msgstr ""
-
-msgid "Find direction from A to B"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "Type address here..."
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "To"
-msgstr ""
-
-msgid "Distance"
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "(by car)"
-msgstr ""
-
-
-# -------------------- ADMIN SITE ------------------
-msgid "District name"
-msgstr ""
-
-msgid "District unsigned name"
-msgstr ""
-
-msgid "Location (on map)"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Street name"
-msgstr ""
-
-msgid "Street unsigned name"
-msgstr ""
-
-msgid "Kind of person name"
-msgstr ""
-
-msgid "Image"
-msgstr ""
-
-msgid "Kind of construction name"
-msgstr ""
-
-msgid "Construction"
-msgstr ""
-
-msgid "Constructions"
-msgstr ""
-
-msgid "Construction name"
-msgstr ""
-
-msgid "Construction unsigned name"
-msgstr ""
-
-msgid "Number or alley"
-msgstr ""
-
-msgid "Street"
-msgstr ""
-
-msgid "Streets"
-msgstr ""
-
-msgid "District"
-msgstr ""
-
-msgid "Districts"
-msgstr ""
-
-msgid "Description detail"
-msgstr ""
-
-msgid "Description other"
-msgstr ""
-
-msgid "Kind Person of Access"
-msgstr ""
-
-msgid "Kind People of Access"
-msgstr ""
-
-msgid "Kind person of access"
-msgstr ""
-
-msgid "Kind person of access name"
-msgstr ""
-
-msgid "Access level"
-msgstr ""
-
-msgid "Kind of Construction"
-msgstr ""
-
-msgid "Kind of Constructions"
-msgstr ""
-
-msgid "Details..."
-msgstr ""
-
-msgid "Couldn't get the data!"
-msgstr ""
-
-msgid "Ward"
-msgstr ""
-
-msgid "Wards"
-msgstr ""
-
-msgid "Ward name"
-msgstr ""
-
-msgid "Content"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Comments"
-msgstr ""
-
-msgid "Comment"
-msgstr ""
-
-msgid "Posted by"
-msgstr ""
-
-msgid "at"
-msgstr ""
-
-msgid "Your comment sent."
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Information of"
-msgstr ""
-
-msgid "Your comment here..."
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Published"
-msgstr ""
-
-msgid "Hidden"
-msgstr ""
-
+#: .\mapapp\admin.py:29
 msgid "Mark selected comments as hidden"
 msgstr ""
 
+#: .\mapapp\admin.py:33
 msgid "Mark selected comments as published"
 msgstr ""
 
-msgid "Import Data"
+#: .\mapapp\forms.py:5 .\mapapp\models.py:147
+msgid "Email"
 msgstr ""
 
-msgid "Upload"
+#: .\mapapp\forms.py:6 .\mapapp\models.py:148 .\mapapp\models.py:172
+msgid "Content"
 msgstr ""
 
-msgid "Map site admin"
+#: .\mapapp\forms.py:6
+msgid "Your comment here..."
 msgstr ""
 
-msgid "Map administration"
-msgstr ""
-
-msgid "Error found at line(s)"
-msgstr ""
-
-msgid "Update data successful."
-msgstr ""
-
-msgid "All Districts"
-msgstr ""
-
-msgid "Import data from Excel file"
-msgstr ""
-
+#: .\mapapp\forms.py:9
 msgid "Input your file"
 msgstr ""
 
+# -------------------- ADMIN SITE ------------------
+#: .\mapapp\models.py:9
+msgid "District name"
+msgstr ""
+
+#: .\mapapp\models.py:10
+msgid "District unsigned name"
+msgstr ""
+
+#: .\mapapp\models.py:14 .\mapapp\models.py:100
+msgid "District"
+msgstr ""
+
+#: .\mapapp\models.py:15
+msgid "Districts"
+msgstr ""
+
+#: .\mapapp\models.py:21
+msgid "Street name"
+msgstr ""
+
+#: .\mapapp\models.py:22
+msgid "Street unsigned name"
+msgstr ""
+
+#: .\mapapp\models.py:25 .\mapapp\models.py:98
+msgid "Street"
+msgstr ""
+
+#: .\mapapp\models.py:26
+msgid "Streets"
+msgstr ""
+
+#: .\mapapp\models.py:32
+msgid "Access level"
+msgstr ""
+
+#: .\mapapp\models.py:33
+msgid "Kind person of access name"
+msgstr ""
+
+#: .\mapapp\models.py:34 .\mapapp\models.py:53 .\mapapp\models.py:60
+#: .\mapapp\models.py:101
+msgid "Image"
+msgstr ""
+
+#: .\mapapp\models.py:37
+msgid "Kind Person of Access"
+msgstr ""
+
+#: .\mapapp\models.py:38
+msgid "Kind People of Access"
+msgstr ""
+
+#: .\mapapp\models.py:59
+msgid "Kind of construction name"
+msgstr ""
+
+#: .\mapapp\models.py:63 .\mapapp\models.py:104
+msgid "Kind of Construction"
+msgstr ""
+
+#: .\mapapp\models.py:64
+msgid "Kind of Constructions"
+msgstr ""
+
+#: .\mapapp\models.py:85
+msgid "Ward name"
+msgstr ""
+
+#: .\mapapp\models.py:88 .\mapapp\models.py:99
+msgid "Ward"
+msgstr ""
+
+#: .\mapapp\models.py:89
+msgid "Wards"
+msgstr ""
+
+#: .\mapapp\models.py:95
+msgid "Construction name"
+msgstr ""
+
+#: .\mapapp\models.py:96
+msgid "Construction unsigned name"
+msgstr ""
+
+#: .\mapapp\models.py:97
+msgid "Number or alley"
+msgstr ""
+
+#: .\mapapp\models.py:102
+msgid "Description detail"
+msgstr ""
+
+#: .\mapapp\models.py:103
+msgid "Description other"
+msgstr ""
+
+#: .\mapapp\models.py:105
+msgid "Kind person of access"
+msgstr ""
+
+#: .\mapapp\models.py:106
+msgid "Location (on map)"
+msgstr ""
+
+#: .\mapapp\models.py:107
+msgid "Icon"
+msgstr ""
+
+#: .\mapapp\models.py:110 .\mapapp\models.py:150
+msgid "Construction"
+msgstr ""
+
+#: .\mapapp\models.py:111
+#: .\templates\admin\mapapp\construction\upload.html.py:20
+msgid "Constructions"
+msgstr ""
+
+#: .\mapapp\models.py:142
+msgid "Published"
+msgstr ""
+
+#: .\mapapp\models.py:143
+msgid "Hidden"
+msgstr ""
+
+#: .\mapapp\models.py:149 .\mapapp\models.py:156
+msgid "Date"
+msgstr ""
+
+#: .\mapapp\models.py:151
+msgid "Status"
+msgstr ""
+
+#: .\mapapp\models.py:178 .\templates\details.html.py:28
+msgid "Comment"
+msgstr ""
+
+#: .\mapapp\models.py:179
+msgid "Comments"
+msgstr ""
+
+#: .\mapapp\views.py:148
+msgid "Your comment sent."
+msgstr ""
+
+#: .\templates\404.html.py:4 .\templates\404.html.py:8
+msgid "Page not found"
+msgstr ""
+
+#: .\templates\404.html.py:10
+msgid "We're sorry, but the requested page could not be found."
+msgstr ""
+
+#: .\templates\500.html.py:4 .\templates\admin\change_form.html.py:19
+#: .\templates\admin\change_list.html.py:42
+#: .\templates\admin\mapapp\construction\upload.html.py:12
+msgid "Home"
+msgstr ""
+
+#: .\templates\500.html.py:4
+msgid "Server error"
+msgstr ""
+
+#: .\templates\500.html.py:6
+msgid "Server error (500)"
+msgstr ""
+
+#: .\templates\500.html.py:9
+msgid "Server Error <em>(500)</em>"
+msgstr ""
+
+#: .\templates\500.html.py:10
+msgid ""
+"There's been an error. It's been reported to the site administrators via e-"
+"mail and should be fixed shortly. Thanks for your patience."
+msgstr ""
+
+#: .\templates\base.html.py:9 .\templates\index.html.py:21
+msgid "Accessible Map"
+msgstr ""
+
+#: .\templates\comments.html.py:6 .\templates\details.html.py:69
+msgid "Posted by"
+msgstr ""
+
+#: .\templates\comments.html.py:6 .\templates\details.html.py:69
+msgid "at"
+msgstr ""
+
+#: .\templates\details.html.py:7
+msgid "Information of"
+msgstr ""
+
+#: .\templates\details.html.py:13
+msgid "Zoom in"
+msgstr ""
+
+#: .\templates\details.html.py:14
+msgid "Zoom out"
+msgstr ""
+
+#: .\templates\details.html.py:15
+msgid "Default"
+msgstr ""
+
+#: .\templates\details.html.py:45
+msgid "Send"
+msgstr ""
+
+#: .\templates\index.html.py:35
+msgid "All Districts"
+msgstr ""
+
+#: .\templates\index.html.py:48
+msgid "Login"
+msgstr ""
+
+#: .\templates\index.html.py:50
+msgid "Admin"
+msgstr ""
+
+#: .\templates\index.html.py:60
+msgid "Find position A on map"
+msgstr ""
+
+#: .\templates\index.html.py:61
+msgid "Find direction from A to B"
+msgstr ""
+
+#: .\templates\index.html.py:65
+msgid "Type address here..."
+msgstr ""
+
+#: .\templates\index.html.py:66 .\templates\index.html.py:74
+msgid "Search"
+msgstr ""
+
+#: .\templates\index.html.py:71
+msgid "Start address..."
+msgstr ""
+
+# --------------- HTML ------------------
+#: .\templates\index.html.py:72
+msgid "Get reverse directions"
+msgstr ""
+
+#: .\templates\index.html.py:73
+msgid "End address..."
+msgstr ""
+
+#: .\templates\index.html.py:77
 msgid "Loading..."
 msgstr ""
 
-msgid "Icon"
+#: .\templates\index.html.py:81
+msgid "Hidden this box"
+msgstr ""
+
+#: .\templates\index.html.py:86
+msgid "Show details"
+msgstr ""
+
+#: .\templates\admin\base_site.html.py:4
+msgid "Map site admin"
+msgstr ""
+
+#: .\templates\admin\base_site.html.py:7
+msgid "Map administration"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:22
+msgid "Add"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:31
+msgid "History"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:32
+msgid "View on site"
+msgstr ""
+
+#: .\templates\admin\change_form.html.py:43
+#: .\templates\admin\change_list.html.py:73 .\templates\admin\login.html.py:17
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\templates\admin\change_list.html.py:64
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: .\templates\admin\change_list.html.py:84
+msgid "Filter"
+msgstr ""
+
+#: .\templates\admin\login.html.py:33
+msgid "Username:"
+msgstr ""
+
+#: .\templates\admin\login.html.py:37
+msgid "Password:"
+msgstr ""
+
+#: .\templates\admin\login.html.py:42
+msgid "Log in"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\change_list.html.py:4
+msgid "Import Data"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:5
+#: .\templates\admin\mapapp\construction\upload.html.py:30
+msgid "Import data from Excel file"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:16
+msgid "Mapapp"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:23
+msgid "Upload"
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:36
+msgid "Update data successful."
+msgstr ""
+
+#: .\templates\admin\mapapp\construction\upload.html.py:39
+msgid "Error found at line(s)"
 msgstr ""
