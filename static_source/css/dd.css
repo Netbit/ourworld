@@ -21,7 +21,7 @@
 }
 
 .dd .ddTitle span.arrow {
-	background: url(/static/images/dd_arrow.gif) no-repeat 0 0;
+	background: url(../images/dd_arrow.gif) no-repeat 0 0;
 	float: right;
 	display: inline-block;
 	width: 16px;

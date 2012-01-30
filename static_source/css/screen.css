@@ -38,6 +38,7 @@
 #prevBtn_right, #prevBtn_left {
 	display: block;
 	height: 32px;
+	width: 12px;
 	position: relative;
 	top: -32px;
 	z-index: 1000;

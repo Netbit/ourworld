@@ -5,13 +5,26 @@ body {
 	height: 80px;
 	position: relative;
 	font-family: arial, sans-serif;
-	font-size: 35px;
 	color: #ffffff;
 	border: 2px solid purple;
-	background-image: url("/static/images/header.png");
+	background-image: url("../images/header.png");
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	/*behavior: url('/static/js/border-radius.htc');*/
+}
+
+.login a {
+	position: relative;
+	font-size: 14px;
+	font-weight: bold;
+	float: right;
+	color: white;
+	bottom: -10px;
+	right: 15px;
+}
+
+.login a:HOVER {
+	color: silver;
 }
 
 .filter {
@@ -21,7 +34,6 @@ body {
 	border: 2px thin;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
-	behavior: url('/static/js/border-radius.htc');
 	background-color: rgba(120, 120, 120, 0.5);
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
 		startColorstr='#e6e6e6', endColorstr='#CCCCCC' ); /* IE6 & IE7 */
@@ -69,6 +81,9 @@ body {
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;
+	text-align: center;
+	font: bold 11px arial;
+	color: #7B7B7B;
 }
 
 .show {
@@ -197,7 +212,7 @@ body {
 
 .box {
 	position: fixed;
-	background-image: url("/static/images/nav_bg.gif");
+	background-image: url("../images/nav_bg.gif");
 	z-index: 99;
 	bottom: 0px;
 	width: 230px;
@@ -211,7 +226,7 @@ body {
 }
 .show-box {
 	position: fixed;
-	background-image: url("/static/images/nav_bg.gif");
+	background-image: url("../images/nav_bg.gif");
 	z-index: 999;
 	cursor: pointer;
 	bottom: 0px;
@@ -261,5 +276,6 @@ body {
 	-moz-border-radius: 10px;
 }
 #tooltip h3, #tooltip div { margin: 0; }
+
 
 

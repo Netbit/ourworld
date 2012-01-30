@@ -145,7 +145,7 @@ STATUS_CHOICES = (
 
 class Comment(models.Model):
     email = models.EmailField(verbose_name = _('Email'))
-    content = models.TextField(verbose_name = _('Content'),  unique = True)
+    content = models.TextField(verbose_name = _('Content'))
     comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Date'))
     construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
     status = models.CharField(max_length = 2, default = 'h', verbose_name = _('Status'), choices = STATUS_CHOICES)

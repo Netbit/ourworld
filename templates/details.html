@@ -6,11 +6,22 @@
 <meta charset="UTF-8">
 <title>{% trans 'Information of' %} {{ con.name }}</title>
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/info.css" />
-
 </head>
 <body>
-<div class='content'>
-	{% autoescape off %}{{ con.description_detail|linebreaksbr|urlize }}{% endautoescape %}
+<div class="font-resizer">
+	<ul>
+		<li><img onclick="changeFontSize(1); return false;" id="font-large" alt="{% trans 'Zoom in' %}" title="{% trans 'Zoom in' %}" src="{{ STATIC_URL }}images/font_large.jpg"></li>	
+		<li><img onclick="changeFontSize(-1); return false;" id="font-small" alt="{% trans 'Zoom out' %}" title="{% trans 'Zoom out' %}" src="{{ STATIC_URL }}images/font_small.jpg"></li>
+		<li><img onclick="revertStyles(); return false;" id="font-default" alt="{% trans 'Default' %}" title="{% trans 'Default' %}" src="{{ STATIC_URL }}images/font_default.jpg"></li>
+	</ul>
+</div>
+<div id="content" class='content'>
+	<div>
+		{% autoescape off %}{{ con.description_detail|linebreaksbr|urlize }}{% endautoescape %}
+	</div>
+	<div>
+		{% autoescape off %}{{ con.description_other|linebreaksbr|urlize }}{% endautoescape %}
+	</div>
 </div>
 <div class="form-row"></div>
 <div id='comment-form'>
@@ -52,7 +63,7 @@
 	</script>
 	{% endif %}
 </div>
-<div>
+<div id='comments'>
 	
 	{% for comment in comments %}
 		{% autoescape off %}<blockquote>{{ comment.content|linebreaksbr|urlize }} <br><br>{% trans 'Posted by' %} <b>{{ comment.email|nickname }}</b> {% trans 'at' %} {{ comment.comment_date }}</blockquote>{% endautoescape %}

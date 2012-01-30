@@ -2,7 +2,7 @@
    content: "";
    position: relative;
    padding: 5px 5px;
-   top: 5px;
+   top: 18px;
    left: 10;
    text-align: justify;
 }
@@ -124,4 +124,18 @@ blockquote {
 #comment-form {
 	position: relative;
 	height: 50px;
+}
+.font-resizer {
+	width: 95%;
+	top: -8px;
+	position: fixed;
+	z-index: 10;
+}
+.font-resizer ul li {
+	display: inline;
+	text-decoration: none;
+	float: right;
+}
+ul li img {
+	cursor: pointer;
 }

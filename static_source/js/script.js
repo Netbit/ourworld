@@ -12,6 +12,7 @@ var start_image_con;	//Start index to show images of kind of construction
 var end_image_con;		//End index to show images of kind of construction
 var directionsService;
 var directionsDisplay;
+var media = "/static/";
 
 kind_person       	= new Array();
 kind_construction 	= new Array();
@@ -78,10 +79,13 @@ function search_place(id, address) {
 						if (data.results.image != "") {
 							contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
 						}
-						contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
-										 "<span class='place_address'>" + marker.address + "</span><br>" +
-										 "<span class='place_details'>" + data.results.details + "</span><br>" +
-										 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
+						contentString += "<span class='place_name'>" + data.results.name + "</span>" + 
+						 "<span style='float: right'><img onclick=\"revertStyles(); return false;\" id=\"font-large\" alt=\"" + gettext("Default") + "\" title=\"" + gettext("Default") + "\" src=\"" + media + "images/font_default.jpg\">" + 
+						 "<img onclick=\"changeFontSize(-1); return false;\" id=\"font-small\" alt=\"" + gettext("Zoom out") + "\" title=\"" + gettext("Zoom out") + "\" src=\"" + media + "images/font_small.jpg\">" +
+						 "<img onclick=\"changeFontSize(1); return false;\" id=\"font-large\" alt=\"" + gettext("Zoom in") + "\" title=\"" + gettext("Zoom in") + "\" src=\"" + media + "images/font_large.jpg\"></span><br>" +
+						 "<span class='place_address'>" + marker.address + "</span><br>" +
+						 "<span id='content' class='place_details'>" + data.results.details + "</span><br>" +
+						 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
 						infowindow = new google.maps.InfoWindow({
 							content : contentString
 						});
@@ -95,30 +99,6 @@ function search_place(id, address) {
 		}
 	});
 }
-
-//function showSteps(directionResult) {
-//	// For each step, place a marker, and add the text to the marker's
-//	// info window. Also attach the marker to an array so we
-//	// can keep track of it and remove it when calculating new
-//	// routes.
-//	var myRoute = directionResult.routes[0].legs[0];
-//
-//	for ( var i = 0; i < myRoute.steps.length; i++) {
-//		var marker = new google.maps.Marker({
-//			position : myRoute.steps[i].start_point,
-//			map : map
-//		});
-//		attachInstructionText(marker, myRoute.steps[i].instructions);
-//		markerArray[i] = marker;
-//	}
-//}
-
-//function attachInstructionText(marker, text) {
-//	google.maps.event.addListener(marker, 'click', function() {
-//		stepDisplay.setContent(text);
-//		stepDisplay.open(map, marker);
-//	});
-//}
 
 function calculateDistances(origin, destination) {
 	var service = new google.maps.DistanceMatrixService();
@@ -157,27 +137,6 @@ function callback(response, status) {
 		}
 	}
 }
-
-//function addMarker(location, isDestination) {
-//
-//	geocoder.geocode({
-//		'address' : location
-//	}, function(results, status) {
-//		if (status == google.maps.GeocoderStatus.OK) {
-//			bounds.extend(results[0].geometry.location);
-//			map.fitBounds(bounds);
-//			var marker = new google.maps.Marker({
-//				map : map,
-//				position : results[0].geometry.location,
-//				zIndex: Math.ceil(Math.random()*1111)
-//			});
-//			markersArray.push(marker);
-//		} else {
-//			alert("Geocode was not successful for the following reason: "
-//					+ status);
-//		}
-//	});
-//}
 
 function deleteOverlays() {
 	directionsDisplay.setMap(null);
@@ -334,13 +293,17 @@ function set_location(id, address, location, icon) {
 		$.getJSON("/info/" + marker.id + "/?address=" + address, function(data) {
 			if (data.results.hasOwnProperty('details')) {
 				contentString += "<div>";
+				
 				if (data.results.image != "") {
 					contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
 				}
-				contentString += "<span class='place_name'>" + data.results.name + "</span><br>" +
-								 "<span class='place_address'>" + marker.address + "</span><br>" +
-								 "<span class='place_details'>" + data.results.details + "</span><br>" +
-								 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
+				contentString += "<span class='place_name'>" + data.results.name + "</span>" + 
+					 "<span style='float: right'><img onclick=\"revertStyles(); return false;\" id=\"font-large\" alt=\"" + gettext("Default") + "\" title=\"" + gettext("Default") + "\" src=\"" + media + "images/font_default.jpg\">" + 
+					 "<img onclick=\"changeFontSize(-1); return false;\" id=\"font-small\" alt=\"" + gettext("Zoom out") + "\" title=\"" + gettext("Zoom out") + "\" src=\"" + media + "images/font_small.jpg\">" +
+					 "<img onclick=\"changeFontSize(1); return false;\" id=\"font-large\" alt=\"" + gettext("Zoom in") + "\" title=\"" + gettext("Zoom in") + "\" src=\"" + media + "images/font_large.jpg\"></span><br>" +
+					 "<span class='place_address'>" + marker.address + "</span><br>" +
+					 "<span id='content' class='place_details'>" + data.results.details + "</span><br>" +
+					 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
 				infowindow = new google.maps.InfoWindow({
 					content : contentString
 				});
@@ -418,24 +381,6 @@ function district_filter(id_district) {
 	});
 }
 
-function create_image_list(images, start, end, id_div)
-{
-	var htmlString;
-	htmlString = "";
-	do {
-		if ("left" == id_div) {
-			htmlString += create_element(images[start].name, images[start].id, images[start].image, 
-											"kind_person_filter", "left");
-		} else {
-			htmlString += create_element(images[start].name, images[start].id, images[start].image, 
-											"kind_construction_filter", "right");
-		}		
-		start++;
-	}while (start < end)
-	
-	return htmlString;
-}
-
 function showTooltip(id, msg) {
 	$("#" + id).tooltip({ 
 	    bodyHandler: function() { 
@@ -444,129 +389,3 @@ function showTooltip(id, msg) {
 	    showURL: false 
 	});
 }
-
-function create_element(name, id, image, func, id_div)
-{
-	var htmlString;
-	htmlString = "<span class='icon'>";
-	if ("left" == id_div) {
-		htmlString += "<a onclick=" + func + "('" + id + "')>"
-					  + "<img id='l" + id + "'";
-	} else {
-		htmlString += "<a onclick=" + func + "('" + id + "')>"
-					  + "<img id='r" + id + "'";	
-	}
-	htmlString += " onmouseover=\"showTooltip(this.id,'" + name + "')\""  
-				   + " height='32'" 
-				   + " alt='" + name + "'" 
-				   + " src='" + image + "'>"
-				   + "</a></span>";
-	return htmlString;
-}
-
-function image_slider(id_button)
-{		
-	var htmlString = "";
-	switch (id_button) {
-	case "left_next_button":
-		start_image_person++;
-		end_image_person++;
-		htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
-										"image_slider", null)
-					+ create_image_list(kind_person, start_image_person, end_image_person, "left");  
-		if (end_image_person < kind_person.length) {
-			htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
-										"image_slider", null);	
-		}
-		$('#left').html(htmlString);
-		break;
-	case "left_prev_button":
-		start_image_person--;
-		end_image_person--;
-		if (0 < start_image_person) {
-			htmlString = create_element("Previous", "left_prev_button", "/static/images/left_prev_button.png", 
-										"image_slider", null);
-		}
-		htmlString += create_image_list(kind_person, start_image_person, end_image_person, "left")  
-					+ create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
-										"image_slider", null);	
-		$('#left').html(htmlString);
-		break;
-	case "right_next_button":
-		start_image_con++;
-		end_image_con++;
-		htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
-										"image_slider", null)
-					+ create_image_list(kind_construction, start_image_con, end_image_con, "right");  
-		if (end_image_con < kind_construction.length) {
-			htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
-										"image_slider", null);	
-		}
-		$('#right').html(htmlString);
-		break;
-	case "right_prev_button":
-		start_image_con--;
-		end_image_con--;
-		if (0 < start_image_con) {
-			htmlString = create_element("Previous", "right_prev_button", "/static/images/right_prev_button.png", 
-										"image_slider", null);
-		}
-		htmlString += create_image_list(kind_construction, start_image_con, end_image_con, "left")  
-					+ create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
-										"image_slider", null);	
-		$('#right').html(htmlString);
-		break;
-	}
-}
-
-function disable_button(id_button)
-{
-	var img;
-	img = document.getElementById(id_button);
-	img.display  = "none";
-}
-
-
-function get_kind_of_person_construction()
-{
-	$.ajax({
-		url : "/get/person_construction/",
-		success : function(data) {
-			var i;
-			var htmlString;
-			htmlString = "";
-    		for (i = 0; i < data.kind_person.length; i++) {
-    			kind_person.push(data.kind_person[i]);
-    		}
-    		
-    		for (i = 0; i < data.kind_construction.length; i++) {
-    			kind_construction.push(data.kind_construction[i]);
-    		}	
-    		
-    		if (end_image_person > kind_person.length) {
-    			end_image_person = kind_person.length;
-    		}
- 			htmlString = create_image_list(kind_person, start_image_person, end_image_person, "left");
- 			if (kind_person.length > end_image_person) {
- 				htmlString += create_element("Next", "left_next_button", "/static/images/left_next_button.png", 
- 											"image_slider", null);
- 			}   				
- 			$('#left').html(htmlString);
- 			
- 			if (end_image_con > kind_construction.length) {
-    			end_image_person = kind_construction.length;
-    		}
- 			htmlString = create_image_list(kind_construction, start_image_con, end_image_con, "right");
- 			if (kind_construction.length > end_image_con) {
- 				htmlString += create_element("Next", "right_next_button", "/static/images/right_next_button.png", 
-											"image_slider", null);	
- 			}  	
- 			
- 			$('#right').html(htmlString);
-		},
-		error : function(e) {
-			alert(gettext("Couldn't get the data of kind of person and construction!"));
-		}
-	});
-}
-
