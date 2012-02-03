@@ -219,7 +219,7 @@ $(document).ready(function() {
 	$('.path').click(function() {
 		$('.search-place').css('display', 'none');
 		$('.search-path').css('display', 'block');
-		$('.box-search').css('width', '570px');
+		$('.box-search').css('width', '580px');
 	});
 
 	$('.swap').click(function() {
