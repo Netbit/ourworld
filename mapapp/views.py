@@ -111,7 +111,7 @@ def kind_construction_filter(request):
     if id2 == '':
         lst = Construction.objects.filter(kind_of_construction = id1)
     else:
-        lst = Construction.objects.filter(kind_of_construction = id1, district = id1)
+        lst = Construction.objects.filter(kind_of_construction = id1, district = id2)
         
     mData = {}           
     mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in lst]
