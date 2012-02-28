@@ -1,20 +1,27 @@
 from django.contrib import admin
 from mapapp.models import District, KindOfConstruction, Construction,\
-    KindPersonOfAccess, Street, Comment, Ward
+    KindPersonOfAccess, Street, Comment, Ward, AccessibleIcon
 from modeltranslation.admin import TranslationAdmin
 from django.utils.translation import ugettext_lazy as _
-
 
 
 class AdminDistrict(admin.ModelAdmin):
     list_display = ['name',]
     list_filter = ('name',)
     search_fields = ('name',)
-    
+
+class AccessibleIconInline(admin.TabularInline):
+    model = AccessibleIcon
+    extra = 1
+            
 class AdminKindOfConstruction(admin.ModelAdmin):
     list_display = ['name', 'show_image']
     list_filter = ('name',)
-    search_fields = ('name',)
+    search_fields = ('name',)    
+    inlines = [
+        AccessibleIconInline,
+    ]
+
     
 class AdminComment(admin.ModelAdmin):
     list_display = ['email', 'get_content', 'date_format', 'construction', 'get_status']

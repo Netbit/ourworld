@@ -27,7 +27,8 @@ class Street(models.Model):
     
     def __unicode__(self):
         return self.name
-   
+
+
 class KindPersonOfAccess(models.Model):
     access_level = models.CharField(max_length = 10, unique = True, verbose_name = _('Access level'))
     name        = models.CharField(max_length = 100, blank = True, verbose_name = _('Kind person of access name'))
@@ -80,6 +81,17 @@ class KindOfConstruction(models.Model):
     
     def __unicode__(self):
         return self.name
+       
+class AccessibleIcon(models.Model):
+    kind_of_contruction = models.ForeignKey(KindOfConstruction)
+    access_level = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Access level'))
+    icon        = models.ImageField(upload_to = 'images/icon_map', blank = True, verbose_name = _('Icon'))
+    
+    class Meta:
+        verbose_name = _("Accessible Icon")
+        verbose_name_plural = _("Accessible Icons")
+        unique_together = ['access_level', 'kind_of_contruction']
+        
     
 class Ward(models.Model):
     name = models.CharField(unique = True, max_length = 100, verbose_name = _('Ward name'))
