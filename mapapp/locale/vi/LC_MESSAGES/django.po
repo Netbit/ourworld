@@ -378,6 +378,12 @@ msgstr "Cập nhật dữ liệu thành công."
 msgid "Error found at line(s)"
 msgstr "Lỗi phát sinh tại dòng"
 
+msgid "Accessible Icon"
+msgstr "Icon Tiếp Cận"
+
+msgid "Accessible Icons"
+msgstr "Các Icon Tiếp Cận"
+
 #~ msgid "From"
 #~ msgstr "Từ"
 

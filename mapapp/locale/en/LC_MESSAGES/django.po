@@ -376,3 +376,9 @@ msgstr ""
 #: .\templates\admin\mapapp\construction\upload.html.py:39
 msgid "Error found at line(s)"
 msgstr ""
+
+msgid "Accessible Icon"
+msgstr ""
+
+msgid "Accessible Icons"
+msgstr ""
