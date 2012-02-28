@@ -389,3 +389,10 @@ function showTooltip(id, msg) {
 	    showURL: false 
 	});
 }
+
+function killEnter(evt) {
+	if(evt.keyCode == 13 || evt.which == 13) {
+		return false;
+	}
+	return true;
+}
