@@ -213,13 +213,12 @@ def upload_file(request):
                         obj.description_other = row[5].value
                         obj.description_other_vi = row[5].value
                         obj.description_other_en = row[6].value
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value)[0]
-                        obj.save()
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value, name_vi = row[7].value)[0]
                         value = str(row[8].value)
                         if value.find(".") != -1:
                             value = value[:value.find(".")]            
                         if value != '':
-                            obj.kind_of_person.add(KindPersonOfAccess.objects.get_or_create(access_level = str(value))[0])
+                            obj.kind_of_person = KindPersonOfAccess.objects.get_or_create(access_level = str(value))[0]
                             obj.save()
                         if flag == 0:
                             flag = 2                        

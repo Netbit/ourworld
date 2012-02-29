@@ -21,6 +21,9 @@ class AdminKindOfConstruction(admin.ModelAdmin):
     inlines = [
         AccessibleIconInline,
     ]
+    
+    class Media:
+        js = ('js/jquery.min.js', 'js/icon.js')
 
     
 class AdminComment(admin.ModelAdmin):

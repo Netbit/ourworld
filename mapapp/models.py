@@ -64,6 +64,7 @@ class KindOfConstruction(models.Model):
         verbose_name = _("Kind of Construction")
         verbose_name_plural = _("Kind of Constructions")
         
+        
     def get_image(self):
         if hasattr(self.image, 'url'):
             return self.image.url
@@ -91,6 +92,9 @@ class AccessibleIcon(models.Model):
         verbose_name = _("Accessible Icon")
         verbose_name_plural = _("Accessible Icons")
         unique_together = ['access_level', 'kind_of_contruction']
+    
+    def __str__(self):
+        return "Accessible Icon"
         
     
 class Ward(models.Model):
@@ -114,9 +118,9 @@ class Construction(models.Model):
     description_detail = models.TextField(blank = True, verbose_name = _('Description detail'))
     description_other  = models.TextField(blank = True, verbose_name = _('Description other'))
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
-    kind_of_person        = models.ManyToManyField(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
+    kind_of_person        = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
     location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
-    icon               = models.ImageField(upload_to = 'images/icon', blank = True, verbose_name = _('Icon'))
+    #icon               = models.ImageField(upload_to = 'images/icon', blank = True, verbose_name = _('Icon'))
     
     class Meta:
         verbose_name = _("Construction")
@@ -130,10 +134,13 @@ class Construction(models.Model):
             return ""
         
     def get_icon(self):
-        if hasattr(self.icon, 'url'):
-            return self.icon.url
-        else:
-            return ""
+        try:
+            obj = AccessibleIcon.objects.get(kind_of_contruction = self.kind_of_construction, access_level = self.kind_of_person)
+            if hasattr(obj.icon, 'url'):
+                return obj.icon.url
+        except:
+            pass
+        return ""
     
     def __unicode__(self):
         return self.name
