@@ -321,15 +321,21 @@ function kind_construction_filter(id) {
 			deleteOverlays();
 			$('#load').show();			
 		},
-    	success : function(data) {    		
+    	success : function(data) { 
+    		var loc = null;
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
     				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				loc = data.results[i].location;
     			}    			
     		}
     		$('#load').hide();
+    		if (loc) {
+    			var lat = new google.maps.LatLng(loc[0],loc[1]);
+    			map.setCenter(lat);
+    		}    		
     	},                                                                    
     	error : function(e) { 
     		$('#load').hide();
@@ -345,15 +351,21 @@ function kind_person_filter(id) {
 			deleteOverlays();
 			$('#load').show();			
 		},
-    	success : function(data) {    		
+    	success : function(data) {   
+    		var loc = null;
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
     				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				loc = data.results[i].location;
     			}
     		}
-    		$('#load').hide();    	},                                                                        	error : function(e) {         
+    		$('#load').hide();
+    		if (loc) {
+    			var lat = new google.maps.LatLng(loc[0],loc[1]);
+    			map.setCenter(lat);
+    		}    	},                                                                        	error : function(e) {         
     		$('#load').hide();    		alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
 }
 
@@ -364,15 +376,21 @@ function district_filter(id_district) {
 			deleteOverlays();
 			$('#load').show();						
 		},
-		success : function(data) {			
+		success : function(data) {
+			var loc = null;
     		for (var i = 0; i < data.results.length; i++) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
     				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				loc = data.results[i].location;
     			}
     		}
     		$('#load').hide();
+    		if (loc) {
+    			var lat = new google.maps.LatLng(loc[0],loc[1]);
+    			map.setCenter(lat);
+    		}
 		},
 		error : function(e) {
 			$('#load').hide();
