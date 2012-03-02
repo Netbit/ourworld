@@ -84,7 +84,7 @@ class KindOfConstruction(models.Model):
         return self.name
        
 class AccessibleIcon(models.Model):
-    kind_of_contruction = models.ForeignKey(KindOfConstruction)
+    kind_of_contruction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
     access_level = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Access level'))
     icon        = models.ImageField(upload_to = 'images/icon_map', blank = True, verbose_name = _('Icon'))
     
