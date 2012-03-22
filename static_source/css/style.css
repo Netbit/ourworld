@@ -277,5 +277,77 @@ body {
 }
 #tooltip h3, #tooltip div { margin: 0; }
 
+#ja-mainnav {
+    background: url("../images/menu-bg.jpg") repeat-x scroll 0 0 transparent;
+    bottom: 0;
+    clear: both;
+    height: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
 
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+#ja-cssmenu {
+    margin: 0;
+    padding: 0 0 0 0;
+    position: relative;
+}
+
+#ja-cssmenu li {
+    background: url("../images/step.jpg") no-repeat scroll right center transparent;
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0 0 0 0;
+}
+
+ul {
+    list-style: none outside none;
+    margin: 0 0;
+    padding: 0;
+}
+
+#ja-cssmenu li a.active, #ja-cssmenu li a.active:hover, #ja-cssmenu li a.active:active, #ja-cssmenu li a.active:focus {
+    text-decoration: none;
+}
+
+#ja-cssmenu li a.active, #ja-cssmenu li a.active:hover, #ja-cssmenu li a.active:active, #ja-cssmenu li a.active:focus {
+    background: url("../images/menu-act.jpg") repeat-x scroll 0 0 transparent;
+    color: #000000;
+}
+
+#ja-cssmenu li a {
+    color: #FFFFFF;
+    display: block;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0 2px;
+    padding: 0 15px;
+    text-decoration: none;
+}
+
+#ja-mainnav a, #ja-subnav a {
+    line-height: normal;
+    outline: medium none;
+}
+
+a, a:hover, a:active, a:focus {
+    color: #3B5998;
+    font-size: 100%;
+}
+
+a {
+    color: #D58400;
+    text-decoration: none;
+}
 

@@ -9,14 +9,34 @@
 
 {% block extra_static %}
 <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+<!--
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
 </script>
+-->
 <!--[if IE]><link rel="stylesheet" href="ie.css" type="text/css" media="screen, projection" />
 <![endif]-->
 {% endblock %}
 
 {% block header %}
+	<div id="new_header">
+		<h1> New header </h1>
+	</div>
+	<div id="ja-mainnav">   
+		<ul class="clearfix" id="ja-cssmenu">
+			<li class="havechild"><a title="DRD" id="menu1" class="menu-item0 first-item" href="http://webmoi.drdvietnam.com/"><span class="menu-title">DRD</span></a></li> 
+			<li class="havechild"><a title="Hội quán" id="menu126" class="menu-item1" href="/vi/drd-hoi-quan.html"><span class="menu-title">Hội quán</span></a></li> 
+			<li class="havechild"><a title="Học bổng" id="menu127" class="menu-item2" href="/vi/drd-hoc-bong.html"><span class="menu-title">Học bổng</span></a></li> 
+			<li class="havechild"><a title="Việc làm" id="menu128" class="menu-item3" href="/vi/drd-viec-lam.html"><span class="menu-title">Việc làm</span></a></li> 
+			<li class="havechild"><a title="Sống độc lập" id="menu129" class="menu-item4" href="/vi/drd-song-doc-lap.html"><span class="menu-title">Sống độc lập</span></a></li> 
+			<li class=""><a title="Luật - Chính sách" id="menu130" class="menu-item5" href="/vi/luat-chinh-sach.html"><span class="menu-title">Luật - Chính sách</span></a></li> 
+			<li class="havechild"><a title="Tập huấn" id="menu131" class="menu-item6" href="/vi/drd-tap-huan.html"><span class="menu-title">Tập huấn</span></a></li> 
+			<li class="havechild"><a title="Media" id="menu132" class="menu-item7" href="/vi/media-drd.html"><span class="menu-title">Media</span></a></li> 
+			<li class=""><a title="Thư viện" id="menu133" class="menu-item8" href="/vi/drd-thu-vien.html"><span class="menu-title">Thư viện</span></a></li> 
+			<li class="havechild"><a title="Diễn đàn" id="menu134" class="menu-item9" href="/vi/drd-dien-dan.html"><span class="menu-title">Diễn đàn</span></a></li> 
+			<li class="havechild"><a title="Bản đồ tiếp cận" id="menu135" class="menu-item10 active last-item" href="/vi/ban-do-tiep-can.html"><span class="menu-title">Bản đồ tiếp cận</span></a></li> 
+		</ul>                       
+	</div>
 	<div class="header">
 		<label style="font-size: 35px;">{% trans 'Accessible Map' %}</label>
 		{% get_current_language as LANGUAGE_CODE %}
@@ -75,8 +95,10 @@
 			</form>					
 		</div>
 		<span id='load' style="z-index: 1000; position: fixed; top: 195px;"><img src="{{ STATIC_URL }}images/loading.gif"><label style="margin: 5px 5px; font-weight: bold; color: red;">{% trans 'Loading...' %}</label></span>
-	</div>		
-	<div class="map" id="my_map"></div>
+	</div>	
+	
+<!--	<div class="map" id="my_map"></div> -->
+
 	<div id="box" class="box">
 		<img alt="" style="cursor: pointer;" id="hidden-popup" title="{% trans 'Hidden this box' %}" src="{{ STATIC_URL }}images/hide.png"><br>
 		<div id="content">
