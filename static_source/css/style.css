@@ -277,6 +277,7 @@ body {
 }
 #tooltip h3, #tooltip div { margin: 0; }
 
+
 #ja-mainnav {
     background: url("../images/menu-bg.jpg") repeat-x scroll 0 0 transparent;
     bottom: 0;
@@ -323,7 +324,7 @@ ul {
 #ja-cssmenu li a.active, #ja-cssmenu li a.active:hover, #ja-cssmenu li a.active:active, #ja-cssmenu li a.active:focus {
     background: url("../images/menu-act.jpg") repeat-x scroll 0 0 transparent;
     color: #000000;
-}
+}/*
 
 #ja-cssmenu li a {
     color: #FFFFFF;
@@ -336,18 +337,75 @@ ul {
     text-decoration: none;
 }
 
+
 #ja-mainnav a, #ja-subnav a {
     line-height: normal;
     outline: medium none;
+}*/
+
+/*
+#ja-mainnav {
+	height: 40px;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+	width: 100%;
+	clear:both;
+	background:url("../images/menu-bg.jpg") repeat-x scroll 0 0 transparent;
 }
 
-a, a:hover, a:active, a:focus {
-    color: #3B5998;
-    font-size: 100%;
+* html #ja-mainnav {
+	bottom: -1px;
 }
 
-a {
-    color: #D58400;
-    text-decoration: none;
+#ja-mainnav a, #ja-subnav a {
+	outline: none;
+	line-height: normal;
 }
+
+#ja-subnav {
+	clear: both;
+	background: url("../images/subnav-bg.gif") repeat-x bottom #D58400;
+	margin: 0 10px;
+	padding: 0 10px;
+	height: 30px;
+}
+
+#ja-subnav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#ja-subnav li {
+	background: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+#ja-subnav a {
+	display: block;
+	float: left;
+	outline: none;
+	padding: 0 15px;
+	line-height: 30px;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#ja-subnav a:hover,
+#ja-subnav a:active,
+#ja-subnav a:focus {
+	color: #FFFFFF;
+	background: url("../images/subnav-hover.gif") no-repeat center bottom;
+	text-decoration: none;
+}
+
+#ja-subnav li.active a {
+	color: #FFFFFF !important;
+	font-weight: bold;
+	background: url("../images/subnav-hover.gif") no-repeat center bottom;
+	text-decoration: none;
+}*/
 
