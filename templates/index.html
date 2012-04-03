@@ -19,24 +19,34 @@
 {% endblock %}
 
 {% block header %}
-	<div id="new_header">
-		<h1> New header </h1>
-	</div>
+	<div id="ja-header" class="clearfix">
+        <div style=" float:right">
+           	<div>
+			    <object width="1000" height="150" type="application/x-shockwave-flash" data="{{STATIC_URL}}images/drdmoi2011.swf">
+			        <param name="loop" value="false">
+			        <param name="wmode" value="window">
+			        <param name="movie" value="/images/stories/banner/drdmoi2011.swf">
+			    </object>
+			</div>
+ 		</div>
+    </div>
+	
 	<div id="ja-mainnav">   
-		<ul class="clearfix" id="ja-cssmenu">
-			<li class="havechild"><a title="DRD" id="menu1" class="menu-item0 first-item" href=""><span class="menu-title">DRD</span></a></li> 
-			<li class="havechild"><a title="Hội quán" id="menu126" class="menu-item1" href=""><span class="menu-title">Hội quán</span></a></li> 
-			<li class="havechild"><a title="Học bổng" id="menu127" class="menu-item2" href=""><span class="menu-title">Học bổng</span></a></li> 
-			<li class="havechild"><a title="Việc làm" id="menu128" class="menu-item3" href=""><span class="menu-title">Việc làm</span></a></li> 
-			<li class="havechild"><a title="Sống độc lập" id="menu129" class="menu-item4" href=""><span class="menu-title">Sống độc lập</span></a></li> 
-			<li class="havechild"><a title="Luật - Chính sách" id="menu130" class="menu-item5" href=""><span class="menu-title">Luật - Chính sách</span></a></li> 
-			<li class="havechild"><a title="Tập huấn" id="menu131" class="menu-item6" href=""><span class="menu-title">Tập huấn</span></a></li> 
-			<li class="havechild"><a title="Media" id="menu132" class="menu-item7" href="l"><span class="menu-title">Media</span></a></li> 
-			<li class="havechild"><a title="Thư viện" id="menu133" class="menu-item8" href=""><span class="menu-title">Thư viện</span></a></li> 
-			<li class="havechild"><a title="Diễn đàn" id="menu134" class="menu-item9" href=""><span class="menu-title">Diễn đàn</span></a></li> 
-			<li class="havechild"><a title="Bản đồ tiếp cận" id="menu135" class="menu-item10" href=""><span class="menu-title">Bản đồ tiếp cận</span></a></li> 
-		</ul>                       
+	    <ul id="ja-cssmenu" class="clearfix">
+			<li class="havechild"><a href="http://webmoi.drdvietnam.com/" class="menu-item0 active first-item" id="menu1" title="DRD"><span class="menu-title">DRD</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-hoi-quan.html" class="menu-item1" id="menu126" title="Hội quán"><span class="menu-title">Hội quán</span></a></li> 
+			<li class="havechild"><a href="/vi/nang-cao-nang-luc.html" class="menu-item2" id="menu127" title="Dự án AP"><span class="menu-title">Dự án AP</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-viec-lam.html" class="menu-item3" id="menu128" title="Việc làm"><span class="menu-title">Việc làm</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-song-doc-lap.html" class="menu-item4" id="menu129" title="Sống độc lập"><span class="menu-title">Sống độc lập</span></a></li> 
+			<li class="havechild"><a href="/vi/luat-chinh-sach.html" class="menu-item5" id="menu130" title="Luật - Chính sách"><span class="menu-title">Luật - Chính sách</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-tap-huan.html" class="menu-item6" id="menu131" title="Tập huấn"><span class="menu-title">Tập huấn</span></a></li> 
+			<li class="havechild"><a href="/vi/media-drd.html" class="menu-item7" id="menu132" title="Media"><span class="menu-title">Media</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-thu-vien.html" class="menu-item8" id="menu133" title="Thư viện"><span class="menu-title">Thư viện</span></a></li> 
+			<li class="havechild"><a href="/vi/drd-dien-dan.html" class="menu-item9" id="menu134" title="Diễn đàn"><span class="menu-title">Diễn đàn</span></a></li> 
+			<li class="havechild active"><a href="/vi/ban-do-tiep-can.html" class="menu-item10 last-item" id="menu135" title="Bản đồ tiếp cận"><span class="menu-title">Bản đồ tiếp cận</span></a></li> 
+		</ul>
 	</div>
+	
 	<div class="header">
 		<label style="font-size: 35px;">{% trans 'Accessible Map' %}</label>
 		{% get_current_language as LANGUAGE_CODE %}
