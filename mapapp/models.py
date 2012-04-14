@@ -118,9 +118,9 @@ class Construction(models.Model):
     description_detail = models.TextField(blank = True, verbose_name = _('Description detail'))
     description_other  = models.TextField(blank = True, verbose_name = _('Description other'))
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
-    kind_of_person        = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
+    kind_of_person     = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
     location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
-    #icon               = models.ImageField(upload_to = 'images/icon', blank = True, verbose_name = _('Icon'))
+    
     
     class Meta:
         verbose_name = _("Construction")
@@ -167,7 +167,7 @@ class Comment(models.Model):
     content = models.TextField(verbose_name = _('Content'))
     comment_date = models.DateTimeField(auto_now_add = True, verbose_name = _('Date'))
     construction = models.ForeignKey(Construction, verbose_name = _('Construction'))
-    status = models.CharField(max_length = 2, default = 'h', verbose_name = _('Status'), choices = STATUS_CHOICES)
+    status = models.CharField(max_length = 2, default = 'p', verbose_name = _('Status'), choices = STATUS_CHOICES)
     
     def date_format(self):
         return date(self.comment_date, 'd-m-Y H:i:s')
@@ -196,6 +196,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = _('Comment')
         verbose_name_plural = _('Comments')
-
-
     

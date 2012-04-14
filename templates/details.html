@@ -17,6 +17,8 @@
 </div>
 <div id="content" class='content'>
 	<div>
+		<h2>{{ con.name }}</h2>
+		<p><i>{{ con.get_address }}</i></p>
 		{% autoescape off %}{{ con.description_detail|linebreaksbr|urlize }}{% endautoescape %}
 	</div>
 	<div>

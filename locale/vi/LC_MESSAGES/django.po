@@ -221,7 +221,7 @@ msgstr ""
 
 #: .\templates\base.html.py:9 .\templates\index.html.py:21
 msgid "Accessible Map"
-msgstr "Bản đồ tiếp cận"
+msgstr "Bản đồ tiếp cận cho người khuyết tật"
 
 #: .\templates\comments.html.py:6 .\templates\details.html.py:69
 msgid "Posted by"

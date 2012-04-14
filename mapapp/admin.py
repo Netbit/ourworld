@@ -65,6 +65,12 @@ class AdminWard(admin.ModelAdmin):
     list_display = ['name',]
     list_filter = ('name',)
     search_fields = ('name',)  
+    
+
+class AdminMenuItem(admin.ModelAdmin):
+    list_display = ['title','url','order']
+    list_filter = ('title',)
+    search_fields = ('title',)  
 
 
 class MyTranslatedNewsAdmin(AdminConstruction, TranslationAdmin):
@@ -80,3 +86,4 @@ admin.site.register(KindPersonOfAccess, AdminKindPersonOfAccess)
 admin.site.register(Street, AdminStreet)
 admin.site.register(Comment, AdminComment)
 admin.site.register(Ward, AdminWard)
+

@@ -49,9 +49,12 @@ function initialize() {
 					+ status);
 		}
 	});
-
-	district = document.getElementById('district');
-	district_filter(district.options[district.selectedIndex].value);
+	
+	if (document.URL.indexOf("/search/") == -1) {
+		district = document.getElementById('district');
+		district_filter(district.options[district.selectedIndex].value);
+	}
+	
 }
 
 function search_place(id, address) {
@@ -72,22 +75,15 @@ function search_place(id, address) {
 			});
 			markersArray.push(marker);
 			google.maps.event.addListener(marker, 'click', function() {
-				var contentString = "";
 				$.getJSON("/info/" + marker.id + "/?address=" + address, function(data) {
-					if (data.results.hasOwnProperty('details')) {
-						contentString += "<div>";
-						if (data.results.image != "") {
-							contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
-						}
-						contentString += "<span class='place_name'>" + data.results.name + "</span>" + 
-						 "<span style='float: right'><img onclick=\"revertStyles(); return false;\" id=\"font-large\" alt=\"" + gettext("Default") + "\" title=\"" + gettext("Default") + "\" src=\"" + media + "images/font_default.jpg\">" + 
-						 "<img onclick=\"changeFontSize(-1); return false;\" id=\"font-small\" alt=\"" + gettext("Zoom out") + "\" title=\"" + gettext("Zoom out") + "\" src=\"" + media + "images/font_small.jpg\">" +
-						 "<img onclick=\"changeFontSize(1); return false;\" id=\"font-large\" alt=\"" + gettext("Zoom in") + "\" title=\"" + gettext("Zoom in") + "\" src=\"" + media + "images/font_large.jpg\"></span><br>" +
-						 "<span class='place_address'>" + marker.address + "</span><br>" +
-						 "<span id='content' class='place_details'>" + data.results.details + "</span><br>" +
-						 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
+					if (data.results.hasOwnProperty('id')) {
 						infowindow = new google.maps.InfoWindow({
-							content : contentString
+							content : data.results.content
+						});
+						infowindow.open(map, marker);
+					} else {
+						infowindow = new google.maps.InfoWindow({
+							content : this.address
 						});
 						infowindow.open(map, marker);
 					}					
@@ -228,29 +224,29 @@ $(document).ready(function() {
 		$('#b').val(temp);
 	});
 
-	$("#p").autocomplete("lookup/", {
-		autoFill : false,
-		max : 15,
-		multiple : true,
-		scroll : true,
-		multipleSeparator : " "
-	});
-
-	$("#a").autocomplete("lookup/", {
-		autoFill : false,
-		max : 15,
-		multiple : true,
-		scroll : true,
-		multipleSeparator : " "
-	});
-
-	$("#b").autocomplete("lookup/", {
-		autoFill : false,
-		max : 15,
-		multiple : true,
-		scroll : true,
-		multipleSeparator : " "
-	});
+//	$("#p").autocomplete("lookup/", {
+//		autoFill : false,
+//		max : 15,
+//		multiple : true,
+//		scroll : true,
+//		multipleSeparator : " "
+//	});
+//
+//	$("#a").autocomplete("lookup/", {
+//		autoFill : false,
+//		max : 15,
+//		multiple : true,
+//		scroll : true,
+//		multipleSeparator : " "
+//	});
+//
+//	$("#b").autocomplete("lookup/", {
+//		autoFill : false,
+//		max : 15,
+//		multiple : true,
+//		scroll : true,
+//		multipleSeparator : " "
+//	});
 
 	$('#hidden-popup').click(function() {
 		$('#box').fadeOut('slow').hide();
@@ -278,38 +274,20 @@ function changedLanguage(value) {
 	window.open('?lang=' + value, '_self', false);
 }
 
-function set_location(id, address, location, icon) {
+function set_location(id, content, location, icon) {
 	var pos = new google.maps.LatLng(location[0], location[1]);
 	var marker = new google.maps.Marker({
 		map : map,
 		id: id,
-		address : address,
 		position : pos,
 		icon: icon,
 		zIndex: Math.round(pos.lat()*-100000)<<5
 	});
 	google.maps.event.addListener(marker, 'click', function() {
-		var contentString = "";
-		$.getJSON("/info/" + marker.id + "/?address=" + address, function(data) {
-			if (data.results.hasOwnProperty('details')) {
-				contentString += "<div>";
-				
-				if (data.results.image != "") {
-					contentString += "<img style='float: left' height='100' src='" + data.results.image + "'>";				
-				}
-				contentString += "<span class='place_name'>" + data.results.name + "</span>" + 
-					 "<span style='float: right'><img onclick=\"revertStyles(); return false;\" id=\"font-large\" alt=\"" + gettext("Default") + "\" title=\"" + gettext("Default") + "\" src=\"" + media + "images/font_default.jpg\">" + 
-					 "<img onclick=\"changeFontSize(-1); return false;\" id=\"font-small\" alt=\"" + gettext("Zoom out") + "\" title=\"" + gettext("Zoom out") + "\" src=\"" + media + "images/font_small.jpg\">" +
-					 "<img onclick=\"changeFontSize(1); return false;\" id=\"font-large\" alt=\"" + gettext("Zoom in") + "\" title=\"" + gettext("Zoom in") + "\" src=\"" + media + "images/font_large.jpg\"></span><br>" +
-					 "<span class='place_address'>" + marker.address + "</span><br>" +
-					 "<span id='content' class='place_details'>" + data.results.details + "</span><br>" +
-					 "<span><a class='more' onclick = \"window.open('/details/" + data.results.id + "/','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')\">" + gettext("Details...") + "</a></span></div>";
-				infowindow = new google.maps.InfoWindow({
-					content : contentString
-				});
-				infowindow.open(map, marker);
-			}					
-		});				
+		infowindow = new google.maps.InfoWindow({
+			content : content
+		});
+		infowindow.open(map, marker);						
 	});
 	markersArray.push(marker);
 }
@@ -327,7 +305,7 @@ function kind_construction_filter(id) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				set_location(data.results[i].id, data.results[i].content, data.results[i].location, data.results[i].icon);
     				loc = data.results[i].location;
     			}    			
     		}
@@ -339,7 +317,7 @@ function kind_construction_filter(id) {
     	},                                                                    
     	error : function(e) { 
     		$('#load').hide();
-    		alert(gettext("Couldn't get the data!"));                                                 
+    		//alert(gettext("Couldn't get the data!"));                                                 
     	}                                                                     
     });   
 }
@@ -357,7 +335,7 @@ function kind_person_filter(id) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				set_location(data.results[i].id, data.results[i].content, data.results[i].location, data.results[i].icon);
     				loc = data.results[i].location;
     			}
     		}
@@ -366,7 +344,7 @@ function kind_person_filter(id) {
     			var lat = new google.maps.LatLng(loc[0],loc[1]);
     			map.setCenter(lat);
     		}    	},                                                                        	error : function(e) {         
-    		$('#load').hide();    		alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
+    		$('#load').hide();    		//alert(gettext("Couldn't get the data!"));                                                     	}                                                                         });   
 }
 
 function district_filter(id_district) {
@@ -382,7 +360,7 @@ function district_filter(id_district) {
     			if (data.results[i].location.length == 0) {
 					search_place(data.results[i].id, data.results[i].address);
     			} else {
-    				set_location(data.results[i].id, data.results[i].address, data.results[i].location, data.results[i].icon);
+    				set_location(data.results[i].id, data.results[i].content, data.results[i].location, data.results[i].icon);
     				loc = data.results[i].location;
     			}
     		}
@@ -394,7 +372,7 @@ function district_filter(id_district) {
 		},
 		error : function(e) {
 			$('#load').hide();
-			alert(gettext("Couldn't get the data!"));
+			//alert(gettext("Couldn't get the data!"));
 		}
 	});
 }
@@ -413,4 +391,32 @@ function killEnter(evt) {
 		return false;
 	}
 	return true;
+}
+
+function get_place(id) {
+	$.ajax({
+		url : "/info/" + id,
+		beforeSend : function() {
+			deleteOverlays();
+			$('#load').show();						
+		},
+		success : function(data) {
+			var loc = null;
+			if (data.results.location.length == 0) {
+				search_place(data.results.id, data.results.address);
+			} else {
+				set_location(data.results.id, data.results.content,data.results.location, data.results.icon);
+				loc = data.results.location;
+			}
+    		$('#load').hide();
+    		if (loc) {
+    			var lat = new google.maps.LatLng(loc[0],loc[1]);
+    			map.setCenter(lat);
+    		}
+		},
+		error : function(e) {
+			$('#load').hide();
+			//alert(gettext("Couldn't get the data!"));
+		}
+	});
 }

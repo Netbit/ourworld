@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load tagslib %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% block title %}Search results for {{ query }}{% endblock %}
+
+{% block extra_static %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dd.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tooltip.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/easySlider1.7.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/details.js"></script>
+	
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/dd.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/screen.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.autocomplete.css">
+	
+	<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+	<script type="text/javascript"
+	    src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
+</script>
+{% endblock %}
+
+{% block content %}
+	<div class="filter">
+		<div class="left">
+			<div id="slider_left">
+				<ul>
+					{% for obj in kind_person %}
+						<li><a onclick="kind_person_filter('{{ obj.id }}')"><img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="right">
+			<div id="slider_right">
+				<ul>
+					{% for obj in kind_construction %}
+						<li><a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+   	<div class="show">
+   		<div id='search-results'>
+   			<div id='inner-search'>
+   				{% include 'mapapp/search_render.html' %}
+   			</div>
+			<div id="left_side_toggle"><i></i></div>
+		</div>
+		<div class="box-search">
+			<div class="icon-search">
+				<div class="point" title="{% trans 'Find position A on map' %}"><a>A</a></div>
+				<div class="path" title="{% trans 'Find direction from A to B' %}"><a>A-B</a></div>
+			</div>
+			<div class="search-place">
+				<form action="{% url search_place %}" method="get">
+					<input onkeypress="return killEnter(event)" id="q" class="textbox" type="text" name="q" placeholder="{% trans 'Type address here...' %}">
+					<input type="submit" id="search_place" value="{% trans 'Search' %}" class="button">		
+				</form>
+			</div>
+			<div class="search-path">
+				<form action="">
+					<input onkeypress="return killEnter(event)" id="a" class="textbox" type="text" name="from_place" placeholder="{% trans 'Start address...' %}">
+					<img title="{% trans 'Get reverse directions' %}" class="swap" src="{{ STATIC_URL }}images/swap.png">
+					<input onkeypress="return killEnter(event)" id="b" class="textbox" type="text" name="to_place" placeholder="{% trans 'End address...' %}">
+					<input type="button" id="search_path" name="Search" value="{% trans 'Search' %}" class="button">
+				</form>					
+			</div>
+			<span id='load' style="z-index: 1000; position: fixed; top: 195px;"><img src="{{ STATIC_URL }}images/loading.gif"><label style="margin: 5px 5px; font-weight: bold; color: red;">{% trans 'Loading...' %}</label></span>
+		</div>		
+		<div class="map" id="my_map"></div>
+		<div id="box" class="box">
+			<img alt="" style="cursor: pointer;" id="hidden-popup" title="{% trans 'Hidden this box' %}" src="{{ STATIC_URL }}images/hide.png"><br>
+			<div id="content">
+			</div>
+		</div>
+		<div class="show-box" id="show-box">
+			<img id="show-popup" alt="" src="{{ STATIC_URL }}images/show.png" title="{% trans 'Show details' %}"><br>
+		</div>
+	</div>
+{% endblock content %}

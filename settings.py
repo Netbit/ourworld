@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'modeltranslation',
     'mapapp',
     'mapapp.templatetags',
+    'haystack',
+    'south',
 )
 
 MODELTRANSLATION_TRANSLATION_REGISTRY = "mapapp.translation"
@@ -142,6 +144,20 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
 
 DATETIME_FORMAT = 'd-m-Y H:i:s'
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_DIR, 'whoosh_index'),
+        'INCLUDE_SPELLING': True,
+        },
+    }
+
+HAYSTACK_DEFAULT_OPERATOR = '+'
+HAYSTACK_DEFAULT_OPERATOR = '|'
+
+if not os.path.exists(os.path.join(PROJECT_DIR, 'logs')):
+    os.makedirs(os.path.join(PROJECT_DIR, 'logs'))
+    
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -158,7 +174,7 @@ LOGGING = {
         },
         'logfile': {
             'class': 'logging.handlers.WatchedFileHandler',
-            'filename': os.path.join(PROJECT_DIR, 'sys.log')
+            'filename': os.path.join(PROJECT_DIR, 'logs/sys.log')
         },
     },
     'loggers': {

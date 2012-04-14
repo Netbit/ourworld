@@ -1,0 +1,15 @@
+{% if qs|length > 0 %}
+	<ul style="list-style-type: none">
+		{% for item in qs %}
+			<li>
+				<a onclick="get_place('{{ item.object.id }}')">{{ item.object.name }}</a><br>
+				<span>{{ item.object.get_address }}</span>
+				<hr>
+			</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<ul style="list-style-type: none">
+		<li>No results found</li>
+	</ul>
+{% endif %}

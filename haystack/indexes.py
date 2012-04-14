@@ -8,6 +8,7 @@ from haystack import connections, connection_router
 from haystack.constants import ID, DJANGO_CT, DJANGO_ID, Indexable, DEFAULT_ALIAS
 from haystack.fields import *
 from haystack.utils import get_identifier, get_facet_field_name
+from django.core.exceptions import ImproperlyConfigured
 
 
 class DeclarativeMetaclass(type):

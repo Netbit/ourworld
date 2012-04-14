@@ -17,6 +17,9 @@ import xlrd
 from django.db import transaction
 import logging
 from django.template.defaultfilters import urlize
+from haystack.views import basic_search
+from haystack.query import SearchQuerySet
+from django.template.loader import render_to_string
 
 logger = logging.getLogger(__name__)
 
@@ -39,14 +42,31 @@ def home(request):
     kind_person       = KindPersonOfAccess.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()
-                   
-    return render_to_response('index.html', {'kind_person'       : kind_person,
-                                             'kind_construction' : kind_construction,
-                                             'districts'         : districts,
-                                             }, 
+    context = {
+        'kind_person'       : kind_person,
+        'kind_construction' : kind_construction,
+        'districts'         : districts
+     }               
+    return render_to_response('index.html', context, 
                               context_instance = RequestContext(request))
     
     
+
+def search_place(request):
+    q = request.GET.get('q', None)
+    kind_person       = KindPersonOfAccess.objects.all()
+    kind_construction = KindOfConstruction.objects.all()
+    districts         = District.objects.all()   
+    qs = SearchQuerySet().filter(content=q)
+    context = {
+        'kind_person'       : kind_person,
+        'kind_construction' : kind_construction,
+        'districts'         : districts,
+        'qs' : qs,
+        'query' : q,
+    }
+    return render_to_response('mapapp/search.html', context,
+                        context_instance = RequestContext(request))
     
 def lookup(request):
     if request.GET.has_key(u'q'):
@@ -59,14 +79,14 @@ def lookup(request):
     else:
         return HttpResponse("\n")
 
-def get_detail_of_construction(id_object):
+def get_detail_of_construction(request, id_object):
     try:
         con = Construction.objects.get(id = id_object)
         return { "results" : {
                         "id"      : str(con.id),
                         "name"    : con.name,
-                        "details" : urlize(con.description_detail.replace('\n', '<br>')),
-                        "image"   : con.get_image(),
+                        "address" : con.get_address(),
+                        "content" : render_to_string('mapapp/box.html', {'place' : con },context_instance = RequestContext(request)),
                         "location" : con.get_location(),
                         "icon"    : con.get_icon()
                     }  
@@ -74,10 +94,10 @@ def get_detail_of_construction(id_object):
     except:
         raise Exception('Object not found')
     
-def get_information(request, id_object):
+def place_info(request, id_object):
     data = { "results" : {} }
     try:        
-        data = get_detail_of_construction(id_object)
+        data = get_detail_of_construction(request, id_object)
     except:
         if request.GET.has_key(u'address'):
             address = request.GET['address'].split(',')[0].strip()
@@ -101,7 +121,12 @@ def kind_person_filter(request):
     else:
         lst = Construction.objects.filter(kind_of_person = id1, district = id2)
     mData = {}           
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in lst]
+    mData["results"] = [{
+        'id' : obj.id, 
+        'content' : render_to_string('mapapp/box.html', {'place' : obj },context_instance = RequestContext(request)), 
+        'location' : obj.get_location(), 
+        'icon' : obj.get_icon() 
+    } for obj in lst]
     
     return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 
@@ -114,7 +139,12 @@ def kind_construction_filter(request):
         lst = Construction.objects.filter(kind_of_construction = id1, district = id2)
         
     mData = {}           
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in lst]
+    mData["results"] = [{
+        'id' : obj.id, 
+        'content' : render_to_string('mapapp/box.html', {'place' : obj },context_instance = RequestContext(request)), 
+        'location' : obj.get_location(), 
+        'icon' : obj.get_icon() 
+    } for obj in lst]
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
@@ -125,7 +155,12 @@ def district_filter(request):
     else:
         construction = Construction.objects.all()
     mData          = {}
-    mData["results"] = [{'id' : obj.id, 'address' : obj.get_address(), 'location' : obj.get_location(), 'icon' : obj.get_icon() } for obj in construction]
+    mData["results"] = [{
+        'id' : obj.id, 
+        'content' : render_to_string('mapapp/box.html', {'place' : obj },context_instance = RequestContext(request)), 
+        'location' : obj.get_location(), 
+        'icon' : obj.get_icon() 
+    } for obj in construction]
     
     return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 

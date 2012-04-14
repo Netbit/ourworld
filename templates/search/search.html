@@ -1,96 +1,69 @@
 {% extends "base.html" %}
-{% load comments spottags thumbnail %}
 
-{% block title %}Search results for {{ query }}{{ block.super }}{% endblock %}
+{% load i18n %}
+{% load tagslib %}
+
+{% block title %}Search results for {{ query }}{% endblock %}
 
 {% block extra_media %}
-    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
-    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
-
-    <script type="text/javascript" src="{{ STATIC_URL }}lionbars/jquery.lionbars.0.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}lionbars/lionbars.css">
-    <script type="text/javascript" src="{{ STATIC_URL }}js/geo.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&amp;sensor=false"></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-            $('#left_inner').lionbars();
-            $('.message').css('margin-left',-$('.message').width()/2+'px');
-
-            {% if query %}
-                {% if page.object_list|length > 0 %}
-                    {% for p in page.object_list|slice:'1' %}
-                        initialize_search({{ p.object.get_location.0 }}, {{ p.object.get_location.1 }}, '{{ query }}');
-                    {% endfor %}
-                {% else %}
-                    initialize();
-                    $('#left_inner').css('width','0');
-                    $('#left_side_toggle').hide();
-                    $('.message').css('margin-left',-$('.message').width()/2+'px');
-
-                    //search using Google Maps
-                    search_place('{{ query }}', 12);
-                    $('#top_search_input').val('{{ query }}');
-                {% endif %}
-            {% else %}
-                initialize();
-            {% endif %}
-        });
-    </script>
-    <style>
-    </style>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.dd.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tooltip.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/easySlider1.7.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/details.js"></script>
+	
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/dd.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/screen.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.autocomplete.css">
+	
+	<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+	<script type="text/javascript"
+	    src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
+</script>
 {% endblock %}
-
 
 {% block content %}
     <div id="left_side">
         <div id="left_inner">
             <ul id="list_address">
                 {% for p in page.object_list %}
-                <li>
-                    <div class="address_info {% if p.object.get_pictures|length == 0 %}full{% endif %}">
-                        <h3>
-                            <a href="#" rel="{{ p.object.id }}" class="marker">
-                                <img src='http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE7569' height="24" style="vertical-align: middle;">
-                            </a>
-                            <a href="{{ p.object.get_absolute_url }}">{{ p.object.title }}</a>
-                        </h3>
-                        <h6>{{ p.object.address }}</h6>
-                    </div>
-                    {% if p.object.get_pictures|length > 0 %}
-                        <a href="{{ p.object.get_absolute_url }}" class="preview_img">
-                            {% thumbnail p.object.get_pictures.0.picture "58x40" crop="80% top" as im %}
-                                <img src="{{ im.url }}" alt="{{ request.user.username }}" width="{{ im.x }}" height="{{ im.y }}">
-                            {% endthumbnail %}
-                        </a>
-                    {% endif %}
-
-                    {% get_comment_count for p.object as comment_count %}
-                    <div class="address_reviews">
-                        <a href="{{ p.object.get_absolute_url }}#comment-list">{{ comment_count }} review{{ comment_count|pluralize }}</a>
-
-                        {% if request.user.is_authenticated %}
-                            {% if not p.object|is_favorite:user %}
-                                <a id='{{ p.object.id }}' onclick='favorite(this)' title="Add to Favorite" class="add_fav"></a>
-                            {% else %}
-                                <a id='{{ place.id }}' href='{% url favorite_address %}' title="Favorite" class="add_fav booked"></a>
-                            {% endif %}
-                        {% endif %}
-
-                    </div>
-                </li>
-                {% empty %}
-                    <li>No results found.</li>
                 {% endfor %}
-
             </ul>
         </div>
         <div id="left_side_toggle"><i></i></div>
     </div>
-
-    <div class="alert message" style="display: none;">
-        <a class="close" data-dismiss="alert">×</a>
-        <strong class="content"></strong>
-    </div>
-
-    <div id="map_canvas"></div>
+   	<div class="show">
+		<div class="box-search">
+			<div class="icon-search">
+				<div class="point" title="{% trans 'Find position A on map' %}"><a>A</a></div>
+				<div class="path" title="{% trans 'Find direction from A to B' %}"><a>A-B</a></div>
+			</div>
+			<div class="search-place">
+				<form action="{% url search_place %}" method="get">
+					<input onkeypress="return killEnter(event)" id="p" class="textbox" type="text" name="p" placeholder="{% trans 'Type address here...' %}">
+					<input type="submit" id="search_place" value="{% trans 'Search' %}" class="button">		
+				</form>
+			</div>
+			<div class="search-path">
+				<form action="">
+					<input onkeypress="return killEnter(event)" id="a" class="textbox" type="text" name="from_place" placeholder="{% trans 'Start address...' %}">
+					<img title="{% trans 'Get reverse directions' %}" class="swap" src="{{ STATIC_URL }}images/swap.png">
+					<input onkeypress="return killEnter(event)" id="b" class="textbox" type="text" name="to_place" placeholder="{% trans 'End address...' %}">
+					<input type="button" id="search_path" name="Search" value="{% trans 'Search' %}" class="button">
+				</form>					
+			</div>
+			<span id='load' style="z-index: 1000; position: fixed; top: 195px;"><img src="{{ STATIC_URL }}images/loading.gif"><label style="margin: 5px 5px; font-weight: bold; color: red;">{% trans 'Loading...' %}</label></span>
+		</div>		
+		<div class="map" id="my_map"></div>
+		<div id="box" class="box">
+			<img alt="" style="cursor: pointer;" id="hidden-popup" title="{% trans 'Hidden this box' %}" src="{{ STATIC_URL }}images/hide.png"><br>
+			<div id="content">
+			</div>
+		</div>
+		<div class="show-box" id="show-box">
+			<img id="show-popup" alt="" src="{{ STATIC_URL }}images/show.png" title="{% trans 'Show details' %}"><br>
+		</div>
+	</div>
 {% endblock content %}
