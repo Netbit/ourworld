@@ -1,0 +1,4 @@
+{{ object.name }}
+{{ object.unsigned_name }}
+{{ object.get_address }}
+

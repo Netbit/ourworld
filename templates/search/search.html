@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load comments spottags thumbnail %}
+
+{% block title %}Search results for {{ query }}{{ block.super }}{% endblock %}
+
+{% block extra_media %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}lionbars/jquery.lionbars.0.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}lionbars/lionbars.css">
+    <script type="text/javascript" src="{{ STATIC_URL }}js/geo.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&amp;sensor=false"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $('#left_inner').lionbars();
+            $('.message').css('margin-left',-$('.message').width()/2+'px');
+
+            {% if query %}
+                {% if page.object_list|length > 0 %}
+                    {% for p in page.object_list|slice:'1' %}
+                        initialize_search({{ p.object.get_location.0 }}, {{ p.object.get_location.1 }}, '{{ query }}');
+                    {% endfor %}
+                {% else %}
+                    initialize();
+                    $('#left_inner').css('width','0');
+                    $('#left_side_toggle').hide();
+                    $('.message').css('margin-left',-$('.message').width()/2+'px');
+
+                    //search using Google Maps
+                    search_place('{{ query }}', 12);
+                    $('#top_search_input').val('{{ query }}');
+                {% endif %}
+            {% else %}
+                initialize();
+            {% endif %}
+        });
+    </script>
+    <style>
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <div id="left_side">
+        <div id="left_inner">
+            <ul id="list_address">
+                {% for p in page.object_list %}
+                <li>
+                    <div class="address_info {% if p.object.get_pictures|length == 0 %}full{% endif %}">
+                        <h3>
+                            <a href="#" rel="{{ p.object.id }}" class="marker">
+                                <img src='http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE7569' height="24" style="vertical-align: middle;">
+                            </a>
+                            <a href="{{ p.object.get_absolute_url }}">{{ p.object.title }}</a>
+                        </h3>
+                        <h6>{{ p.object.address }}</h6>
+                    </div>
+                    {% if p.object.get_pictures|length > 0 %}
+                        <a href="{{ p.object.get_absolute_url }}" class="preview_img">
+                            {% thumbnail p.object.get_pictures.0.picture "58x40" crop="80% top" as im %}
+                                <img src="{{ im.url }}" alt="{{ request.user.username }}" width="{{ im.x }}" height="{{ im.y }}">
+                            {% endthumbnail %}
+                        </a>
+                    {% endif %}
+
+                    {% get_comment_count for p.object as comment_count %}
+                    <div class="address_reviews">
+                        <a href="{{ p.object.get_absolute_url }}#comment-list">{{ comment_count }} review{{ comment_count|pluralize }}</a>
+
+                        {% if request.user.is_authenticated %}
+                            {% if not p.object|is_favorite:user %}
+                                <a id='{{ p.object.id }}' onclick='favorite(this)' title="Add to Favorite" class="add_fav"></a>
+                            {% else %}
+                                <a id='{{ place.id }}' href='{% url favorite_address %}' title="Favorite" class="add_fav booked"></a>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                </li>
+                {% empty %}
+                    <li>No results found.</li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        <div id="left_side_toggle"><i></i></div>
+    </div>
+
+    <div class="alert message" style="display: none;">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong class="content"></strong>
+    </div>
+
+    <div id="map_canvas"></div>
+{% endblock content %}
