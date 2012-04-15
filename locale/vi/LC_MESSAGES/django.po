@@ -384,29 +384,5 @@ msgstr "Icon Tiếp Cận"
 msgid "Accessible Icons"
 msgstr "Các Icon Tiếp Cận"
 
-#~ msgid "From"
-#~ msgstr "Từ"
-
-#~ msgid "To"
-#~ msgstr "Đến"
-
-#~ msgid "Distance"
-#~ msgstr "Khoảng cách"
-
-#~ msgid "Time"
-#~ msgstr "Thời gian"
-
-#~ msgid "(by car)"
-#~ msgstr "(xe ô tô)"
-
-#~ msgid "Description"
-#~ msgstr "Mô tả chi tiết"
-
-#~ msgid "Kind of person name"
-#~ msgstr "Tên loại người tiếp cận"
-
-#~ msgid "Details..."
-#~ msgstr "Chi tiết..."
-
-#~ msgid "Couldn't get the data!"
-#~ msgstr "Không thể lấy được dữ liệu!"
+msgid "No results found"
+msgstr "Không tìm thấy kết quả nào."

@@ -382,3 +382,6 @@ msgstr ""
 
 msgid "Accessible Icons"
 msgstr ""
+
+msgid "No results found"
+msgstr ""
