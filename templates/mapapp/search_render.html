@@ -3,7 +3,7 @@
 	<ul style="list-style-type: none">
 		{% for item in qs %}
 			<li>
-				<a onclick="get_place('{{ item.object.id }}')">{{ item.object.name }}</a><br>
+				<a onclick="get_place('{{ item.object.id }}')"><strong>{{ item.object.name }}</strong></a><br>
 				<span>{{ item.object.get_address }}</span>
 				<hr>
 			</li>

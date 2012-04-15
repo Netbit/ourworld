@@ -1,10 +1,8 @@
 # Create your views here.
 import json
+import xlrd
+import logging
 
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
-from mapapp.models import KindPersonOfAccess, KindOfConstruction, Construction, Street, District,\
-    Comment, Ward
 from django.utils import translation
 from django.http import HttpResponse, Http404
 from mapapp.forms import CommentForm, InputFile
@@ -13,14 +11,15 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
 from mapapp.utils import unsigned_vi, get_address, LocationGetter
-import xlrd
-from django.db import transaction
-import logging
-from django.template.defaultfilters import urlize
-from haystack.views import basic_search
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
 from haystack.query import SearchQuerySet
 from django.template.loader import render_to_string
 from django.views.decorators.cache import cache_page
+from django.db import transaction
+from mapapp.models import KindPersonOfAccess, KindOfConstruction, Construction, Street, District,\
+    Comment, Ward
+
 
 logger = logging.getLogger(__name__)
 
