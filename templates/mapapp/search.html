@@ -61,15 +61,15 @@
 			</div>
 			<div class="search-place">
 				<form action="{% url search_place %}" method="get">
-					<input onkeypress="return killEnter(event)" id="q" class="textbox" type="text" name="q" placeholder="{% trans 'Type address here...' %}">
+					<input onkeypress="return killEnter(event)" id="q" class="textbox" type="text" name="q" required="required" placeholder="{% trans 'Type address here...' %}">
 					<input type="submit" id="search_place" value="{% trans 'Search' %}" class="button">		
 				</form>
 			</div>
 			<div class="search-path">
 				<form action="">
-					<input onkeypress="return killEnter(event)" id="a" class="textbox" type="text" name="from_place" placeholder="{% trans 'Start address...' %}">
+					<input onkeypress="return killEnter(event)" id="a" class="textbox" type="text" name="from_place" required="required" placeholder="{% trans 'Start address...' %}">
 					<img title="{% trans 'Get reverse directions' %}" class="swap" src="{{ STATIC_URL }}images/swap.png">
-					<input onkeypress="return killEnter(event)" id="b" class="textbox" type="text" name="to_place" placeholder="{% trans 'End address...' %}">
+					<input onkeypress="return killEnter(event)" id="b" class="textbox" type="text" name="to_place" required="required" placeholder="{% trans 'End address...' %}">
 					<input type="button" id="search_path" name="Search" value="{% trans 'Search' %}" class="button">
 				</form>					
 			</div>

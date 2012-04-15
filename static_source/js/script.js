@@ -53,6 +53,19 @@ function initialize() {
 	if (document.URL.indexOf("/search/") == -1) {
 		district = document.getElementById('district');
 		district_filter(district.options[district.selectedIndex].value);
+	} else {
+		var $_GET = {};
+	    document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+	        function decode(s) {
+	            return decodeURIComponent(s.split("+").join(" "));
+	        }
+	        $_GET[decode(arguments[1])] = decode(arguments[2]);
+	    });
+	    if ($_GET['q']) {
+	        try {
+	        	search_place(0, $_GET['q']);
+	        } catch(err) {}
+	    }
 	}
 	
 }
@@ -80,6 +93,7 @@ function search_place(id, address) {
 						infowindow = new google.maps.InfoWindow({
 							content : data.results.content
 						});
+						marker.id = data.results.id;
 						infowindow.open(map, marker);
 					} else {
 						infowindow = new google.maps.InfoWindow({
@@ -349,6 +363,7 @@ function kind_person_filter(id) {
 
 function district_filter(id_district) {
 	$.ajax({
+		cache : true,
 		url : "/filter/district/?id_district=" + id_district,
 		beforeSend : function() {
 			deleteOverlays();

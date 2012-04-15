@@ -9,7 +9,7 @@
 	 	<img onclick="changeFontSize(1); return false;" id="font-large" alt="Zoom in" title="Zoom in" src="{{ STATIC_URL }}images/font_large.jpg\">
 	 </span><br>
 	 <span class='place_address'>{{ place.get_address }}</span><br>
-	 <span id='content' class='place_details'>{{ place.description_detail|linebreaks }}</span><br>
+	 <span id='content' class='place_details'>{{ place.description_detail|linebreaksbr }}</span><br>
 	 <span>
 	 	<a class='more' onclick="window.open('{% url place_detail place.id %}','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')">Details...</a>
 	 </span>

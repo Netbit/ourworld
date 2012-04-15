@@ -20,12 +20,14 @@ from django.template.defaultfilters import urlize
 from haystack.views import basic_search
 from haystack.query import SearchQuerySet
 from django.template.loader import render_to_string
+from django.views.decorators.cache import cache_page
 
 logger = logging.getLogger(__name__)
 
 t = LocationGetter()
 t.start()
-    
+
+@cache_page(60 * 30)    
 def home(request):
     lang = request.GET.get("lang", '')
     
@@ -54,6 +56,8 @@ def home(request):
 
 def search_place(request):
     q = request.GET.get('q', None)
+    if q == '':
+        q = ' '
     kind_person       = KindPersonOfAccess.objects.all()
     kind_construction = KindOfConstruction.objects.all()
     districts         = District.objects.all()   
@@ -108,11 +112,12 @@ def place_info(request, id_object):
                                                  Q(street__name = street_name) | Q(street__unsigned_name = street_name))
             
             if len(result) > 0:
-                data = get_detail_of_construction(result[0].id)
+                data = get_detail_of_construction(request ,result[0].id)
             
     return HttpResponse(json.dumps(data, indent=2), mimetype = "application/json")
 
 
+@cache_page(60 * 30)
 def kind_person_filter(request):
     id1 = request.GET.get('id1', '')
     id2 = request.GET['district_id']
@@ -130,6 +135,7 @@ def kind_person_filter(request):
     
     return HttpResponse(json.dumps(mData, indent = 2), mimetype = "application/json")
 
+@cache_page(60 * 30)
 def kind_construction_filter(request):
     id1 = request.GET['id1']
     id2 = request.GET['district_id']
@@ -148,6 +154,7 @@ def kind_construction_filter(request):
     
     return HttpResponse(json.dumps(mData), mimetype = "application/json")
 
+@cache_page(60 * 30)
 def district_filter(request):
     id_district  = request.GET['id_district']
     if id_district != '':

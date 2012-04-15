@@ -99,6 +99,8 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -158,7 +160,16 @@ HAYSTACK_DEFAULT_OPERATOR = '|'
 if not os.path.exists(os.path.join(PROJECT_DIR, 'logs')):
     os.makedirs(os.path.join(PROJECT_DIR, 'logs'))
     
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+        'TIMEOUT': 60,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
