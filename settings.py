@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'mapapp',
     'mapapp.templatetags',
     'haystack',
+    'captcha',
     'south',
 )
 
@@ -170,6 +171,10 @@ CACHES = {
         }
     }
 }
+CAPTCHA_BASE_IMAGE = os.path.join(PROJECT_DIR, 'captcha/background/captcha_base.png')
+CAPTCHA_IMAGES_PATH = os.path.join(PROJECT_DIR, 'static_source/capcha/')
+CAPTCHA_IMAGES_URL = '/static/capcha/'
+CAPTCHA_FONT = os.path.join(PROJECT_DIR, 'captcha/fonts/DejaVuSans.ttf')
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

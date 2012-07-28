@@ -50,6 +50,12 @@ class AdminConstruction(admin.ModelAdmin):
                      'kind_of_construction__name_vi')
     save_on_top = True
     list_per_page = 200
+    fieldsets = [
+        ('Construction Name', {'fields': ['name', 'name_vi', 'name_en', 'unsigned_name'],}),
+        ('Construction Address', {'fields': ['number_or_alley', 'street', 'ward', 'district'],}),
+        ('Construction\'s Information', {'fields': ['link_image', 'description_detail', 'description_detail_vi', 'description_detail_en', 'kind_of_construction', 'kind_of_person', 'location'],}),
+        ('Other', {'fields': ['description_other', 'description_other_vi', 'description_other_en'],}),
+    ]
     
 class AdminKindPersonOfAccess(admin.ModelAdmin):
     list_display = ['access_level', 'name', 'show_image']
