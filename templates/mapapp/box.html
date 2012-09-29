@@ -1,14 +1,17 @@
+{% load i18n %}
 <div>
 	{% if place.link_image %}
 	<img style='float: left' height='100' src="{{ place.get_image }}">
 	{% endif %}
 	<span class='place_name'>{{ place.name }}</span> 
 	 <span style='float: right'>
-	 	<img onclick="revertStyles(); return false;" id="font-large" alt="Default" title="Default" src="{{ STATIC_URL }}images/font_default.jpg\">
-	 	<img onclick="changeFontSize(-1); return false;" id="font-small" alt="Zoom out" title="Zoom out" src="{{ STATIC_URL }}images/font_small.jpg\">
-	 	<img onclick="changeFontSize(1); return false;" id="font-large" alt="Zoom in" title="Zoom in" src="{{ STATIC_URL }}images/font_large.jpg\">
+	 	<img onclick="revertStyles(); return false;" id="font-large" alt="Default" title="Default" src="{{ STATIC_URL }}images/font_default.jpg">
+	 	<img onclick="changeFontSize(-1); return false;" id="font-small" alt="Zoom out" title="Zoom out" src="{{ STATIC_URL }}images/font_small.jpg">
+	 	<img onclick="changeFontSize(1); return false;" id="font-large" alt="Zoom in" title="Zoom in" src="{{ STATIC_URL }}images/font_large.jpg">
 	 </span><br>
-	 <span class='place_address'>{{ place.get_address }}</span><br>
+	 <span class='place_address'>{% trans 'Address' %}: {{ place.get_address }}</span><br>
+	 <span class='lct' style="margin-left: 10px">{% trans 'Kind of Construction' %}: {{ place.kind_of_construction }}</span><br>
+	 <span class='lntc' style="margin-left: 10px">{% trans 'Person Accessible' %}: {{ place.kind_of_person }}</span><br><br>
 	 <span id='content' class='place_details'>{{ place.description_detail|linebreaksbr }}</span><br>
 	 <span>
 	 	<a class='more' onclick="window.open('{% url place_detail place.id %}','mywindow','menubar=1,resizable=1,scrollbars=1,width=650,height=550')">Details...</a>

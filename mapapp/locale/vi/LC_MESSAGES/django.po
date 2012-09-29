@@ -386,3 +386,9 @@ msgstr "Các Icon Tiếp Cận"
 
 msgid "No results found"
 msgstr "Không tìm thấy kết quả nào."
+
+msgid "Address"
+msgstr "Địa chỉ"
+
+msgid "Person Accessible"
+msgstr "Người tiếp cận"

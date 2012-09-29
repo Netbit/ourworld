@@ -385,3 +385,9 @@ msgstr ""
 
 msgid "No results found"
 msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Person Accessible"
+msgstr ""

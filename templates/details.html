@@ -18,9 +18,14 @@
 <div id="content" class='content'>
 	<div>
 		<h2>{{ con.name }}</h2>
-		<p><i>{{ con.get_address }}</i></p>
+		<p>
+			<span>{% trans 'Address' %}: <i>{{ con.get_address }}</i></span><br>
+			<span>{% trans 'Kind of Construction' %}: <i>{{ con.kind_of_construction }}</i></span><br>
+			<span>{% trans 'Person Accessible' %}: <i>{{ con.kind_of_person }}</i></span>
+		</p><br>
+		
 		{% autoescape off %}{{ con.description_detail|linebreaksbr|urlize }}{% endautoescape %}
-	</div>
+	</div><hr>
 	<div>
 		{% autoescape off %}{{ con.description_other|linebreaksbr|urlize }}{% endautoescape %}
 	</div>
