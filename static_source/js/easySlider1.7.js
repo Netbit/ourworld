@@ -64,7 +64,7 @@
 			var w = $("li", obj).width(); 
 			var h = $("li", obj).height(); 
 			var clickable = true;
-			obj.width(310); 
+			obj.css('width',"95%");
 			obj.height(h); 
 			obj.css("overflow","hidden");
 			var ts = s-1;

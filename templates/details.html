@@ -41,10 +41,14 @@
 	{% endif %}
 	<form id='comment' class='comment-form' action="" method="post">{% csrf_token %}
 		<div class='comment-form'>
-			<ul class="comment">
-				{{ form.as_ul }}
-			</ul>
-			<input class="submit" type="submit" name="submit" value="{% trans 'Send' %}">
+			<table>
+				{{ form.as_table }}
+				<tr>
+					<td colspan="2">
+						<input class="submit" type="submit" name="submit" value="{% trans 'Send' %}">
+					</td>
+				</tr>
+			</table>			
 		</div>	
 	</form>	
 	{% if form.errors %}

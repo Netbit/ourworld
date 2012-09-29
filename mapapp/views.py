@@ -208,7 +208,7 @@ def get_kind_person_contruction(request):
 
 @login_required
 @csrf_protect 
-@transaction.commit_on_success
+@transaction.autocommit()
 def upload_file(request):
     request.session['django_language'] = 'vi'
     translation.activate('vi')
@@ -226,40 +226,53 @@ def upload_file(request):
                     fo.write(line)
                 fo.close()
                 reader = xlrd.open_workbook('temp.xls', encoding_override = 'utf-8').sheets()[0]                
-                for line in range(1, reader.nrows):
-                    row = reader.row(line)                             
-                    try: 
+                for line in range(0, reader.nrows):
+                    row = reader.row(line)  
+                    if line == 0:
+                        header = [h.value for h in row]                            
+                    try:
+                        address = get_address(row[2].value.strip().encode('utf-8', errors='ignore'))
+                         
                         try:
-                            obj = Construction.objects.get(Q(name_vi = row[0].value) | Q(name_en = row[1].value))
-                        except:
+                            obj = Construction.objects.get(Q(name_vi = row[0].value, street__name = address[1]) | Q(name_en = row[1].value, street__name = address[1]))
+                            temp = ""
+                            for i in range(9, reader.ncols):
+                                temp += header[i] + ': ' + str(row[i].value) + "\n"
+                            obj.description_other = temp
+                            obj.description_other_vi = temp
+                            obj.description_other_en = temp
+                            obj.save()
+                            continue
+                        except Exception as e:
+                            logger.error("Data Row " + str(line + 1) + ": " + str(e))
                             obj = Construction() 
+                            continue
 
-                        obj.name_vi = row[0].value
+                        obj.name_vi = row[0].value.encode('utf-8', errors='ignore')
                         obj.unsigned_name = unsigned_vi(row[0].value)
-                        obj.name_en = row[1].value
-                        address = get_address(row[2].value.encode('utf-8').strip())
-                        obj.number_or_alley = address[0]
+                        obj.name_en = row[1].value.encode('utf-8', errors='ignore')                        
+                        obj.number_or_alley = address[0].encode('utf-8', errors='ignore')
                         obj.street = Street.objects.get_or_create(name = address[1], unsigned_name = unsigned_vi(address[1]))[0]
                         if address[2] != '':
                             ward = Ward.objects.get_or_create(name = address[2])[0]
                             obj.ward = ward 
                         try :                            
-                            obj.district = District.objects.get_or_create(name = address[3], unsigned_name = unsigned_vi(address[3]))[0]
+                            obj.district = District.objects.get_or_create(name = address[3].strip(), unsigned_name = unsigned_vi(address[3].strip()))[0]
                         except:
                             logger.error(row[2].value + ": Missed District")                           
                         
-                        obj.description_detail = row[3].value
-                        obj.description_detail_vi = row[3].value
-                        obj.description_detail_en = row[4].value
-                        obj.description_other = row[5].value
-                        obj.description_other_vi = row[5].value
-                        obj.description_other_en = row[6].value
-                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value, name_vi = row[7].value)[0]
+                        obj.description_detail = row[3].value.encode('utf-8', errors='ignore')
+                        obj.description_detail_vi = row[3].value.encode('utf-8', errors='ignore')
+                        obj.description_detail_en = row[4].value.encode('utf-8', errors='ignore')
+                        obj.description_other = row[5].value.encode('utf-8', errors='ignore')
+                        obj.description_other_vi = row[5].value.encode('utf-8', errors='ignore')
+                        obj.description_other_en = row[6].value.encode('utf-8', errors='ignore')
+                        obj.kind_of_construction = KindOfConstruction.objects.get_or_create(name = row[7].value.encode('utf-8', errors='ignore'), name_vi = row[7].value.encode('utf-8', errors='ignore'))[0]
                         value = str(row[8].value)
                         if value.find(".") != -1:
                             value = value[:value.find(".")]            
                         if value != '':
-                            obj.kind_of_person = KindPersonOfAccess.objects.get_or_create(access_level = str(value))[0]
+                            obj.kind_of_person = KindPersonOfAccess.objects.get_or_create(access_level = str(value.encode('utf-8', errors='ignore')))[0]
                             obj.save()
                         if flag == 0:
                             flag = 2                        

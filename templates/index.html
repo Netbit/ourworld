@@ -33,7 +33,7 @@
 			<div id="slider_left">
 				<ul>
 					{% for obj in kind_person %}
-						<li><a onclick="kind_person_filter('{{ obj.id }}')"><img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+						<li><a onclick="kind_person_filter('{{ obj.id }}')"><img id="p{{ obj.id }}" title="{{ obj.name }}" height="32" width="40" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
 					{% endfor %}
 				</ul>
 			</div>
@@ -42,7 +42,7 @@
 			<div id="slider_right">
 				<ul>
 					{% for obj in kind_construction %}
-						<li><a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
+						<li><a onclick="kind_construction_filter('{{ obj.id }}')"><img id="c{{ obj.id }}" title="{{ obj.name }}" height="32" width="40" alt="{{ obj.name }}" src="{{ obj|get_image }}"></a></li>
 					{% endfor %}
 				</ul>
 			</div>

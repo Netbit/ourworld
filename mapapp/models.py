@@ -108,7 +108,7 @@ class Ward(models.Model):
         return self.name
 
 class Construction(models.Model):   
-    name               = models.CharField(max_length = 100, unique = True, verbose_name = _('Construction name'))
+    name               = models.CharField(max_length = 100, verbose_name = _('Construction name'))
     unsigned_name      = models.CharField(max_length = 80, verbose_name = _('Construction unsigned name'))
     number_or_alley    = models.CharField(max_length = 20, blank = True, verbose_name = _('Number or alley'))
     street             = models.ForeignKey(Street, verbose_name = _('Street'))
@@ -125,6 +125,7 @@ class Construction(models.Model):
     class Meta:
         verbose_name = _("Construction")
         verbose_name_plural = _("Constructions")
+        unique_together = ('name', 'street')
         
     def get_image(self):
         '''Get image of construciton'''

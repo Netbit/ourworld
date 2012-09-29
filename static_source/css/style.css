@@ -33,8 +33,7 @@ body {
 	background-color: rgba(120, 120, 120, 0.5);
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
 		startColorstr='#e6e6e6', endColorstr='#CCCCCC' ); /* IE6 & IE7 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,
-		startColorstr='#e6e6e6', endColorstr='#CCCCCC' )"; /* IE8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e6e6e6', endColorstr='#CCCCCC' )"; /* IE8 */
 	zoom: 1;
 }
 
@@ -106,8 +105,7 @@ body {
 	background-color: rgba(120, 120, 120, 0.5);
 	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
 		startColorstr='#e6e6e6', endColorstr='#CCCCCC' ); /* IE6 & IE7 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,
-		startColorstr='#e6e6e6', endColorstr='#CCCCCC' )"; /* IE8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#e6e6e6', endColorstr='#CCCCCC')"; /* IE8 */
 	zoom: 1;
 	/* for IE */
 	filter: alpha(opacity = 80);
@@ -369,7 +367,7 @@ body {
 
 .bottom-menu ul li a {
 	color: #FFFFFF;
-	background: url("../images/bottom-menu-li.jpg") no-repeat right;;
+	background: url("../images/bottom-menu-li.jpg") no-repeat right;
 }
 
 .bottom-menu ul li a:hover,.bottom-menu ul li a:active,.bottom-menu ul li a:focus
