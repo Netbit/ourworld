@@ -194,7 +194,7 @@ $(document).ready(function() {
 	$('#search_place').click(function() {
 		var address;
 		deleteOverlays();
-		address = document.getElementById("p").value;
+		address = document.getElementById("q").value;
 		search_place(0, address);
 	});
 
@@ -294,7 +294,11 @@ function set_location(id, content, location, icon) {
 		icon: icon,
 		zIndex: Math.round(pos.lat()*-100000)<<5
 	});
+	
 	google.maps.event.addListener(marker, 'click', function() {
+		try {
+            infowindow.close();
+        } catch(err) {}
 		infowindow = new google.maps.InfoWindow({
 			content : content
 		});

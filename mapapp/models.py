@@ -24,6 +24,7 @@ class Street(models.Model):
     class Meta:
         verbose_name = _("Street")
         verbose_name_plural = _("Streets")
+        ordering = ['-name',]
     
     def __unicode__(self):
         return self.name
@@ -120,7 +121,7 @@ class Construction(models.Model):
     kind_of_construction = models.ForeignKey(KindOfConstruction, verbose_name = _('Kind of Construction'))
     kind_of_person     = models.ForeignKey(KindPersonOfAccess, verbose_name = _('Kind person of access'), blank = True)
     location           = models.CharField(max_length = 100, blank = True, verbose_name = _('Location (on map)'))
-    
+    #active             = models.BooleanField(default=True)
     
     class Meta:
         verbose_name = _("Construction")

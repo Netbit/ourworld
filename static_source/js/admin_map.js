@@ -116,8 +116,8 @@ $(document).ready(function() {
 	$('#id_location').css('width', '400px');
 	$('#id_location').attr('readonly', true);
 	
-	$('.location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
-	$('.location').append("<input type='button' value='search' onclick='search_place()'/>");
+	$('.field-location').append("<div style='width: 550px; height:400px' id='my_map'></div>");
+	$('.field-location').append("<input type='button' value='search' onclick='search_place()'/>");
 	initialize();
 });
 

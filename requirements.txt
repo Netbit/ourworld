@@ -1,0 +1,6 @@
+Django==1.5
+waitress
+django-modeltranslation==0.6
+xlrd
+MySQL-python==1.2.5
+pillow

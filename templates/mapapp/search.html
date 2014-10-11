@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/screen.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.autocomplete.css">
 	
-	<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 	<script type="text/javascript"
 	    src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&language={{ LANGUAGE_CODE }}&region=vn">
 </script>
@@ -60,7 +60,7 @@
 				<div class="path" title="{% trans 'Find direction from A to B' %}"><a>A-B</a></div>
 			</div>
 			<div class="search-place">
-				<form action="{% url search_place %}" method="get">
+				<form action="{% url 'search_place' %}" method="get">
 					<input onkeypress="return killEnter(event)" id="q" class="textbox" type="text" name="q" required="required" placeholder="{% trans 'Type address here...' %}">
 					<input type="submit" id="search_place" value="{% trans 'Search' %}" class="button">		
 				</form>
