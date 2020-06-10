@@ -1,4 +1,4 @@
-Django==1.5
+Django==1.11.29
 waitress
 django-modeltranslation==0.6
 xlrd
